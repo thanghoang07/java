@@ -1,0 +1,158 @@
+package ly_thuyet_do_thi_2;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Prim {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	//
+	List<Edges> listEdges = new ArrayList<>();
+	//
+	public boolean[] visited;
+
+	// khoi tao matrix
+	public Prim() {
+		super();
+	}
+
+	/**
+	 * ?????????????????????????????????????????????????????????????????????????
+	 */
+	public Prim(int[][] matrix) {
+		super();
+		this.matrix = matrix;
+		this.numVex = matrix.length;
+		this.visited = new boolean[matrix.length];
+	}
+
+	// khoi tao matrix dang nhap vao dinh
+	public Prim(int numVex) {
+		this.numVex = numVex;
+		this.matrix = new int[numVex][numVex];
+		this.visited = new boolean[numVex];
+	}
+
+	// in matrix
+	public void printGraph(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix.length; j++)
+				System.out.printf("%3d", matrix[i][j]);
+			System.out.println();
+		}
+	}
+
+	// xoa bo mot canh
+	public void removeEdges(int src, int dest) {
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (src >= 0 && dest >= 0 && src <= numVex && dest <= numVex) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh bac cua mot dinh bat ky
+	public int degreeVex(int vex) {
+		int degreeVex = 0;
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (vex > numVex + 1) {
+			System.out.println("loi.. .  .   .   .");
+		} else {
+			for (int i = 0; i < matrix[vex].length; i++) {
+				degreeVex += matrix[vex][i];
+			}
+		}
+		return degreeVex;
+	}
+
+	// them vao matrix mot canh co trong so
+	public void addEdgesNumber(int src, int dest, int trongSo) {
+		if (src >= 0 && dest >= 0 && trongSo > 0) {
+			matrix[src][dest] = trongSo;
+			matrix[dest][src] = trongSo;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh tong trong so cua ma tran.
+	public int degreeGraphNum() {
+		int degreeG = 0;
+		if (matrix.length == 0) {
+			System.out.println("Matrix chưa được tạo");
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += degreeVex(i);
+		}
+		return degreeG / 2;
+	}
+
+	public Prim algoPrim(int[][] tree, int vex) {
+		visited = new boolean[numVex];
+		Prim pri = new Prim(tree.length);
+		// dem so dinh da duyet
+		int numVex2 = 0;
+		int min = 0;// bien tam trong so nho nhat
+		// dinh bat dau
+		int src = vex;
+		// dinh ket thuc
+		int des = 0;
+		int total = 0;
+		visited[src] = true;
+		// tạo biến visit dỉnh thăm
+		boolean visit;
+		while (numVex2 < numVex - 1) {
+			min = Integer.MAX_VALUE;
+			visit = false;
+			for (int i = 0; i < tree.length; i++) {
+				if (tree[src][i] > 0 && tree[src][i] < min && !visited[i]) {
+					min = tree[src][i];
+					des = i;
+					visit = true;
+				}
+			}
+			if (src != des) {
+				System.out.printf("Edges found: %d -> %d Min: %d\n", src, des, min);
+				pri.addEdgesNumber(src, des, min);
+				visited[des] = true;
+				src = des;
+				numVex2++;
+				total += min;
+			}
+			if (numVex2 < numVex && !visit) {
+				for (int i = 0; i < visited.length; i++) {
+					if (!visited[i]) {
+						visited[i] = true;
+						src = i;
+						min = Integer.MAX_VALUE;
+						for (int j = 0; j < tree.length; j++) {
+							if (tree[j][src] > 0 && tree[j][src] < min) {
+								min = tree[j][src];
+								des = j;
+							}
+						}
+						System.out.printf("Edges found: %d -> %d Min: %d\n", src, des, min);
+						pri.addEdgesNumber(src, des, min);
+						numVex2++;
+						total += min;
+						break;
+					}
+				}
+			}
+		}
+		System.out.printf("Tong trong nho so cua tree: %d\n", total);
+		if (numVex2 < numVex - 1) {
+			System.out.println("loi . . . .");
+		} else {
+			System.out.println("In ma tran co trong so nho nhat");
+			pri.printGraph(pri.matrix);
+		}
+		return pri;
+	}
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="swing/khac/org.apache.commons.io.jar/org.apache.commons.io.jar"/>
+	<classpathentry kind="lib" path="swing/fileDemo/commons-io-2.0-sources.jar"/>
+	<classpathentry kind="lib" path="swing/fileDemo/commons-io-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="swing/fileDemo/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="swing/sendMail/activation.jar"/>
+	<classpathentry kind="lib" path="swing/sendMail/mail.jar"/>
+	<classpathentry kind="src" path="doc_file_csv"/>
+	<classpathentry kind="src" path="game_jpong"/>
+	<classpathentry kind="src" path="game_tetris"/>
+	<classpathentry kind="src" path="note"/>
+	<classpathentry kind="src" path="Ontap1"/>
+	<classpathentry kind="src" path="duyet_DFS_BFS"/>
+	<classpathentry kind="src" path="hoc_java_tren_Youtube"/>
+	<classpathentry kind="src" path="Ontap"/>
+	<classpathentry kind="src" path="Khac"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

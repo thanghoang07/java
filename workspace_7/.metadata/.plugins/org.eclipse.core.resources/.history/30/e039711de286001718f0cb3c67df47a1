@@ -1,0 +1,21 @@
+package isLucky;
+
+public class MainTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	//
+	public boolean isLucky(int n) {
+		int sum = 0;
+		String s = Integer.toString(n);
+		int length = s.length() / 2;
+		//
+		for (int i = 0; i < length; i++) {
+			sum = sum + Character.getNumericValue(s.charAt(i)) - Character.getNumericValue(s.charAt(i + length));
+		}
+	}
+
+}

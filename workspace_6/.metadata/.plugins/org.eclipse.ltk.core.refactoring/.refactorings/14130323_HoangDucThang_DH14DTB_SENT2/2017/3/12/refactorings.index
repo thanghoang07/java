@@ -1,0 +1,21 @@
+1490233191986	Rename type 'BFSAlgo'
+1490235608288	Rename type 'Run'
+1490235755970	Rename type 'RunDFSAlgorithm'
+1490252907316	Rename field 'mRight'
+1490252917188	Rename field 'cRight'
+1490252925908	Rename field 'mLeft'
+1490252935526	Rename field 'cLeft'
+1490252999717	Rename method 'isValid'
+1490253026355	Rename method 'isFinal'
+1490260756061	Rename method 'generateSuccessors'
+1490260772308	Rename method 'addValidState'
+1490260848907	Move package
+1490261343461	Delete elements
+1490261347758	Delete element
+1490261499648	Rename method 'bfs'
+1490261538050	Rename type 'BFSAlgorithm'
+1490261699852	Rename method 'exec'
+1490261714069	Delete element
+1490317403104	Rename local variable 'state'
+1490319257986	Rename local variable 'ta'
+1490319264089	Rename local variable 'tb'

@@ -1,0 +1,130 @@
+package view;
+
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+
+public class PongBall
+{
+	// Variablen
+	private int x_pos;			// x - Position des Balles
+	private int y_pos;			// y - Position des Balles
+	private int x_speed;		// Geschwindigkeit in x - Richtung
+	private int y_speed;		// Geschwindigkeit in y - Richtung
+
+	// Positionen
+	private int ball_top;		// Obergrenze des Balles
+	private int ball_bottom;	// Untergrenze des Balles
+	private int ball_left;		// Linke Grenze des Balles
+	private int ball_right;		// Rechte Grenze des Balles
+	private int comp_top;		// Oberkante des Computerpaddels
+	private int comp_bottom;	// Unterkante des Computerpaddels
+	private int comp_right;		// Rechte Seite des Computerpaddels
+
+	// Spielfeld (Radius des Balles mit eingerechnet)
+	private static final int right_out = 390;
+	private static final int left_out = 10;
+	private static final int down_out =290;
+	private static final int up_out = 10;
+
+	private static final int radius = 10;			// Ballradius
+
+	public PongBall (int x_pos, int y_pos)
+	{
+		this.x_pos = x_pos;
+		this.y_pos = y_pos;
+		x_speed = 3;
+		y_speed = 3;
+	}
+
+	public void move ()
+	{
+		x_pos += x_speed;
+		y_pos += y_speed;
+
+		isBallOut();
+	}
+
+	public void isBallOut ()
+	{
+		// Ball bewegt sich nach links
+		if (x_speed < 0)
+		{
+			if (x_pos < left_out)
+			{
+
+				// Geschwindigkeit umdrehen
+				x_speed = - x_speed;
+			}
+		}
+		// Ball bewegt sich nach rechts
+		else if (x_speed > 0)
+		{
+			if (x_pos > right_out)
+			{
+
+				// Geschwindigkeit umdrehen
+				x_speed = - x_speed;
+			}
+		}
+
+		// Ball bewegt sich nach oben
+		if (y_speed < 0)
+		{
+			if (y_pos < up_out)
+			{
+				y_speed = - y_speed;
+			}
+		}
+		// Ball bewegt sich nach unten
+		else if (y_speed > 0)
+		{
+			if (y_pos > down_out)
+			{
+				y_speed = - y_speed;
+			}
+		}
+	}
+
+	public void testForCollisionComputer (ComputerKI computer)
+	{
+		// Initialisierung der Ballpositionen
+		ball_top = y_pos - radius;
+		ball_bottom = y_pos + radius;
+		ball_left = x_pos - radius;
+		ball_right = x_pos + radius;
+
+		// Initialisierung der momentanen Positionen des Paddels
+		comp_top = computer.getYPos();
+		comp_bottom = computer.getYPos() + computer.getYSize();
+		comp_right = computer.getXPos() + computer.getXSize();
+
+		// Ist die Y - Position des Balles zwischen den Paddelpositionen?
+		if ((ball_top >= comp_top - radius) && (ball_bottom <= comp_bottom + radius))
+		{
+			// Ist Paddel in der Nähe?
+			if (ball_left <= comp_right)
+			{
+				// Normales Bouncen
+				x_speed = - x_speed;
+			}
+		}
+	}
+
+	public int getXSpeed ()
+	{
+		return x_speed;
+	}
+
+	public int getYPos ()
+	{
+		return y_pos;
+	}
+
+
+	public void paint (Graphics g)
+	{
+		g.setColor (Color.red);
+		g.fillOval (x_pos - radius, y_pos - radius, 2 * radius, 2 * radius);
+	}
+}

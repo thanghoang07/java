@@ -1,0 +1,52 @@
+package calculatorClientServer;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class CalculatorServer {
+	private int port = 12345;
+
+	public void calculator() throws IOException, UnknownHostException {
+		ServerSocket server = new ServerSocket(port);
+		System.out.println("waiting .... ");
+		Socket sc = server.accept();
+		System.out.println("Accept Connects ....");
+		// response get information from client
+		BufferedReader getClient = new BufferedReader(new InputStreamReader(sc.getInputStream()));
+		//
+		String readClient = getClient.readLine();
+		String[] processInf = readClient.split(" ");
+		String number1 = processInf[0], calculator = processInf[1], destFile = processInf[2];
+		//
+		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(calculator)));
+		// send data to client
+		PrintWriter sendClient = new PrintWriter(new OutputStreamWriter(new FileOutputStream(destFile)), true);
+		String line = "";
+		if (number1.equalsIgnoreCase("copy")) {
+			while ((line = input.readLine()) != null) {
+				System.out.println(line);
+				sendClient.write(line);
+				sendClient.write("\n");
+			}
+		} else {
+			sendClient.print("sai dinh dang");
+		}
+		getClient.close();
+		input.close();
+		sendClient.close();
+		sc.close();
+		server.close();
+	}
+
+	public static void main(String[] args) throws IOException, UnknownHostException {
+		
+	}
+}

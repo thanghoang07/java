@@ -1,0 +1,96 @@
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+import java.net.*;
+
+public class Main extends Applet implements Runnable
+{
+	// Variablen
+
+	// Thread
+	Thread thread;
+
+	// Ball
+	PongBall ball;
+
+	// Computerpaddel
+	ComputerKI computer;
+
+	// Doppelpufferung
+	private Image dbImage;
+	private Graphics dbg;
+
+	public void init(){
+		setBackground (Color.black);
+		ball = new PongBall (200,200);
+		computer = new ComputerKI (200, ball);
+	}
+
+	public void start(){
+		thread = new Thread (this);
+		thread.start();
+	}
+
+	public void stop(){
+		thread.stop();
+	}
+
+	public void run(){
+
+		// Erniedrigen der ThreadPriority um zeichnen zu erleichtern
+		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+
+		while (true)
+		{
+			// Neumalen des Fensters
+			repaint();
+
+			ball.move();
+			computer.move();
+
+			if (ball.getXSpeed() < 0){
+				ball.testForCollisionComputer(computer);
+			}
+
+			try
+			{
+				// Stoppen des Threads für 10 Millisekunden
+				Thread.sleep (10);
+			}
+			catch (InterruptedException ex)
+			{
+				break;
+			}
+
+			// Zurücksetzen der ThreadPriority auf Maximalwert
+			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+		}
+	}
+
+	public void paint(Graphics g){
+		ball.paint(g);
+		computer.paint (g);
+	}
+
+	/** Update - Methode, Realisierung der Doppelpufferung zur Reduzierung des Bildschirmflackerns */
+	public void update (Graphics g)
+	{
+		// Initialisierung des DoubleBuffers
+		if (dbImage == null)
+		{
+			dbImage = createImage (this.getSize().width, this.getSize().height);
+			dbg = dbImage.getGraphics ();
+		}
+
+		// Bildschirm im Hintergrund löschen
+		dbg.setColor (getBackground ());
+		dbg.fillRect (0, 0, this.getSize().width, this.getSize().height);
+
+		// Auf gelöschten Hintergrund Vordergrund zeichnen
+		dbg.setColor (getForeground());
+		paint (dbg);
+
+		// Nun fertig gezeichnetes Bild Offscreen auf dem richtigen Bildschirm anzeigen
+		g.drawImage (dbImage, 0, 0, this);
+	}
+}

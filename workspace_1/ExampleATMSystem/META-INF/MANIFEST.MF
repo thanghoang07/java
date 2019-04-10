@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ExampleATMSystem
+Bundle-SymbolicName: ExampleATMSystem;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.runtime,
+ org.eclipse.swt;bundle-version="3.104.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

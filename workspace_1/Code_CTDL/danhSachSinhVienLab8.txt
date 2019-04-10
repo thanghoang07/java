@@ -1,0 +1,28 @@
+
+1Ma so sinh vien: 1	Ho va Ten: Hoang Duc Thang  	Diem ly thuyet: 7.9	Diem thuc hanh: 8.6	Diem trung binh: 7.4
+
+
+
+2Ma so sinh vien: 3	Ho va Ten: Trinh Van Toan  	Diem ly thuyet: 9.0	Diem thuc hanh: 8.0	Diem trung binh: 8.5
+
+
+
+3Ma so sinh vien: 2	Ho va Ten: Vo Quoc Huy  	Diem ly thuyet: 10.0	Diem thuc hanh: 9.5	Diem trung binh: 9.75
+
+
+
+4Ma so sinh vien: 5	Ho va Ten: Nguyen Thanh Trung  	Diem ly thuyet: 7.4	Diem thuc hanh: 8.9	Diem trung binh: 7.0
+
+
+
+5Ma so sinh vien: 4	Ho va Ten: Tran Thi Kim  	Diem ly thuyet: 6.8	Diem thuc hanh: 6.0	Diem trung binh: 7.0
+
+
+
+6Ma so sinh vien: 7	Ho va Ten: Truong Hoang Nam  	Diem ly thuyet: 8.0	Diem thuc hanh: 5.2	Diem trung binh: 6.7
+
+
+
+7Ma so sinh vien: 6	Ho va Ten: Phan The Nam  	Diem ly thuyet: 8.0	Diem thuc hanh: 5.2	Diem trung binh: 7.9
+
+

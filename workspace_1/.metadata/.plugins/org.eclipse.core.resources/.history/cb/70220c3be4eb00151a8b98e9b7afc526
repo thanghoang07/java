@@ -1,0 +1,26 @@
+package tuan2;
+
+public class Thread2 implements Runnable {
+
+	int count;
+
+	public Thread2(int count) {
+		this.count = count;
+	}
+
+	// thoi gian su ly 1000
+	@Override
+	public void run() {
+		while (true) {
+			count++;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(count);
+		}
+
+	}
+}

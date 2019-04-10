@@ -1,0 +1,13 @@
+1490698699796	Rename local variable 'searchbfs'
+1490698935916	Rename method 'execute'
+1490699791507	Rename field 'xCood'
+1490699799912	Rename field 'yCood'
+1490699820562	Rename local variable 'xCood'
+1490699828732	Rename local variable 'yCood'
+1490700687879	Rename local variable 'yCood'
+1490701081046	Rename method 'execute'
+1490706097331	Rename method 'execute'
+1490709321336	Delete element
+1490709397961	Rename type 'RunBFS'
+1490709909530	Rename method 'depthFirstSearch'
+1490709914529	Convert local variable 'sc' to field

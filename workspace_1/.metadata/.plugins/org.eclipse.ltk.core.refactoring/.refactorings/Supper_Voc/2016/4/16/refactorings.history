@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move source folder &apos;swing&apos; to &apos;Sovc&apos;&#x0D;&#x0A;- Original project: &apos;Supper_Voc&apos;&#x0D;&#x0A;- Destination element: &apos;Sovc&apos;&#x0D;&#x0A;- Original element: &apos;Supper_Voc/swing&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move source folder" destination="=Sovc" element1="/swing" flags="6" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveRoots" roots="1" stamp="1460818534364" version="1.0"/>
+</session>

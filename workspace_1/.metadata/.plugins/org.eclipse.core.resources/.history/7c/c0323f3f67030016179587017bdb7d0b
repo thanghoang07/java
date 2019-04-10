@@ -1,0 +1,32 @@
+package tuan5_1;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Test {
+	public static void main(String[] args) {
+		CaNhan ca1 = new CaNhan("Thang", "001");
+		CaNhan ca2 = new CaNhan("Toan", "002");
+		DoanhNghiep da1 = new DoanhNghiep("TH", "003", "A1");
+		DoanhNghiep da2 = new DoanhNghiep("GH", "004", "A2");
+		DienLuc dl1 = new DienLuc("DL01");
+		//
+		ca1.themChiSo(new DienSinhHoat(new Date(12, 01, 2016), 01));
+		ca1.themChiSo(new DienSinhHoat(new Date(12, 02, 2016), 123));
+		//
+		ca2.themChiSo(new DienSinhHoat(new Date(01, 07, 2015), 962));
+		ca2.themChiSo(new DienSinhHoat(new Date(01, 10, 2015), 1232));
+		//
+		da1.themChiSo(new DienSanXuat(new Date(01, 05, 2014), 20560, 5000, 2000));
+		da1.themChiSo(new DienSanXuat(new Date(01, 06, 2014), 21796, 5550, 2340));
+		//
+		da2.themChiSo(new DienSanXuat(new Date(01, 01, 2016), 32356, 4126, 2123));
+		da2.themChiSo(new DienSanXuat(new Date(01, 02, 2016), 43267, 7446, 4320));
+		// dl1.register(ca1);
+		dl1.register(ca2);
+		dl1.register(da1);
+		dl1.register(da2);
+		//
+		System.out.println(dl1.inMotKH("002"));
+	}
+}

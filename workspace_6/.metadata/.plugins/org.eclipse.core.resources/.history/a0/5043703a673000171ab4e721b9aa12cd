@@ -1,0 +1,58 @@
+package caro;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Clock extends Thread {
+	JTextField txtTime;
+	private static final int TIME = 1200;
+	public static int i = TIME;
+	public static int j = 0;
+
+	public Clock(JTextField lblTime) {
+		this.txtTime = lblTime;
+	}
+
+	// @SuppressWarnings("static-access")
+	public Clock(int a) {
+		this.i = a;
+	}
+
+	@Override
+	public void run() {
+
+		while (i > 0) {
+			i--;
+			int minute = i / 60;
+			int Second = i - minute * 60;
+			String time = minute + ":" + Second;
+			if (Second < 10) {
+				time = minute + ":0" + Second;
+			}
+			System.out.println(j);
+			txtTime.setText(time);
+			try {
+				j++;
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+
+			}
+		}
+	}
+
+	public void reset() {
+		i = TIME;
+		j = 0;
+	}
+
+	public static String TimePlay() {
+		int minute = j / 60;
+		int Second = j - minute * 60;
+		// String time = minute+":"+Second;
+		String time = minute + ":" + Second;
+		if (Second < 10) {
+			time = minute + ":0" + Second;
+		}
+		return time;
+	}
+
+}

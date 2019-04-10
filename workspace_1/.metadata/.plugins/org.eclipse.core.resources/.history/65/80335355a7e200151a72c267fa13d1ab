@@ -1,0 +1,140 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Stack;
+
+public class UndiretedGraph extends GraphTheory {
+	int[][] matrix = null;
+	int numVex;
+
+	public UndiretedGraph() {
+		this.numVex = numVex;
+		this.matrix = new int[numVex][numVex];
+	}
+
+	@Override
+	public int[][] readMatrix(File fileName) {
+		String line;
+		int row = 0;
+		int vex = 0;// so dinh cua do thi
+		int count = 0;// đếm số dòng đã đọc // dòng đầu tiên là số đỉnh
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			try {
+				while ((line = br.readLine()) != null) {
+					count++;
+					if (count == 1) {// số đỉnh của đồ thị
+						vex = Integer.parseInt(line);
+						matrix = new int[vex][vex];
+					} else {// matrix
+						String[] elements = line.split(" ");
+						for (int col = 0; col < vex; col++) {// lấy_từng_phần_tử_gán_vào_matrix
+							matrix[row][col] = Integer.parseInt(elements[col]);
+						}
+						row++;
+					}
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return matrix;
+	}
+
+	@Override
+	public void printGraph(int[][] matrix) {
+		int row = 0;
+		int col = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	@Override
+	public void addEgdes(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 1;
+			matrix[dest][src] = 1;
+		} else {
+			System.out.println("loi....");
+		}
+	}
+
+	public int size() {
+		return this.matrix.length;
+	}
+
+	@Override
+	public void removeEdges(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi....");
+		}
+
+	}
+
+	@Override
+	public int degreeVex(int vex) {
+		int degreeVex = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			degreeVex += matrix[vex][i];
+		}
+		return degreeVex;
+	}
+
+	@Override
+	public int degreeGraph(int[][] matrix) {
+		int degreeG = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += degreeVex(i);
+		}
+		return degreeG;
+	}
+
+	@Override
+	public int edges(int[][] matrix) {
+		int temp = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix.length; j++) {
+				temp += matrix[i][j];
+			}
+		}
+		return temp / 2;
+	}
+
+	@Override
+	public boolean isConnected() {
+		int i = 0;
+		boolean[] visited = new boolean[matrix.length];
+		Stack<Integer> stack = new Stack<>();
+		stack.push(i);
+		while (!stack.empty()) {
+			i = stack.pop();
+			visited[i] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if (!visited[j] && matrix[i][j] > 0) {
+					stack.push(j);
+				} //
+			}
+
+		}
+		for (int j = 0; j < matrix.length; j++) {
+			if (!visited[j]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}

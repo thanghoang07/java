@@ -1,0 +1,32 @@
+package ly_thuyet_do_thi_2;
+
+import javax.swing.UIManager;
+
+public class tess2 {
+	public static void main(String[] args) throws Exception {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("=|=|=|===== Undireted Graph =|=|=|=");
+		UndiretedGraph u = new UndiretedGraph(18);
+		u.addEdges(0, 4);
+		u.addEdges(0, 6);
+		u.addEdges(4, 6);
+		u.addEdges(1, 2);
+		u.addEdges(1, 3);
+		u.addEdges(2, 3);
+		u.addEdges(1, 15);
+		u.addEdges(15, 14);
+		u.addEdges(5, 7);
+		u.addEdges(11, 12);
+		u.addEdges(16, 16);
+		u.addEdges(13, 13);
+		u.addEdges(17, 17);
+		u.addEdges(10, 9);
+		u.addEdges(10, 8);
+		u.addEdges(9, 8);
+		u.printGraph(u.matrix);
+	}
+}

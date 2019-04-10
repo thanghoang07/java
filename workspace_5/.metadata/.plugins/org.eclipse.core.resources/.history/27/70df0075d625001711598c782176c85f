@@ -1,0 +1,5 @@
+package demo3;
+
+public abstract class Person {
+	public abstract String getJobName();
+}

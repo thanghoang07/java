@@ -1,0 +1,79 @@
+package tuan2;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileSystemView;
+
+public class CopyDetailFile1 {
+
+	public void copy(String source, String dest) {
+		File file = new File(source);
+		try {
+			BufferedInputStream inputFile = new BufferedInputStream(new FileInputStream(source));
+			BufferedOutputStream outputFile = new BufferedOutputStream(new FileOutputStream(dest));
+
+			byte[] data = new byte[10240];
+			long beginTime = System.currentTimeMillis();
+			int i;
+			while ((i = inputFile.read(data)) != -1) {
+				outputFile.write(data, 0, i);
+			}
+			inputFile.close();
+			outputFile.close();
+
+		} catch (Exception err) {
+			// TODO: handle exception
+			System.out.println("Lỗi không copy được file:  " + err);
+
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String srouce = "";
+		String dest = "";
+
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Chọn File nguồn: ");
+
+		int returnValue = jfc.showDialog(null, "Save");
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			srouce = (jfc.getSelectedFile().getPath());
+		}
+
+		System.out.println("File nguồn: " + srouce);
+
+		JFileChooser jfc1 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Chọn File đích: ");
+
+		int returnValue1 = jfc1.showDialog(null, "Save");
+		if (returnValue1 == JFileChooser.APPROVE_OPTION) {
+			dest = (jfc1.getSelectedFile().getPath());
+		}
+
+		System.out.println("File đích: " + dest);
+
+		if (dest.length() == 0 && srouce.length() == 0 || dest.length() == 0 || srouce.length() == 0) {
+			System.out.println("Đường dẫn rỗng");
+		} else {
+			CopyDetailFile1 copyFile = new CopyDetailFile1();
+			copyFile.copy(srouce, dest);
+		}
+
+	}
+
+}

@@ -1,0 +1,17 @@
+package demo3;
+
+public class People extends Person {
+
+	@Override
+	public void eat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getJobName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

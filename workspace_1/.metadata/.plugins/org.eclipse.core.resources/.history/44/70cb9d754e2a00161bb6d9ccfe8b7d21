@@ -1,0 +1,76 @@
+package demo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Dijkstra {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	// khởi tạo một mảng boolean vị trí các đỉnh viếng thăm
+	public boolean[] visited;
+	// khởi tạo một giá trị cho thành phần liên thông
+	int countConnected = 1;
+
+	// khoi tao mang chua duogn di
+	public int[] path;
+	// dem so phan tu hien co trong mang
+	public int indext;
+	//
+	int index;
+
+	public void algoDijkstra(int src) {
+		int min = 0, d = 0, numEdges = 0;
+		int[] dist = new int[numVex];
+		int[] pred = new int[numVex];
+		for (int i = 0; i < numVex; i++) {
+			dist[i] = Integer.MAX_VALUE;
+			visited[i] = false;
+		}
+		dist[src] = 0;
+		while (numEdges < (numVex - 1)) {
+			min = minDisTance(dist, visited);
+			visited[min] = true;
+			for (int j = 0; j < numVex; j++) {
+				d = dist[min] + matrix[min][j];
+				if (!visited[j] && matrix[min][j] != 0 && dist[min] != Integer.MAX_VALUE && dist[j] > d) {
+					dist[j] = d;
+					pred[j] = min;
+					numEdges++;
+				}
+			}
+		}
+		System.out.printf("Dinh bat dau: %3d\n", src);
+		System.out.printf("%3s : %3s : %3s\n", "Den dinh", "Do dai", "Duong di");
+		for (int j = 0; j < pred.length; j++) {
+			System.out.printf("%3d : %3d : ", j, dist[j]);
+			inDuongDiD(pred, src, j);
+			System.out.println();
+		}
+	}
+
+	public void inDuongDiD(int[] path, int src, int des) {
+		List<Integer> list = new ArrayList<>();
+		int x = des;
+		while (x != src) {
+			list.add(0, x);
+			x = path[x];
+		}
+		list.add(0, src);
+		System.out.print(list);
+
+	}
+
+	private int minDisTance(int[] dist, boolean[] visited) {
+		int x = Integer.MAX_VALUE;
+		int y = -1;
+		for (int i = 0; i < numVex; i++) {
+			if (!visited[i] && dist[i] < x) {
+				y = i;
+				x = dist[i];
+			}
+		}
+		return y;
+	}
+}

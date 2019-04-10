@@ -1,0 +1,127 @@
+package vnzoom;
+
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
+public class NewJFrame extends JFrame {
+	private JButton jButton1, jButton2, jButton3;
+	private JLabel jLabel1, jLabel2;
+
+	private Clock cl = null;
+
+	public NewJFrame() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		jButton1 = new JButton();
+		jLabel1 = new JLabel();
+		jButton2 = new JButton();
+		jButton3 = new JButton();
+		jLabel2 = new JLabel();
+
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		jButton1.setText("Start");
+		jButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jButton1ActionPerformed(evt);
+			}
+		});
+
+		jLabel1.setFont(new Font("Tahoma", 1, 14));
+		jLabel1.setText("20:00");
+
+		jButton2.setText("Stop");
+		jButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jButton2ActionPerformed(evt);
+			}
+		});
+
+		jButton3.setText("Reset");
+		jButton3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jButton3ActionPerformed(evt);
+			}
+		});
+
+		jLabel2.setText("Time: ");
+
+		GroupLayout layout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addGap(153, 153, 153)
+						.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(194, Short.MAX_VALUE))
+				.addGroup(
+						layout.createSequentialGroup().addGap(79, 79, 79)
+								.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+								.addGap(18, 18, 18)
+								.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+								.addComponent(jButton3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addGap(95, 95, 95))
+				.addGroup(layout.createSequentialGroup().addGap(141, 141, 141).addComponent(jLabel2)
+						.addContainerGap(230, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addGap(109, 109, 109).addComponent(jLabel1).addGap(59, 59, 59)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(jButton1)
+								.addComponent(jButton2).addComponent(jButton3))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+						.addComponent(jLabel2).addGap(30, 30, 30)));
+
+		pack();
+	}
+
+	private void jButton1ActionPerformed(ActionEvent evt) {
+		cl = new Clock(jLabel1);
+		cl.start();
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(true);
+
+	}
+
+	@SuppressWarnings("static-access")
+	private void jButton2ActionPerformed(ActionEvent evt) {
+		cl.stop();
+		// cl.reset();
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(false);
+		jLabel2.setText("Time:" + cl.TimePlay());
+	}
+
+	private void jButton3ActionPerformed(ActionEvent evt) {
+		cl.stop();
+		cl.reset();
+		jLabel1.setText("20:00");
+		jLabel2.setText("Time:00");
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(false);
+	}
+
+	public static void main(String args[]) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new NewJFrame().setVisible(true);
+			}
+		});
+	}
+
+}

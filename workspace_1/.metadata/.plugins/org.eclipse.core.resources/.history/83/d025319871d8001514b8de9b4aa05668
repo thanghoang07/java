@@ -1,0 +1,44 @@
+package khac;
+
+public class PasswordChecker {
+	public static void main(String[] args) {
+		String password1 = "12345678";
+		String password2 = "1234567a";
+		String password3 = "123456aA";
+		String password4 = "12345aA@";
+
+		// Kiểm tra độ mạnh của mật khẩu
+		System.out.println(
+				"Độ mạnh của mật khẩu password1:" + password1 + " là =" + validatePasswordStrength(password1) + "%");
+		System.out.println(
+				"Độ mạnh của mật khẩu password2:" + password2 + " là =" + validatePasswordStrength(password2) + "%");
+		System.out.println(
+				"Độ mạnh của mật khẩu password3:" + password3 + " là =" + validatePasswordStrength(password3) + "%");
+		System.out.println(
+				"Độ mạnh của mật khẩu password4:" + password4 + " là =" + validatePasswordStrength(password4) + "%");
+	}
+
+	static int validatePasswordStrength(String password) {
+		int strengthPercentage = 0;
+		String[] regexChecks = { ".*[a-z]+.*", // kiểm tra chữ thường
+				".*[A-Z]+.*", // kiểm tra chữ hoa
+				".*[\\d]+.*", // kiểm tra chữ số
+				".*[@#$%]+.*" // kiểm tra ký tự đặc biệt
+		};
+
+		if (password.matches(regexChecks[0])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[1])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[2])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[3])) {
+			strengthPercentage += 25;
+		}
+
+		return strengthPercentage;
+	}
+}

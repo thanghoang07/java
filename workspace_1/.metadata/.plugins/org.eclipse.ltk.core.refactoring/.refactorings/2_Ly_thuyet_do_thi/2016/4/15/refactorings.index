@@ -1,0 +1,6 @@
+1459695349925	Rename local variable 'k'
+1459696646423	Rename local variable 'stack'
+1459701544763	Rename method 'multiPathCycleEuler'
+1460169665378	Rename method 'pathHamilton'
+1460171467370	Rename method 'findHamilton'
+1460171474553	Rename field 'pathHamilton'

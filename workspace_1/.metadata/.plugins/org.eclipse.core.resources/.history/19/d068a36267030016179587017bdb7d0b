@@ -1,0 +1,57 @@
+package tuan5_1;
+
+import java.util.List;
+
+public abstract class NguoiDung {
+	// tao bien thue gia tri gia tang
+	protected static final double VAT = 0.1;
+	private String ten, diaChi;
+
+	public NguoiDung(String ten, String diaChi) {
+		super();
+		this.ten = ten;
+		this.diaChi = diaChi;
+	}
+
+	/**
+	 * @return the ten
+	 */
+	public String getTen() {
+		return ten;
+	}
+
+	/**
+	 * @param ten
+	 *            the ten to set
+	 */
+	public void setTen(String ten) {
+		this.ten = ten;
+	}
+
+	/**
+	 * @return the diaChi
+	 */
+	public String getDiaChi() {
+		return diaChi;
+	}
+
+	/**
+	 * @param diaChi
+	 *            the diaChi to set
+	 */
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
+	public abstract List<? extends NgayGhiSoDienDung> getNgayGhi();
+
+	public NgayGhiSoDienDung getChiSoCu() {
+		return getNgayGhi().get(getNgayGhi().size() - 2);
+	}
+
+	public NgayGhiSoDienDung getChiSoMoi() {
+		return getNgayGhi().get(getNgayGhi().size() - 1);
+	}
+
+	public abstract String inHoaDon();
+}

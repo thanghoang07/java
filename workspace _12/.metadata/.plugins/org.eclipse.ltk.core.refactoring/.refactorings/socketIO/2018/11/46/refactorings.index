@@ -1,0 +1,7 @@
+1542078005190	Rename type 'calculatorClient'
+1542078175369	Rename method 'upload'
+1542078836046	Rename local variable 'comm'
+1542078851687	Rename local variable 'sourceFile'
+1542078866761	Rename local variable 'destFile'
+1542080231689	Rename method 'sendCalculator'
+1542081747457	Rename local variable 'f'

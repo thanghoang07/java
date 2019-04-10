@@ -1,0 +1,4 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Wed Mar 30 15:28:41 ICT 2016
+http\://download.codetrails.com/models/freq/v2/.error=Could not transfer artifact com.sun.mail\:javax.mail\:zip\:ctor-freq\:0.0.0-SNAPSHOT from/to models (http\://download.codetrails.com/models/freq/v2)\: Connect to download.codetrails.com\:80 timed out
+@default-models-http\://download.codetrails.com/models/freq/v2/.lastUpdated=1459326521685

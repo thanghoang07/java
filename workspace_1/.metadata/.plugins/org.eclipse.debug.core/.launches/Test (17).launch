@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/2_Ly_thuyet_do_thi/demo/LTDT_thu7_456_TrinhVanToan_14130349_Tuan5/Test.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="LTDT_thu7_456_TrinhVanToan_14130349_Tuan5.Test"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="2_Ly_thuyet_do_thi"/>
+</launchConfiguration>

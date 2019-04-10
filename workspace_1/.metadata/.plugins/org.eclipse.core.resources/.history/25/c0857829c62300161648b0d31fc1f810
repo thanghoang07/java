@@ -1,0 +1,194 @@
+package demo;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import java.awt.ScrollPane;
+import javax.swing.JScrollPane;
+import java.awt.Panel;
+
+public class Student extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtCode, txtName, txtDob, txtPob;
+	private JLabel stdCode, stdName, stdDob, stdPob;
+	private DefaultTableModel model;
+	private List<String> dsStudent;
+	private String body;
+	private JTable table;
+	private JScrollPane jScrollPane;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					Student frame = new Student();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Student() {
+		dsStudent = new LinkedList<String>();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 407);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		createGUI();
+		dataTable();
+
+	}
+
+	public void createGUI() {
+		JToolBar toolBar = new JToolBar();
+		contentPane.add(toolBar, BorderLayout.NORTH);
+
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addStuden();
+				reset();
+			}
+		});
+		toolBar.add(btnAdd);
+
+		JButton btnExit = new JButton("Exit");
+		toolBar.add(btnExit);
+
+		JButton btnDelete = new JButton("Delete");
+		toolBar.add(btnDelete);
+
+		JPanel panelInPut = new JPanel();
+		contentPane.add(panelInPut, BorderLayout.CENTER);
+		panelInPut.setLayout(new BoxLayout(panelInPut, BoxLayout.Y_AXIS));
+
+		JPanel panel_1 = new JPanel();
+		panelInPut.add(panel_1);
+
+		stdCode = new JLabel("StdCode");
+		stdCode.setPreferredSize(new Dimension(80, 20));
+		panel_1.add(stdCode);
+
+		txtCode = new JTextField();
+		panel_1.add(txtCode);
+		txtCode.setColumns(20);
+
+		JPanel panel_2 = new JPanel();
+		panelInPut.add(panel_2);
+
+		stdName = new JLabel("StdName");
+		stdName.setPreferredSize(new Dimension(80, 20));
+		panel_2.add(stdName);
+
+		txtName = new JTextField();
+		panel_2.add(txtName);
+		txtName.setColumns(20);
+
+		JPanel panel_3 = new JPanel();
+		panelInPut.add(panel_3);
+
+		stdDob = new JLabel("StdDob");
+		stdDob.setPreferredSize(new Dimension(80, 20));
+		panel_3.add(stdDob);
+
+		txtDob = new JTextField();
+		panel_3.add(txtDob);
+		txtDob.setColumns(20);
+
+		JPanel panel_4 = new JPanel();
+		panelInPut.add(panel_4);
+
+		stdPob = new JLabel("StdPob");
+		stdPob.setPreferredSize(new Dimension(80, 20));
+		panel_4.add(stdPob);
+
+		txtPob = new JTextField();
+		panel_4.add(txtPob);
+		txtPob.setColumns(20);
+
+		JPanel panelData = new JPanel();
+		contentPane.add(panelData, BorderLayout.SOUTH);
+		panelData.setLayout(new BoxLayout(panelData, BoxLayout.Y_AXIS));
+
+		table = new JTable();
+		panelData.add(table);
+		table.setName("tableData");
+		table.setEnabled(false);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+	}
+
+	public void reset() {
+		txtCode.setText("");
+		txtName.setText("");
+		txtDob.setText("");
+		txtPob.setText("");
+	}
+
+	private void dataTable() {
+		model = new DefaultTableModel(new Object[] { "STT", "StdCode", "StdName", "StDob", "StdPob" }, 0) {
+			@Override
+			public Class<?> getColumnClass(int columnIndex) {
+				switch (columnIndex) {
+				default:
+					return Object.class;
+				}
+			}
+
+		};
+	}
+
+	private void addStuden() {
+		if (txtCode.getText().equals("") && txtName.getText().equals("") && txtDob.getText().equals("")
+				&& txtPob.getText().equals("") || txtCode.getText().equals("") || txtName.getText().equals("")
+				|| txtDob.getText().equals("") || txtPob.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Cac truong dang rong", "Error", JOptionPane.WARNING_MESSAGE);
+		} else {
+			model.addRow(new Object[] { model.getRowCount() + 1, txtCode.getText(), txtName.getText(), txtDob.getText(),
+					txtPob.getText() });
+			System.out.printf("STT: %3d \nStdCode: %3s \nStdTen: %3s \nStdDob: %3s \nStdPod: %3s\n===============",
+					model.getRowCount(), txtCode.getText(), txtName.getText(), txtDob.getText(), txtPob.getText());
+			dsStudent.add(0, data());
+		}
+	}
+
+	private String data() {
+		for (int i = 0; i < model.getRowCount(); i++) {
+			String stdCode = (String) model.getValueAt(i, 1);
+			String stdName = (String) model.getValueAt(i, 2);
+			String stdDob = (String) model.getValueAt(i, 3);
+			String stdPob = (String) model.getValueAt(i, 4);
+			body += String.format("STT: %d \nStdCode: %s \nStdTen: %s \nStdDob: %s \nStdPod: %s\n", i, stdCode, stdName,
+					stdDob, stdPob);
+		}
+		return body;
+	}
+}

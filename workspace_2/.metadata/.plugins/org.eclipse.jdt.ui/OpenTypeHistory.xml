@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai1{Subject.java[Subject" modifiers="513" timestamp="1465527338000"/>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai1{Observer.java[Observer" modifiers="513" timestamp="1465527052000"/>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai2{Subject.java[Subject" modifiers="513" timestamp="1465528214000"/>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai2{Observer.java[Observer" modifiers="513" timestamp="1465528166000"/>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai3{Subject.java[Subject" modifiers="513" timestamp="1465529615000"/>
+<typeInfo handle="=PatternExampleJava/observer&lt;bai3{Observer.java[Observer" modifiers="513" timestamp="1465529669000"/>
+<typeInfo handle="=PatternExampleJava/factory&lt;car{Car.java[Car" modifiers="1025" timestamp="1466257184000"/>
+<typeInfo handle="=PatternExampleJava/decorator&lt;car{Car1.java[Car1" modifiers="513" timestamp="1466291839000"/>
+<typeInfo handle="=PatternExampleJava/decorator&lt;textfield{Widget.java[Widget" modifiers="513" timestamp="1466301530000"/>
+<typeInfo handle="=PatternExampleJava/state&lt;tvRemote2{State.java[State" modifiers="513" timestamp="1466306199000"/>
+<typeInfo handle="=PatternExampleJava/adapter&lt;mp3{AdvancedMediaPlayer.java[AdvancedMediaPlayer" modifiers="513" timestamp="1466321091000"/>
+<typeInfo handle="=PatternExampleJava/adapter&lt;mp3{MediaPlayer.java[MediaPlayer" modifiers="513" timestamp="1466321431000"/>
+</typeInfoHistroy>

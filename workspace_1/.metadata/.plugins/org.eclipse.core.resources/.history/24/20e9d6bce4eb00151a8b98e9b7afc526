@@ -1,0 +1,9 @@
+package tuan2;
+
+public class Test {
+	public static void main(String[] args) {
+		Thread th1 = new Thread2(10, 20);
+		Thread t1 = new Thread(th1);
+		t1.start();
+	}
+}

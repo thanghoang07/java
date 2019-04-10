@@ -1,0 +1,45 @@
+package lab4;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Bai7 {
+	public static int[] taoMang(int n) {
+		int[] arr = new int[n];
+		Scanner sc = new Scanner(System.in);
+		Random ra = new Random();
+		for (int i = 0; i < n; i++) {
+			System.out.printf("arr[%d] = ", i);
+			arr[i] = ra.nextInt();
+		}
+		return arr;
+	}
+
+	public static void in(int[] arr) {
+		System.out.println("mang nhap vao la: ");
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i] + " ");
+		}
+	}
+
+	public static void doiXung(int[] arr, int n) {
+		for (int i = 0; i < n; i++) {
+			if (arr[i] == arr[n - i - 1]) {
+				System.out.println("\n la day doi xung");
+			} else {
+				System.out.println("\n khong la day doi xung");
+			}
+			break;
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.println("nhap vao mot so: ");
+		int n = in.nextInt();
+		int[] arr = new int[n];
+		arr = taoMang(n);
+		in(arr);
+		doiXung(arr, n);
+	}
+}

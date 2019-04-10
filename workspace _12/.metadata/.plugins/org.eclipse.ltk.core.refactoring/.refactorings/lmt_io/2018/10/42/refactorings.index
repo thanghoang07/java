@@ -1,0 +1,12 @@
+1539667910852	Encapsulate field 'name'
+1539667923367	Encapsulate field 'id'
+1539667931179	Encapsulate field 'where'
+1539668242948	Encapsulate field 'gpa'
+1539669493743	Convert local variable 'dis' to field
+1539669502541	Convert local variable 'dis' to field
+1539671316155	Delete element
+1539672973581	Delete element
+1539673034286	Delete element
+1539673062721	Delete element
+1539673414162	Copy compilation units
+1539674324615	Rename local variable 'dis'

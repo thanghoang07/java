@@ -1,0 +1,17 @@
+1496548804912	Rename field 'mainFrame'
+1496550567654	Rename field 'btnewgame'
+1496550585082	Rename field 'btresume'
+1496552285860	Rename type 'MainProgram'
+1496552610666	Rename local variable 'pnew'
+1496613142923	Delete element
+1496613158718	Rename type 'Main'
+1496613712038	Delete element
+1496622341034	Rename local variable 'B'
+1496624608413	Rename local variable 'black'
+1496624617178	Rename local variable 'white'
+1496624640547	Rename local variable 'game'
+1496624650771	Rename local variable 'game'
+1496624664142	Rename local variable 'game'
+1496624680696	Rename local variable 'game'
+1496626050628	Rename method 'search'
+1496626067751	Rename local variable 'game'

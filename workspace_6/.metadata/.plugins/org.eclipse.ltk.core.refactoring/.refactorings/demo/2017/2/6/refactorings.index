@@ -1,0 +1,5 @@
+1486632850998	Rename package 'com.datumbox.opensource.game'
+1486632862354	Rename package 'com.datumbox.opensource.dataobjects'
+1486632875870	Rename package 'com.datumbox.opensource.ai'
+1486632889613	Rename package 'com.datumbox.opensource'
+1486643856790	Convert local variable 'sc' to field

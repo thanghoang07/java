@@ -1,0 +1,9 @@
+1456041804020	Convert local variable 'nhapVaoPass' to field
+1456562414733	Rename compilation unit 'SwingAdapterDemo.java'
+1456562763069	Rename field 'lblStatus'
+1456563043386	Rename field 'tpContent'
+1456563069735	Rename field 'menubar'
+1456565477142	Rename local variable 'selFile'
+1456567637489	Move compilation units
+1456569926628	Copy compilation unit
+1456570123400	Copy package

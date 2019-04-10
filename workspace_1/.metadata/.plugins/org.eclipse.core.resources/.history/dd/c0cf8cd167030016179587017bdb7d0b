@@ -1,0 +1,44 @@
+package tuan5_1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class DienLuc {
+	private String name;
+
+	// danh sach tat ca khach hang cua Chi Nhanh.
+	private Map<String, NguoiDung> nguoiDung = new HashMap<String, NguoiDung>();
+
+	public DienLuc(String name) {
+		this.name = name;
+	}
+
+	public void register(NguoiDung customer) {
+		nguoiDung.put(customer.getDiaChi(), customer);
+	}
+
+	public NguoiDung getNguoiDung(String id) {
+		return nguoiDung.get(id);
+	}
+
+	// Xuat hoa don cho khach hang co ma id.
+	public String inMotKH(String id) {
+		StringBuffer result = new StringBuffer("Cong ty " + name + "\n");
+		result.append("HOA DON TIEN DIEN CUA KHACH HANG\n\n");
+		result.append(getNguoiDung(id).inHoaDon());
+		return result.toString();
+	}
+	public void inHDTatCaKH(){
+		
+	}
+	// Xuat hoa don cho tat ca khach hang.
+	public String inTatCaKH() {
+		StringBuffer result = new StringBuffer("Cong ty " + name + "\n");
+		result.append("BAO CAO VE VIEC THU TIEN DIEN CUA KHACH HANG\n\n");
+		for (NguoiDung customer : nguoiDung.values()) {
+			result.append(customer.inHoaDon());
+		}
+		return result.toString();
+	}
+	
+}

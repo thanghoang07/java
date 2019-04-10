@@ -1,0 +1,40 @@
+1457828115600	Move compilation units
+1457828126922	Copy compilation units
+1457828134026	Delete elements
+1457828156471	Delete element
+1457828396159	Rename method 'addEgdes'
+1457831161968	Rename method 'addEdges'
+1457832051386	Rename local variable 'u'
+1457835441152	Rename method 'isConnected1'
+1457846563691	Rename resource 'BaiTapTuan1 .java'
+1457846572407	Move compilation unit
+1457846577410	Delete element
+1457846753667	Rename local variable 'diGraph'
+1457853966040	Rename type 'UndiretedGraph'
+1457855197859	Rename method 'countConnected'
+1457855212452	Rename method 'countConnected2'
+1457855228741	Rename method 'countConnected3'
+1457855378272	Move packages
+1457861892087	Delete elements
+1457861925283	Delete element
+1457861951353	Move compilation unit
+1457862198436	Delete element
+1457867392760	Rename package 'demo_1'
+1457867400577	Delete element
+1457871627742	Rename method 'checkConnected'
+1457945042215	Rename method 'adjacent'
+1457947228219	Infer generic type arguments
+1457947236680	Infer generic type arguments
+1457947656167	Rename local variable 'u'
+1457947676041	Rename local variable 'v'
+1457947685074	Rename local variable 'v1'
+1457947692243	Rename local variable 'v'
+1457947698344	Rename local variable 'v1'
+1457965188698	Rename field 'adj'
+1458261568767	Rename local variable 'fc'
+1458261610722	Rename local variable 'temp'
+1458267235050	Rename method 'chuTrinhEuler'
+1458271304367	Rename method 'pathEuler'
+1458354027939	Rename method 'isEuler'
+1458373723821	Rename type 'tess2'
+1458380343795	Rename local variable 'v'

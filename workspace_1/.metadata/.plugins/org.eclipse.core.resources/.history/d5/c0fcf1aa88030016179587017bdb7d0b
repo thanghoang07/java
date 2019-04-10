@@ -1,0 +1,35 @@
+package video_Rental;
+
+public class Test {
+	public static void main(String[] args) {
+		Movie[] phim = { new Movie(" Batman v Superman: Dawn of Justice", LoaiPhimThue.NEW_RELEASE),
+				new Movie("Captain America: Civil War", LoaiPhimThue.NEW_RELEASE),
+				new Movie("X-men: Apocalypse", LoaiPhimThue.NEW_RELEASE),
+				new Movie("Angry Birds 3D", LoaiPhimThue.CHILDRENS), 
+				new Movie("Finding Dory", LoaiPhimThue.CHILDRENS),
+				new Movie("Kungfu Panda 3", LoaiPhimThue.CHILDRENS),
+				new Movie("Come Back, Mister", LoaiPhimThue.REGULAR),
+				new Movie("The Flash ss2", LoaiPhimThue.REGULAR),
+				new Movie("Assassination Classroom", LoaiPhimThue.REGULAR) };
+		//
+		Customer cu1 = new Customer("Thang");
+		Customer cu2 = new Customer("Toan");
+		Customer cu3 = new Customer("Huy");
+		//
+		cu1.choThue(phim[0], new Date(01, 04, 2016));
+		cu1.choThue(phim[3], new Date(01, 04, 2016));
+		cu1.choThue(phim[6], new Date(01, 04, 2016));
+		//
+		cu2.choThue(phim[1], new Date(02, 04, 2016));
+		cu2.choThue(phim[4], new Date(02, 04, 2016));
+		cu2.choThue(phim[7], new Date(02, 04, 2016));
+		//
+		cu3.choThue(phim[2], new Date(03, 04, 2016));
+		cu3.choThue(phim[5], new Date(03, 04, 2016));
+		cu3.choThue(phim[8], new Date(03, 04, 2016));
+		
+		//
+		cu3.inHoaDon();
+	}
+
+}

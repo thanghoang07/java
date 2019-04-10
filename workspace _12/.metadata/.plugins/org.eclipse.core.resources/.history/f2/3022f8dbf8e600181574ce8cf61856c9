@@ -1,0 +1,69 @@
+package calculatorClientServer;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class CalculatorServer {
+	private int port = 12345;
+
+	public void calculator() throws IOException, UnknownHostException {
+		ServerSocket server = new ServerSocket(port);
+		System.out.println("waiting .... ");
+		Socket sc = server.accept();
+		System.out.println("Accept Connects ....");
+		// response get information from client
+		BufferedReader getClient = new BufferedReader(new InputStreamReader(sc.getInputStream()));
+		//
+		String readClient = getClient.readLine();
+		String result = readClient + " =";
+		String[] processInf = readClient.split(" ");
+		String number1 = processInf[0], number2 = (processInf[2]), calculator = processInf[1];
+		int a = 0, b = 0, total = 0;
+		//
+		PrintWriter sendClient = new PrintWriter(new OutputStreamWriter(sc.getOutputStream()));
+		// BufferedReader read = new BufferedReader(new InputStreamReader(getClient,
+		// arg1))
+		//
+		String line = "";
+		while ((line = getClient.readLine()) != null) {
+			try {
+				a = Integer.parseInt(number1);
+				b = Integer.parseInt(number2);
+			} catch (NumberFormatException e) {
+				// TODO: handle exception
+				System.out.println("nhap khong phai so");
+				sendClient.println("Nhap lai");
+			}
+			if (calculator.equalsIgnoreCase("+")) {
+				total = a + b;
+			} else if (calculator.equalsIgnoreCase("-")) {
+				total = a - b;
+			} else if (calculator.equalsIgnoreCase("*")) {
+				total = a * b;
+			} else if (calculator.equalsIgnoreCase("/")) {
+				if (b != 0)
+					total = a / b;
+				else
+					sendClient.println("#DIV/0");
+			} else {
+				sendClient.println("null");
+			}
+			result += total;
+			sendClient.println(result);
+		}
+
+	}
+
+	public static void main(String[] args) throws IOException, UnknownHostException {
+		CalculatorServer s = new CalculatorServer();
+		s.calculator();
+	}
+}

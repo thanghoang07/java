@@ -1,0 +1,12 @@
+package demo3;
+
+public class Test {
+	public static void main(String[] args) {
+		Icecream kem1 = new Icecream("01", "Toan", "OK");
+		Icecream kem2 = new Icecream("01", "Huy", "OK");
+		Icecream kem3 = new Icecream("01", "Hai", "OK");
+		Icecream kem4 = new Icecream("01", "Hoc", "OK");
+		
+		
+	}
+}

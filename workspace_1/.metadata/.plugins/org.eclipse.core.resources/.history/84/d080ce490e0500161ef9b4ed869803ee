@@ -1,0 +1,15 @@
+package tuan2;
+
+public class Test {
+	public static void main(String[] args) {
+		/*Thread th1 = new Thread1(10, 20);
+		Thread t1 = new Thread(th1);
+		t1.start();*/
+		Producer pd = new Producer(0);
+		Thread t1 = new Thread(pd);
+		t1.start();
+		Consumer co = new Consumer();
+		Thread t2 = new Thread(co);
+		t2.start();
+	}
+}

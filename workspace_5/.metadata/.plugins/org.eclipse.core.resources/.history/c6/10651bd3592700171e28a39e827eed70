@@ -1,0 +1,21 @@
+package demo3;
+
+import java.util.ArrayList;
+
+public class Test {
+	public static void main(String[] args) {
+		Icecream kem1 = new Icecream("01", "Toan", "OK");
+		Icecream kem2 = new Icecream("01", "Huy", "OK");
+		Icecream kem3 = new Icecream("01", "Hai", "OK");
+		Icecream kem4 = new Icecream("01", "Hoc", "OK");
+		
+		ArrayList<Icecream> ice = new ArrayList<Icecream>();
+		ice.add(kem1);
+		ice.add(kem2);
+		ice.add(kem3);
+		ice.add(kem4);
+		
+		People pe = new People(ice);
+		pe.getIce(ice);
+	}
+}

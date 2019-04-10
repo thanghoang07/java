@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="code-ThangHoang"/>
+	<classpathentry kind="src" path="code-ThanhHai"/>
+	<classpathentry kind="src" path="code-VanToan"/>
+	<classpathentry kind="src" path="de-quy"/>
+	<classpathentry kind="src" path="mangMotChieu"/>
+	<classpathentry kind="src" path="mangHaiChieu"/>
+	<classpathentry kind="src" path="demoThanghoang"/>
+	<classpathentry kind="src" path="voc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

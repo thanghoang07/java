@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/2_Ly_thuyet_do_thi/src/ly_thuyet_do_thi_2/TestDirectedGraph.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ly_thuyet_do_thi_2.TestDirectedGraph"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="2_Ly_thuyet_do_thi"/>
+</launchConfiguration>

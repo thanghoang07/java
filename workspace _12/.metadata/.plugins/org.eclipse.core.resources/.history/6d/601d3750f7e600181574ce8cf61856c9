@@ -1,0 +1,41 @@
+package calculatorClientServer;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class CalculatorServer {
+	private int port = 12345;
+
+	public void calculator() throws IOException, UnknownHostException {
+		ServerSocket server = new ServerSocket(port);
+		System.out.println("waiting .... ");
+		Socket sc = server.accept();
+		System.out.println("Accept Connects ....");
+		// response get information from client
+		BufferedReader getClient = new BufferedReader(new InputStreamReader(sc.getInputStream()));
+		//
+		String readClient = getClient.readLine();
+		String result = readClient + " =";
+		String[] processInf = readClient.split(" ");
+		int number1 = Integer.parseInt(processInf[0]), number2 = Integer.parseInt(processInf[2]);
+		String calculator = processInf[1];
+
+	}
+
+	public double computing(double number1, double number2) {
+
+	}
+
+	public static void main(String[] args) throws IOException, UnknownHostException {
+		CalculatorServer s = new CalculatorServer();
+		s.calculator();
+	}
+}

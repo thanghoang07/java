@@ -1,0 +1,36 @@
+package calculatorClientServer;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class CalculatorClient {
+	private int port = 12345;
+	private String ip = "127.0.0.1";
+
+	public void sendComputing() throws IOException, UnknownHostException {
+		Socket sc = new Socket(ip, port);
+		System.out.println("Accept Connects ....");
+		// user input
+		System.out.println("Nhap vao gia tri can tinh: a +(-*/) b");
+		BufferedReader f = new BufferedReader(new InputStreamReader(System.in));
+		// send data
+		String readUser = f.readLine();
+		//
+		PrintWriter ws = new PrintWriter(sc.getOutputStream());
+		//
+		BufferedReader recrServer = new BufferedReader(new InputStreamReader(sc.getInputStream()));
+		//
+		String line = "";
+		
+		sc.close();
+	}
+
+	public static void main(String[] args) throws IOException, UnknownHostException {
+		CalculatorClient c = new CalculatorClient();
+		c.sendComputing();
+	}
+}

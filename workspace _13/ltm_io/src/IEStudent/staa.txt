@@ -1,0 +1,6 @@
+id1	thang	5
+id2	Huy	5
+id3	aaa	8
+id1	thang	5
+id2	Huy	5
+id3	aaa	8

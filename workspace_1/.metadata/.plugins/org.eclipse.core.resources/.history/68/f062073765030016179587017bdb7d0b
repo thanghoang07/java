@@ -1,0 +1,102 @@
+package tuan4;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+public class Student {
+	// khoi tao ten
+	public String ten;
+	// khoi tao ngay sinh
+	public Date ngaySinh;
+	// khoi tao giang vien
+	public Lecturer giangVien;
+	// khoi tao danh sach mon dang ky
+	public List<Register> danhSachMon = new ArrayList<Register>();
+
+	public Student(String ten, Date ngaySinh, Lecturer giangVien, ArrayList<Register> monDk) {
+		this.ten = ten;
+		this.ngaySinh = ngaySinh;
+		this.giangVien = giangVien;
+		this.danhSachMon = monDk;
+	}
+
+	public List<Register> getDanhSachMon() {
+		return danhSachMon;
+	}
+
+	public void setDanhSachMon(List<Register> danhSachMon) {
+		this.danhSachMon = danhSachMon;
+	}
+
+	public String getTen() {
+		return ten;
+	}
+
+	public void setTen(String ten) {
+		this.ten = ten;
+	}
+
+	public Date getNgaySinh() {
+		return ngaySinh;
+	}
+
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh;
+	}
+
+	public Lecturer getGiangVien() {
+		return giangVien;
+	}
+
+	public void setGiangVien(Lecturer giangVien) {
+		this.giangVien = giangVien;
+	}
+
+	// phuong thuc tinh diem trung binh
+	public float diemTrungBinh() {
+		float temp = 0;
+		int temp2 = 0;
+		for (Register f : danhSachMon) {
+			temp += (f.getGrade() * f.getCourse().getSoTinChi());
+			temp2 += f.getCourse().getSoTinChi();
+		}
+		return temp / temp2;
+	}
+
+	// in ra danh sach cac sinh vien
+	public void print() {
+		System.out.println("=================================" + "\n" + "Ten: " + getTen() + "\n" + "Ngay sinh: "
+				+ getNgaySinh() + "\n" + "Stt\tMon\tSo Chi\tDiem");
+		for (int i = 0; i < danhSachMon.size(); i++) {
+			System.out.println(i + "\t" + danhSachMon.get(i).getCourse().getTen() + "\t"
+					+ danhSachMon.get(i).getCourse().getSoTinChi() + "\t" + danhSachMon.get(i).getGrade());
+		}
+		System.out.println("Diem trung binh: " + diemTrungBinh());
+		System.out.println("Xep loai: " + xepHang());
+		System.out.println("=================================");
+	}
+
+	// in ra tung sinh vien
+	public String toString() {
+		return getTen() + " " + getNgaySinh() + " " + getDanhSachMon();
+	}
+
+	// phuong thuc sep hang
+	public String xepHang() {
+		float diemTB = diemTrungBinh();
+		if (diemTB >= 9)
+			return "Xuat Sac";
+		else if (diemTB >= 8)
+			return "Gioi";
+		else if (diemTB >= 7)
+			return "Kha";
+		else if (diemTB >= 6)
+			return "Trung Binh Kha";
+		else if (diemTB >= 5)
+			return "Trung Binh";
+		else
+			return "Rot";
+	}
+
+}

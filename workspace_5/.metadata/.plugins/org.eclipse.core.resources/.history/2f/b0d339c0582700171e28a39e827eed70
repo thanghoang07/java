@@ -1,0 +1,6 @@
+package demo3;
+
+public class Icecream {
+public String id, ten, mui;
+
+}

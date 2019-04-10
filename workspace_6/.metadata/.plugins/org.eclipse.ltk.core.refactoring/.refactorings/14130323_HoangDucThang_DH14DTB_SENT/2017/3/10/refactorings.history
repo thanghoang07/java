@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 packages to &apos;Va4/src&apos;&#x0D;&#x0A;- Original project: &apos;VacuumWorld4&apos;&#x0D;&#x0A;- Destination element: &apos;Va4/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     VacuumWorld4/src/randomagent&#x0D;&#x0A;     VacuumWorld4/src/agent&#x0D;&#x0A;     VacuumWorld4/src/vacworld&#x0D;&#x0A;- Update references to refactored element" description="Move packages" destination="=Va4/src" element1="/src&lt;randomagent" element2="/src&lt;agent" element3="/src&lt;vacworld" flags="589830" fragments="3" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1489022146812" version="1.0"/>
+</session>

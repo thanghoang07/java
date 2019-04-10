@@ -1,0 +1,11 @@
+1463395409987	Rename local variable 'c1'
+1463395416978	Rename local variable 'c2'
+1463409108841	Rename local variable 'numVex2'
+1463409430214	Rename local variable 'min'
+1463791698175	Copy compilation units
+1463791737125	Delete element
+1463796352898	Infer generic type arguments
+1463796530298	Rename local variable 'v'
+1463797061624	Rename method 'minVertex'
+1463802089194	Rename local variable 'next'
+1463814366307	Rename local variable 'di'

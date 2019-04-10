@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 packages to &apos;VacuumWorld4/src&apos;&#x0D;&#x0A;- Original project: &apos;Va4&apos;&#x0D;&#x0A;- Destination element: &apos;VacuumWorld4/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Va4/src/vacworld&#x0D;&#x0A;     Va4/src/agent" description="Copy packages" destination="=VacuumWorld4/src" element1="/src&lt;vacworld" element2="/src&lt;agent" flags="589830" fragments="2" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1489483244430" version="1.0"/>
+</session>

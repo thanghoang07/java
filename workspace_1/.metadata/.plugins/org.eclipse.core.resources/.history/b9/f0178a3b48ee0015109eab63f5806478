@@ -1,0 +1,455 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class DirectedGraph extends GraphTheory {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	//
+	private BufferedReader br;
+	// khởi tạo một mảng boolean vị trí các đỉnh viếng thăm
+	public boolean[] visited;
+	// khởi tạo một giá trị cho thành phần liên thông
+	int countConnected = 1;
+	// Array of lists for Adjacency List Representation
+	private LinkedList<Integer>[] dinhKe;
+	// khoi tao mang chua duogn di
+	public int[] path;
+	// dem so phan tu hien co trong mang
+	public int indext;
+
+	// khởi tạo matrix có hướng
+	public DirectedGraph() {
+
+	}
+
+	// khởi tạo matrix có hướng
+	public DirectedGraph(int[][] matrix) {
+		this.matrix = matrix;
+		this.numVex = matrix.length;
+		this.visited = new boolean[matrix.length];
+		this.dinhKe = new LinkedList[numVex];
+		for (int i = 0; i < numVex; ++i)
+			dinhKe[i] = new LinkedList();
+		this.path = new int[matrix.length];
+	}
+
+	// khoi tao matrix dang nhap vao dinh
+	public DirectedGraph(int numVex) {
+		this.numVex = numVex;
+		this.visited = new boolean[numVex];
+		this.matrix = new int[numVex][numVex];
+		this.dinhKe = new LinkedList[numVex];
+		for (int i = 0; i < numVex; ++i)
+			dinhKe[i] = new LinkedList();
+		this.path = new int[numVex];
+
+	}
+
+	// doc matran tu file
+	@Override
+	public int[][] readMatrix(File fileName) {
+		String line;
+		matrix = null; // gan cho matrix ban dau bang rong
+		int row = 0; // so_dong
+		int vex = 0; // so_dinh_cua_do_thi
+		int count = 0;// đếm_số_dòng_đã_đọc_dòng_đầu_tiên_là_số_đỉnh
+		try {
+			br = new BufferedReader(new FileReader(fileName));
+			try {
+				while ((line = br.readLine()) != null) {
+					count++;
+					if (count == 1) {// số_đỉnh_của_đồ_thị
+						vex = Integer.parseInt(line);
+						matrix = new int[vex][vex];
+					} else {// matrix
+						String[] elements = line.split(" ");
+						for (int col = 0; col < vex; col++) {// lấy_từng_phần_tử_gán_vào_matrix
+							matrix[row][col] = Integer.parseInt(elements[col]);
+						}
+						row++;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return matrix;
+	}
+
+	// đọc file matrix Incidence
+	@Override
+	public int[][] readIncidenceMatrix(File fileName) {
+
+		return null;
+	}
+
+	// in matrix
+	@Override
+	public void printGraph(int[][] matrix) {
+		// so hang,
+		for (int i = 0; i < matrix.length; i++)
+			System.out.printf("%3d", i);
+		System.out.println();
+		// in ra so cot
+		for (int i = 0; i < matrix.length; i++) {
+			System.out.print(i + " ");
+			// in matrix
+			for (int j = 0; j < matrix.length; j++)
+				System.out.print(matrix[i][j] + "  ");
+			System.out.println();
+		}
+	}
+
+	// them vao matrix co hướng mot canh
+	@Override
+	public void addEdges(int src, int dest) throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được tạo");
+		}
+		if (src >= matrix.length && dest >= matrix.length) {
+			throw new IndexOutOfBoundsException("Vị trí vượt quá giới hạn");
+		}
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 1;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// xoa bo mot canh trong matrix có hướng
+	@Override
+	public void removeEdges(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// bậc_vào_cuả_đỉnh_duyệt_theo_chiều_dọc_của_matrix_kề
+	public int din(int vex) {
+		int din = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			din += matrix[i][vex];
+		}
+		return din;
+	}
+
+	// bậc_ra_của_đỉnh_duyệt_theo_chiều_ngang_của_matrix_kề
+	public int dout(int vex) {
+		int dout = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			dout += matrix[vex][i];
+		}
+		return dout;
+	}
+
+	// tinh tong bac cua matrix
+	@Override
+	public int degreeGraph() throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được tạo");
+		}
+		int degreeG = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += dout(i);
+		}
+		return degreeG;
+	}
+
+	// tinh so canh cua matrix
+	@Override
+	public int numEdges() throws Exception {
+		int temp = 0;
+		temp = degreeGraph();
+		return temp;
+	}
+
+	// kiểm tra tính liên thông của matrix
+	@Override
+	public boolean isConnected() {
+		int i = 0;
+		visited = new boolean[matrix.length];
+		Stack<Integer> stack = new Stack<>();
+		stack.push(i);
+		while (!stack.empty()) {
+			i = stack.pop();
+			visited[i] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if (!visited[j] && matrix[i][j] > 0) {
+					stack.push(j);
+				}
+			}
+		}
+		for (int j = 0; j < matrix.length; j++) {
+			if (!visited[j]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public void DFSUseStack(int vex) {
+		Stack<Integer> stack = new Stack<>();
+		stack.push(vex);
+		visited[vex] = true;
+		while (!stack.empty()) {
+			vex = stack.pop();
+			visited[vex] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if (!visited[j] && matrix[vex][j] > 0) {
+					stack.push(j);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void DFS(int vex) {
+		visited[vex] = true;
+		for (int i = 0; i < matrix.length; i++) {
+			if (!visited[i] && matrix[vex][i] > 0) {
+				DFS(i);
+			}
+		}
+	}
+
+	@Override
+	public void BFSUseQueue(int vex) {
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.add(vex);// them vao hang doi
+		visited[vex] = true;
+		while (!queue.isEmpty()) {
+			vex = queue.remove(); // lay gia trị pah tu ra khoi hang doi
+			int acx = vex;
+			// System.out.print(acx + "---"); //The BFS traversal of the graph
+			for (int i = 0; i < matrix.length; i++) {
+				if (!visited[i] && matrix[vex][i] > 0) {
+					queue.add(i); // tiep tuc them dinh vao hang doi
+					visited[i] = true;
+				}
+			}
+		}
+	}
+
+	@Override
+	public int countConnectedDFSUseStack() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				DFSUseStack(i);
+			}
+		}
+		return countConnected;
+	}
+
+	@Override
+	public int countConnectedDFS() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				DFS(i);
+			}
+		}
+		return countConnected;
+	}
+
+	@Override
+	public int countConnectedBFSUseQueue() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				BFSUseQueue(i);
+			}
+		}
+		return countConnected;
+	}
+
+	// kiểm tra liên thông mạnh, yếu
+	// mạnh
+	public boolean isStrongConnected() {
+		// duyet mang
+		for (int j = 0; j < matrix.length; j++) {
+			// duyet mang
+			for (int i = 0; i < matrix[0].length; i++) {
+				/*
+				 * kiem tra coi giua hai diem co ton tai duong di tu diem nay
+				 * toi diem kia va nguoc lai, va voi moi dinh cua do thi
+				 */
+				// khong thi tra ve false
+				if (!checkConnect(j, i))
+					return false;
+			}
+		}
+		// co thi tra ve true
+		return true;
+	}
+
+	// yếu
+	public boolean isWeakConnected() {
+		// neu do thi khong lien thong mang va do thi lien thong thi tra ve true
+		if (!isStrongConnected() && isConnected()) {
+			return true;
+		} else {
+			// nguoc lai tra ve false
+			return false;
+		}
+	}
+
+	// kiểm tra liên thông giữa hai điểm
+	public boolean checkConnect(int a, int b) {
+		// khoi tao bien boolean ban dau la false
+		boolean connect = false;
+		// neu phan tu tai vi tri do lon hon ko thi tra ve true
+		if (matrix[a][b] > 0)
+			return true;
+		// nguoc lai
+		else {
+			try {
+				// khoi tao stack
+				Stack<Integer> stack = new Stack<Integer>();
+				// duyet mang
+				for (int i = 0; i < matrix.length; i++) {
+					// neu phan tu tai vi tri do lon hon khon va hai diem do
+					// khac nhau
+					if (matrix[a][i] > 0 && i != a)
+						// them dinh do vao stack
+						stack.add(i);
+				}
+				// vong lap while kiem tra coi stack co rong ko
+				while (stack.size() != 0) {
+					// de quy lai checkConnect
+					connect = checkConnect(stack.pop(), b);
+					// neu connect bang true thi tra ve true
+					if (connect == true)
+						return true;
+				}
+
+			} catch (StackOverflowError e) {
+				return false;
+			}
+		}
+		// tra ve bien boolean connect
+		return connect;
+	}
+
+	// lam moi mang boolean
+	public void reset() {
+		// duyet mang
+		for (int i = 0; i < numVex; i++) {
+			// gan can phan tu trong mang bang false
+			visited[i] = false;
+		}
+	}
+
+	// in duong di
+	public void path(int src, int dest) {
+		path[indext] = src;
+		indext++;
+		visited[src] = true;
+		if (src == dest) {
+			for (int i = 0; i < indext; i++) {
+				System.out.print(path[i] + "|");
+			}
+			System.out.println();
+			return;
+		}
+		for (int i = 0; i < numVex; i++) {
+			if (matrix[src][i] == 1 && visited[i] == false) {
+				path(i, dest);
+				visited[i] = true;
+				indext--;
+			}
+		}
+	}
+
+	/**
+	 * Chu trinh euler
+	 *
+	 */
+	// code tham khao by Van Toan
+	public boolean checkCycleEuler() {
+		if (!isWeakConnected()) {
+			System.out.println("Đồ thị không có chu trình Euler");
+			return false;
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			if (din(i) != dout(i)) {
+				System.out.println("Đồ thị không có chu trình Euler");
+				return false;
+			}
+		}
+		System.out.println("Đồ thị không có chu trình Euler");
+		return true;
+	}
+
+	// code viet
+	public boolean checkEuler() {
+		if (isConnected()) {
+			for (int i = 0; i < dinhKe.length; i++) {
+				if (isWeakConnected()) {
+					System.out.println("Do thi euler co chu trinh");
+					return true;
+				}
+				if (isWeakConnected() && !checkDinhCoLap(i)) {
+					System.out.println("Do thi euler co duong di euler");
+					return false;
+				} else {
+					System.out.println("Do thi lien thong manh");
+					return false;
+				}
+			}
+		}
+		System.out.println("Do thi khong phai la do thi euler");
+		return false;
+	}
+
+	public boolean checkDinhCoLap(int vex) {
+		int din = 0;
+		int dout = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			din += matrix[i][vex];
+			dout += matrix[vex][i];
+			if (din == 0 && dout == 0) {
+				System.out.println("do thi co dinh co lap");
+				return true;
+			}
+		}
+		System.out.println("do thi khong co dinh co lap");
+		return false;
+	}
+
+	public boolean kiemTraDKConLaiDL4(int vex) {
+		int din = 0;
+		int dout = 0;
+		int count1 = 0;
+		int count2 = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			din += matrix[i][vex];
+			dout += matrix[vex][i];
+			if (din == dout + 1) {
+				count1++;
+			}
+			if (dout = din + 1) {
+				count2++;
+			}
+			if (count1 == count2) {
+
+			}
+		}
+	}
+}

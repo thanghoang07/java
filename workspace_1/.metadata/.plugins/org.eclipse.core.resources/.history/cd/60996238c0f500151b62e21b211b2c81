@@ -1,0 +1,71 @@
+package demon;
+
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
+public class MoveFile {
+	protected static File file;
+	public static JFileChooser fc;
+
+	public static File docFile() throws Exception {
+		try {
+			fc = new JFileChooser();
+			fc.setCurrentDirectory(new File("C:\\Users\\thang\\Desktop\\files"));// dat_vi_tri_mac_dinh_de_mo
+			fc.setDialogTitle("Chon File");
+			fc.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
+			// fc.setAcceptAllFileFilterUsed(false);
+			if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+				String selOpen = fc.getSelectedFile().getName();// lay_duong_dan_file
+				String selOF = fc.getCurrentDirectory().toString();
+				file = new File(selOF);
+			} else {
+				System.out.println("No selection");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return file;
+	}
+
+	public static void moveFF(File oldFF, String newFF) {
+		// kiem tra coi neu duong dan khong phai thu muc
+		if (!oldFF.isDirectory()) {
+			try {
+				if (oldFF.renameTo(new File(newFF + oldFF.getName()))) {
+					System.out.println("The file was moved successfully to the new folder");
+				} else {
+					System.out.println("The File was not moved.");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// kiem tra coi duong dan co phai la thu muc do co rong hay ko
+		else if (oldFF.isDirectory()) {
+			String[] files = oldFF.list();
+			// neu rong thi thuc hien move
+			if (files.length < 0) {
+				try {
+					if (oldFF.renameTo(new File(newFF + oldFF.getName()))) {
+						System.out.println("The Forder was moved successfully to the new folder");
+					} else {
+						System.out.println("The Forder was not moved.");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				// khong rong thi dung
+				System.out.println("The Forder is not empty!");
+			}
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		File oldFF = MoveFile.docFile();
+		String newFF = ("C:\\Users\\thang\\Desktop\\files\\files2\\");
+		moveFF(oldFF, newFF);
+	}
+
+}

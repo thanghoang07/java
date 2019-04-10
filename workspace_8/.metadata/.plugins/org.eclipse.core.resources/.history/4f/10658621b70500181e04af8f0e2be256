@@ -1,0 +1,15 @@
+package socketSinhVien;
+
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.HashMap;
+
+public class Server {
+Socket socket;
+static int port = 12345;
+BufferedReader in;
+PrintWriter out;
+
+	HashMap<String, SinhVien>map=new HashMap<>();
+}

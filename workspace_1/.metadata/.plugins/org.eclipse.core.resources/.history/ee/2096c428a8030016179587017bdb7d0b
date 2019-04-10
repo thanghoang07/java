@@ -1,0 +1,96 @@
+package quanLyDiem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+	// khoi tao danh sach cac sinh vien
+	public static List<Student> stu = new ArrayList<Student>();
+	// khoi tao danh sach cac giang vien
+	public static List<Lecturer> lec1 = new ArrayList<Lecturer>();
+	// khoi tao danh sach cac mon hoc
+	public static List<Course> cor1 = new ArrayList<Course>();
+
+	// phuong thuc in danh sach cac sinh vien
+	public void printStuden(List<Student> students) {
+		for (Student student : students) {
+			student.print();
+		}
+	}
+
+	// phuong thuc in điểm của một môn
+	public void printOneCourse(String tenMon, List<Register> registers, List<Student> students) {
+		for (Student student : students) {
+			for (Register register : registers) {
+				if (register.getCourse().getTen().equals(tenMon))
+					System.out.printf("Ten: %s \nDiem: %.2f\n", student.getTen(), register.getDiem());
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		// tao du lieu giang vien
+		Lecturer lt1 = new Lecturer("Thien", new Date(10, 12, 2012), "GV");
+		Lecturer lt2 = new Lecturer("Hung", new Date(10, 12, 2012), "GV");
+		Lecturer lt3 = new Lecturer("Thuan", new Date(10, 12, 2012), "GV");
+		Lecturer lt4 = new Lecturer("Tram", new Date(10, 12, 2012), "GV");
+		Lecturer lt5 = new Lecturer("Nga", new Date(10, 12, 2012), "GV");
+		// them giang vien vao danh sach cac giang vien
+		lec1.add(lt1);
+		lec1.add(lt2);
+		lec1.add(lt3);
+		lec1.add(lt4);
+		lec1.add(lt5);
+		// tao du lieu mon hoc
+		Course co1 = new Course("LTNC", lt1, 3);
+		Course co2 = new Course("LTCB", lt3, 4);
+		Course co3 = new Course("LTDT", lt4, 3);
+		Course co4 = new Course("CTDL", lt5, 4);
+		Course co5 = new Course("HDHNC", lt2, 5);
+		// them mon hoc vao danh sach cac mon hoc
+		cor1.add(co1);
+		cor1.add(co2);
+		cor1.add(co3);
+		cor1.add(co4);
+		cor1.add(co5);	
+		// tao du lieu hoc vien
+		Student st1 = new Student("Trinh Van Toan", new Date(3, 10, 1996));
+		Student st2 = new Student("Hoang Duc Thang", new Date(3, 1, 1995));
+		// đăng ky môn hoc
+		st1.dangKy(co1);
+		st1.dangKy(co2);
+		st1.dangKy(co3);
+		st1.dangKy(co4);
+		st1.dangKy(co5);
+		
+		st2.dangKy(co1);
+		st2.dangKy(co2);
+		st2.dangKy(co3);
+		st2.dangKy(co4);
+		
+		// them vao danh sach cac sinh vien
+		stu.add(st1);
+		stu.add(st2);
+		// stu.add(st3);
+		// stu.add(st4);
+		// stu.add(st5);
+		// cap nhat lai diem cho tung sinh vien
+		st1.capNhatDiem(co1, 10);
+		st1.capNhatDiem(co2, 8);
+		st1.capNhatDiem(co3, 6);
+		st1.capNhatDiem(co4, 5);
+		st1.capNhatDiem(co5, 8);
+		
+		st2.capNhatDiem(co1, 6);
+		st2.capNhatDiem(co2, 8);
+		st2.capNhatDiem(co3, 9);
+		st2.capNhatDiem(co4, 7);
+		// in ra danh sach cac sinh vien
+		Test te1 = new Test();
+		te1.printStuden(stu);
+		// te1.printOneCourse("LTNC", list5, stu);
+		//
+
+	}
+
+}

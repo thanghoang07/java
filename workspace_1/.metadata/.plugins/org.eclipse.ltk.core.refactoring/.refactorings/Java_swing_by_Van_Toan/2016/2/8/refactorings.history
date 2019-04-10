@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Bai1.java&apos; to &apos;Thu/swing/demo003&apos;&#x0D;&#x0A;- Original project: &apos;Java_swing_by_Van_Toan&apos;&#x0D;&#x0A;- Destination element: &apos;Thu/swing/demo003&apos;&#x0D;&#x0A;- Original element: &apos;lab1.Bai1.java&apos;" description="Copy compilation unit" destination="=Thu/swing&lt;demo003" element1="/src&lt;lab1{Bai1.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1455618267006" units="1" version="1.0"/>
+</session>

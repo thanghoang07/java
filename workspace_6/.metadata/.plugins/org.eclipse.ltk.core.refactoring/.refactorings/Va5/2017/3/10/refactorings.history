@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 elements from project &apos;Va5&apos;&#x0D;&#x0A;- Original project: &apos;Va5&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Va5/src/doc&#x0D;&#x0A;     Va5/src/doc.agent&#x0D;&#x0A;     Va5/src/doc.resources&#x0D;&#x0A;     Va5/src/doc.vacworld&#x0D;&#x0A;- Delete subpackages" description="Delete elements" element1="/src&lt;doc.vacworld" element2="/src&lt;doc.resources" element3="/src&lt;doc.agent" element4="/src&lt;doc" elements="4" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1489040965836" subPackages="true" version="1.0"/>
+</session>

@@ -1,0 +1,34 @@
+package lab9;
+
+import java.io.*;
+import java.util.*;
+
+public class Bai3 {
+	private static Scanner docFile;
+
+	public static void main(String[] args) throws IOException {
+		File file = new File("output.txt");
+		int dem = 0;
+		try {
+			docFile = new Scanner(file);
+			ArraySet<String> set1 = new ArraySet<>();
+			String[] mangStr = docFile.nextLine().split("//W");
+			for (String word : mangStr) {
+				set1.add(word);
+			}
+			Iterator<String> itr = set1.iterator();
+			while (itr.hasNext()) {
+				String wwo = itr.next();
+				for (int i = 0; i < mangStr.length; i++) {
+					if (wwo.equals(mangStr[i])) {
+						dem++;
+					}
+				}
+				System.out.println(wwo + "\t" + dem + " lan");
+				dem = 0;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}

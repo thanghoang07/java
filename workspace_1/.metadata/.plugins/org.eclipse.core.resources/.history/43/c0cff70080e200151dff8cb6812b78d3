@@ -1,0 +1,18 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.File;
+
+public abstract class GraphTheory {
+	
+	public abstract int[][] readMatrix(File fileName);
+
+	public abstract void viewGraph(int[][] adj);
+
+	public abstract void addEgdes(int sx, int dx);
+
+	public abstract void removeEdges(int src, int dest);
+
+	public abstract int degreeVex(int src);
+
+	public abstract int degreeGraph();
+}

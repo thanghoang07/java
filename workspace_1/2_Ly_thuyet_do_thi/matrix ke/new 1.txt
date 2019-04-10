@@ -1,0 +1,46 @@
+#include<queue>
+#include<fstream>
+#include<iostream>
+#include<conio.h>
+using namespace std;
+#define MAX 1000
+queue <int> a;
+int b[MAX][MAX], chuaxet[MAX], m, u;
+void init ()
+{
+   // nhap ma tran tu file in
+    ifstream file ("in");
+    file>>m;
+    for ( int i = 1 ; i <=  m ; ++i)
+        for ( int j = 1 ; j <= m ; ++j)
+            file>>b[i][j];
+    file.close();
+    // danh dau tat ca cac dinh deu chua xet ( chuaxet[i] = 1 )
+    for ( int i = 1 ; i <= m ; ++i)
+        chuaxet[i] = 1;
+}
+void BFS(int b[][MAX], int m, int u)
+{
+    a.push(u);                // nhap dinh vao queue
+    chuaxet[u] = 0;          // danh dau dinh nay da duoc xet
+    while ( a.empty() != 1)  // chung nao queue con trong con thuc hien
+    {
+          int x = a.front();  // gan x = dinh cuoi cua queue
+          cout<<x<<" ";      // xuat dinh do ra
+          a.pop();            // xoa dinh kho queue
+          for ( int j = 1; j <= m ; ++j)    // vong for tim cac dinh ke voi x
+              if ( b[x][j] == 1 && chuaxet[j] ) // neu dinh j ke voi x va i chua duoc xet thi
+           {
+                    a.push(j);            // them j vao queue
+                    chuaxet[j] = 0;        // danh dau j da duoc xet
+              }
+    }
+}
+main (){
+    init ();
+    cout<<"nhap dinh bat dau duyet : ";
+    cin>>u;
+    cout<<"\ncac dinh duoc duyet : \n";
+    BFS(b, m, u);              
+    getch();
+}

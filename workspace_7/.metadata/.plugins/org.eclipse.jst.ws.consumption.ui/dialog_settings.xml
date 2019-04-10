@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.jst.ws.internal.consumption.ui.widgets.test.ClientTestWidget.sampleFolderText_">
+		<item value="sampleStudentManagerWebServiceSoapProxy"/>
+	</list>
+	<list key="org.eclipse.jst.ws.client.type.java">
+		<item value="http://round2demo4.azurewebsites.net/WServices/StudentManagerWebService.asmx?wsdl"/>
+	</list>
+</section>

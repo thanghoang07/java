@@ -1,0 +1,34 @@
+1458475899367	Rename local variable 'thang00'
+1458478345706	Move compilation units
+1458478358784	Delete element
+1458478363417	Move compilation unit
+1458480285227	Copy compilation unit
+1458481579352	Copy compilation units
+1458481696413	Copy compilation unit
+1458482464310	Delete element
+1458487573688	Rename local variable 'students'
+1458487765819	Rename method 'printStuden'
+1458554662708	Delete element
+1458565714796	Rename type 'PhongBan'
+1458565742859	Encapsulate field 'maPB'
+1458565815446	Rename field 'loaiNV'
+1458565835289	Rename local variable 'loaiNV'
+1458567193289	Rename local variable 'p'
+1458650830339	Copy compilation unit
+1458651304582	Rename type 'Reading'
+1458652107656	Rename method 'getReadings'
+1458653117337	Rename method 'getChiSoDienLucCaoDiem'
+1458653209495	Rename method 'getChiSoDienLucThapDiem'
+1458653221541	Rename method 'getChiSoDienLucCD'
+1458653258461	Rename method 'getChiSoDien'
+1458653972221	Rename field 'maSo'
+1458654292284	Rename method 'luongDienTong'
+1458654882125	Rename local variable 'oldIndex'
+1458654906937	Rename local variable 'newIndex'
+1458655112214	Rename method 'charge'
+1458655150005	Rename local variable 'usage'
+1458655865554	Rename field 'customers'
+1458655902304	Rename method 'getCustomer'
+1458656893658	Rename method 'allInvoice'
+1458656906068	Rename method 'invoice'
+1458689853607	Rename package 'tuan5'

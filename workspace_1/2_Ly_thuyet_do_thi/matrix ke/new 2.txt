@@ -1,0 +1,22 @@
+//
+		// do thi co huong
+		//
+		System.out.println("=|=|=|= Directed Graph =|=|=|=");
+		File file2 = GraphTheory.docFile();
+		DirectedGraph g2 = new DirectedGraph();
+		int[][] matrix2 = g2.readMatrix(file2);
+		System.out.print("------------------------" + "\nIn Matrix do thi: \n");
+		g2.printGraph(matrix2);
+		nhapVao = new Scanner(System.in);
+		System.out.print("------------------------" + "\nNhap vao dinh so can tinh bac: ");
+		int dinh2 = nhapVao.nextInt();
+		System.out.printf("Bac vao cua dinh %s la: %s", dinh2, g2.din(dinh2));
+		System.out.printf("\nBac ra cua dinh %s la: %s", dinh2, g2.din(dinh2));
+		System.out.println("\nTong bac cua do thi: " + g2.degreeGraph(matrix2));
+		System.out.println("So canh cua do thi: " + g2.numEdges(matrix2));
+		System.out.println("Xoa canh 5: ");
+		// g1.removeEdges(0, 4);
+		System.out.print("------------------------" + "\nIn Matrix do thi: \n");
+		g2.printGraph(matrix2);
+		System.out.println("Kiem tra lien thong");
+		System.out.println(g2.isConnected() ? "=>lien thong" : "=>khong kien thong");

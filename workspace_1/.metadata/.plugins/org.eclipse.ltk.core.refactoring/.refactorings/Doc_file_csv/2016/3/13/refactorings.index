@@ -1,0 +1,7 @@
+1458466794944	Convert local variable 'stri' to field
+1458466870788	Move compilation unit
+1458466948798	Rename method 'readFileCSV'
+1458467187267	Rename field 'country'
+1458467695544	Rename field 'stris'
+1458971559151	Rename source folder 'src'
+1458971571179	Move source folder

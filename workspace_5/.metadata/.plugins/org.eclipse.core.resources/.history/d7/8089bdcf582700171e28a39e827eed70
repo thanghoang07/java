@@ -1,0 +1,13 @@
+package demo3;
+
+public class Icecream {
+	public String id, ten, mui;
+
+	public Icecream(String id, String ten, String mui) {
+		super();
+		this.id = id;
+		this.ten = ten;
+		this.mui = mui;
+	}
+
+}

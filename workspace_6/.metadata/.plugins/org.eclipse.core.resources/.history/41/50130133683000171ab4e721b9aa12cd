@@ -1,0 +1,84 @@
+package vnzoom;
+
+import javax.swing.JLabel;
+
+public class Clock extends Thread {
+	JLabel lblTime;
+	private static final int TIME = 1200;
+	public static int i = TIME;
+	public static int j = 0;
+
+	public Clock(JLabel lblTime) {
+		this.lblTime = lblTime;
+	}
+
+	// @SuppressWarnings("static-access")
+	public Clock(int a) {
+		this.i = a;
+	}
+
+	@Override
+	public void run() {
+
+		while (i > 0) {
+			i--;
+			int minute = i / 60;
+			int Second = i - minute * 60;
+			String time = minute + ":" + Second;
+			if (Second < 10) {
+				time = minute + ":0" + Second;
+			}
+			// System.out.println(j);
+			lblTime.setText(time);
+			try {
+				j++;
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+
+			}
+		}
+	}
+
+	public void reset() {
+		i = TIME;
+		j = 0;
+	}
+
+	public static String TimePlay() {
+		int minute = j / 60;
+		int Second = j - minute * 60;
+		// String time = minute+":"+Second;
+		String time = minute + ":" + Second;
+		if (Second < 10) {
+			time = minute + ":0" + Second;
+		}
+		return time;
+	}
+
+	public boolean timeRun() {
+		int minute = 0, Second = 0;
+		while (i > 0) {
+			i--;
+			minute = i / 60;
+			Second = i - minute * 60;
+			String time = minute + ":" + Second;
+			if (Second < 10) {
+				time = minute + ":0" + Second;
+			}
+			// System.out.println(j);
+			lblTime.setText(time);
+			try {
+				j++;
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+
+			}
+		}
+		if (minute == 0 && Second == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

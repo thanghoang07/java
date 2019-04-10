@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="lab_3_strategy_Pattern_Bai_1"/>
+	<classpathentry kind="src" path="lab_3_strategy_Pattern_Bai_2"/>
+	<classpathentry kind="src" path="lab_4_observer_Pattern_Bai_1"/>
+	<classpathentry kind="src" path="lab_4_observer_Pattern_Bai_2"/>
+	<classpathentry kind="src" path="lab_5_decorator_Pattern_Bai_1"/>
+	<classpathentry kind="src" path="lab_5_decorator_Pattern_Bai_2"/>
+	<classpathentry kind="src" path="lab_6_factory_pattern_bai_1"/>
+	<classpathentry kind="src" path="lab_7_adapter_Patter_bai_1"/>
+	<classpathentry kind="src" path="lab8_template_pattern"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="demo"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

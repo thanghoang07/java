@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;apriori.Itemset.getListItem()&apos; to &apos;getItemset&apos;&#x0D;&#x0A;- Original project: &apos;Demo&apos;&#x0D;&#x0A;- Original element: &apos;apriori.Itemset.getListItem()&apos;&#x0D;&#x0A;- Renamed element: &apos;apriori.Itemset.getItemset()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getListItem&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;apriori{Itemset.java[Itemset~getListItem" name="getItemset" references="true" stamp="1524732866895" version="1.0"/>
+</session>

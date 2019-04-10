@@ -1,0 +1,45 @@
+package quanLyDiem;
+
+//giang vien
+public class Lecturer {
+	// khoi tao ten
+	public String ten;
+	// khoi tao ngay
+	public Date ngay;
+	// khoi tao chuc danh
+	public String degree;
+
+	public Lecturer(String ten, Date ngay, String degree) {
+		this.ten = ten;
+		this.ngay = ngay;
+		this.degree = degree;
+	}
+
+	public String getTen() {
+		return ten;
+	}
+
+	public void setTen(String ten) {
+		this.ten = ten;
+	}
+
+	public Date getNgay() {
+		return ngay;
+	}
+
+	public void setNgay(Date ngay) {
+		this.ngay = ngay;
+	}
+
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+
+	public String toString() {
+		return getTen() + " " + getNgay() + " " + getDegree();
+	}
+}

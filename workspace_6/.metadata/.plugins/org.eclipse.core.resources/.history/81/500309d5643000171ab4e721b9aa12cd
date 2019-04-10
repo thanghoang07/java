@@ -1,0 +1,432 @@
+package caro;
+
+import java.awt.Color;
+import java.util.EventObject;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+public class MainProgram {
+
+	// +----------------+
+	// | GUI components |
+	// +----------------+
+	private static final int SIZEBOX = 25; // kích thước bàn cờ?
+	private static JFrame frame;
+	private static JPanel panel;
+	private static JCanvas canvas;
+	private static JButton NewGameButton, UndoButton, AboutButton;
+	private static JLabel LevelLabel, whoFirstLabel, RepresentLabel, jLabel1;
+	private static JComboBox<?> LevelBox, whoFirstBox, RepresentBox;
+	private static JTextField ScoreText;
+	private static JEventQueue Events;
+	private static Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+	private static TitledBorder titlePanel = BorderFactory.createTitledBorder(loweredetched);
+
+	// +---------------+
+	// | GUI constants |
+	// +---------------+
+	private static int thicknessX = 4, thicknessO = 4, marginTableCell = 3, marginTable = 10, sizeTable = 600,
+			widthCanvas = sizeTable + 2 * marginTable, widthPanel = 350, widthFrame = widthCanvas + widthPanel,
+			height = widthCanvas + 29, widthButton = 120, heightButton = 30, marginButton = 50, whoFirstBox_width = 200,
+			ScoreText_width = 250;
+	private static final Color COLOR_X = Color.red, COLOR_O = Color.blue, COLOR_TABLE = Color.gray;
+	private static String LevelData[] = { "AI program", "Random" }, // mảng_chứa_kiêu_chơi
+			whoFirstData[] = { "User plays first", "Computer plays first" }, // mảng_chứa_ai_được_đi_trước
+			RepresentData[] = { "plays as X", "plays as O" }; //
+	private static int MaxN = SIZEBOX, whoFirst = -1, LengthWin, nUserWin = 0, nComputerWin = 0;
+	private static boolean UserX = true, hasAI = true;
+
+	// +----------------------+
+	// | Table representation |
+	// +----------------------+
+	private static int N = SIZEBOX, nSteps;
+	private static int x[] = new int[MaxN * MaxN], y[] = new int[MaxN * MaxN];
+	private static boolean used[][] = new boolean[MaxN][MaxN];
+
+	public static void InitGUI() {
+		frame = new JFrame();
+		frame.setTitle("Caro");
+		frame.setSize(widthFrame, height);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//
+		canvas = new JCanvas();
+		canvas.setBounds(0, 0, widthCanvas, height);
+		frame.add(canvas);
+		//
+		panel = new JPanel();
+		panel.setBounds(widthCanvas, 0, widthPanel, height);
+		titlePanel.setTitleJustification(TitledBorder.RIGHT);
+		panel.setBorder(titlePanel);
+		panel.setLayout(null);
+		frame.add(panel);
+		//
+		int ButtonPositionX = widthCanvas + (widthPanel - widthButton) / 2;
+		NewGameButton = new JButton("New Game");
+		NewGameButton.setBounds(ButtonPositionX, marginButton, widthButton, heightButton);
+		panel.add(NewGameButton);
+		//
+		UndoButton = new JButton("Undo");
+		UndoButton.setBounds(ButtonPositionX, 2 * marginButton, widthButton, heightButton);
+		panel.add(UndoButton);
+		//
+		AboutButton = new JButton("About");
+		AboutButton.setBounds(ButtonPositionX, 3 * marginButton, widthButton, heightButton);
+		panel.add(AboutButton);
+		//
+		int LabelPositionX = widthCanvas + marginButton;
+		int BoxPositionX = widthCanvas + (widthPanel - whoFirstBox_width) / 2;
+		//
+		LevelLabel = new JLabel("Level:");
+		LevelLabel.setBounds(LabelPositionX, 4 * marginButton, widthButton, heightButton);
+		LevelLabel.setOpaque(true);
+		panel.add(LevelLabel);
+		//
+		LevelBox = new JComboBox<String>(LevelData);
+		LevelBox.setBounds(LabelPositionX + widthButton, 4 * marginButton, widthButton, heightButton);
+		panel.add(LevelBox);
+		//
+		jLabel1 = new JLabel("Time: ");
+		//
+		whoFirstLabel = new JLabel("User or Computer plays first:");
+		whoFirstLabel.setBounds(LabelPositionX, 6 * marginButton, 2 * widthButton, heightButton);
+		whoFirstLabel.setOpaque(true);
+		panel.add(whoFirstLabel);
+		//
+		whoFirstBox = new JComboBox<String>(whoFirstData);
+		whoFirstBox.setBounds(BoxPositionX, 7 * marginButton, whoFirstBox_width, heightButton);
+		panel.add(whoFirstBox);
+		//
+		RepresentLabel = new JLabel("User:");
+		RepresentLabel.setBounds(LabelPositionX, 8 * marginButton, widthButton, heightButton);
+		RepresentLabel.setOpaque(true);
+		panel.add(RepresentLabel);
+		//
+		RepresentBox = new JComboBox<String>(RepresentData);
+		RepresentBox.setBounds(LabelPositionX + widthButton, 8 * marginButton, widthButton, heightButton);
+		panel.add(RepresentBox);
+		//
+		int TextPositionX = widthCanvas + (widthPanel - ScoreText_width) / 2;
+		ScoreText = new JTextField();
+		ScoreText.setBounds(TextPositionX, 12 * 46, ScoreText_width, heightButton);
+		ScoreText.setEditable(false);
+		ScoreText.setHorizontalAlignment(JTextField.CENTER);
+		ScoreText.setText("User 0 - 0 Computer");
+		panel.add(ScoreText);
+		//
+		frame.setVisible(true);
+	}
+
+	public static void InitEventListener() {
+		Events = new JEventQueue();
+		Events.listenTo(canvas, "canvas");
+		Events.listenTo(NewGameButton, "NewGame");
+		Events.listenTo(UndoButton, "Undo");
+		Events.listenTo(AboutButton, "About");
+		Events.listenTo(LevelBox, "Level");
+		Events.listenTo(whoFirstBox, "whoFirst");
+		Events.listenTo(RepresentBox, "Represent");
+	}
+
+	public static void clearTable() {
+		canvas.setBackground(panel.getBackground());
+	}
+
+	public static void drawTable() {
+		int lengthCell = sizeTable / N;
+		int x1 = marginTable;
+		int x2 = marginTable + sizeTable;
+		int y1 = marginTable;
+		int y2 = marginTable + sizeTable;
+		canvas.setColor(COLOR_TABLE);
+		for (int i = 0; i <= N; i++) {
+			canvas.drawLine(x1, y1 + i * lengthCell, x2, y1 + i * lengthCell);
+			canvas.drawLine(x1 + i * lengthCell, y1, x1 + i * lengthCell, y2);
+		}
+	}
+
+	public static void drawX(int tableX, int tableY) {
+		int lengthCell = sizeTable / N;
+		int x1 = marginTable + tableX * lengthCell;
+		int y1 = marginTable + tableY * lengthCell;
+		int x2 = x1 + lengthCell;
+		int y2 = y1 + lengthCell;
+		x1 += marginTableCell;
+		y1 += marginTableCell;
+		x2 -= marginTableCell;
+		y2 -= marginTableCell;
+		canvas.setColor(COLOR_X);
+		for (int i = 0; i <= thicknessX; i++) {
+			canvas.drawLine(x1, y1 + i, x2 - i, y2);
+			canvas.drawLine(x1 + i, y1, x2, y2 - i);
+			canvas.drawLine(x1, y2 - i, x2 - i, y1);
+			canvas.drawLine(x1 + i, y2, x2, y1 + i);
+		}
+	}
+
+	public static void drawO(int tableX, int tableY) {
+		int lengthCell = sizeTable / N;
+		int x = marginTable + tableX * lengthCell + marginTableCell;
+		int y = marginTable + tableY * lengthCell + marginTableCell;
+		int diameter = lengthCell - 2 * marginTableCell;
+		canvas.setColor(COLOR_O);
+		for (int i = 0; i <= thicknessO; i++)
+			canvas.drawOval(x + i, y + i, diameter - 2 * i, diameter - 2 * i);
+	}
+
+	public static void reDrawX() {
+		for (int i = 0; i < nSteps; i++)
+			if (whoFirst == 1) {
+				if ((i % 2 == 0) && (!UserX))
+					drawX(x[i], y[i]);
+				if ((i % 2 == 1) && (UserX))
+					drawX(x[i], y[i]);
+			} else {
+				if ((i % 2 == 0) && (UserX))
+					drawX(x[i], y[i]);
+				if ((i % 2 == 1) && (!UserX))
+					drawX(x[i], y[i]);
+			}
+	}
+
+	public static void reDrawO() {
+		boolean UserO = false;
+		if (!UserX)
+			UserO = true;
+
+		for (int i = 0; i < nSteps; i++)
+			if (whoFirst == 1) {
+				if ((i % 2 == 0) && (!UserO))
+					drawO(x[i], y[i]);
+				if ((i % 2 == 1) && (UserO))
+					drawO(x[i], y[i]);
+			} else {
+				if ((i % 2 == 0) && (UserO))
+					drawO(x[i], y[i]);
+				if ((i % 2 == 1) && (!UserO))
+					drawO(x[i], y[i]);
+			}
+	}
+
+	public static void clearCell(int tableX, int tableY) {
+		int lengthCell = sizeTable / N;
+		int x1 = marginTable + tableX * lengthCell;
+		int y1 = marginTable + tableY * lengthCell;
+		int length = lengthCell - 2;
+		canvas.setColor(panel.getBackground());
+		canvas.fillRect(x1 + 1, y1 + 1, length, length);
+	}
+
+	public static void reDrawXO() {
+		for (int i = 0; i < nSteps; i++)
+			clearCell(x[i], y[i]);
+		reDrawX();
+		reDrawO();
+	}
+
+	public static void UpdateMove(int nextMoveX, int nextMoveY) {
+		used[nextMoveX][nextMoveY] = true;
+		x[nSteps] = nextMoveX;
+		y[nSteps] = nextMoveY;
+		nSteps++;
+		if (UserX)
+			drawO(nextMoveX, nextMoveY);
+		else
+			drawX(nextMoveX, nextMoveY);
+	}
+
+	public static void DeleteMove(int MoveX, int MoveY) {
+		used[MoveX][MoveY] = false;
+		clearCell(MoveX, MoveY);
+		nSteps--;
+	}
+
+	public static void UndoMove() {
+		if (nSteps == 0)
+			return;
+		if (nSteps == 1) {
+			JOptionPane.showMessageDialog(frame, "You cannot undo!", "Notice", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		DeleteMove(x[nSteps - 1], y[nSteps - 1]);
+		DeleteMove(x[nSteps - 1], y[nSteps - 1]);
+	}
+
+	public static boolean CheckFinalState() {
+		int result = ArtificialIntelligence.CheckWinner(N, nSteps, x, y, whoFirst, LengthWin);
+		if (result != 0) {
+			if (result == 1) {
+				JOptionPane.showMessageDialog(frame, "Computer and Artificial Intelligence win!");
+				nComputerWin++;
+			} else {
+				JOptionPane.showMessageDialog(frame, "User wins!");
+				nUserWin++;
+			}
+			ScoreText.setText(
+					"User " + Integer.toString(nUserWin) + " - " + Integer.toString(nComputerWin) + " Computer");
+			return true;
+		}
+		if (nSteps == N * N) {
+			JOptionPane.showMessageDialog(frame, "Computer and user are drawn!");
+			return true;
+		}
+		return false;
+	}
+
+	public static void GamePlaying() {
+		int nextMoveX, nextMoveY;
+
+		clearTable();
+		drawTable();
+
+		nSteps = 0;
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				used[i][j] = false;
+
+		LengthWin = Math.min(5, N);
+
+		if (whoFirst == 1) {
+			ArtificialIntelligence.findNextMove(N, nSteps, x, y, whoFirst, hasAI);
+			nextMoveX = ArtificialIntelligence.getNextMoveX();
+			nextMoveY = ArtificialIntelligence.getNextMoveY();
+			UpdateMove(nextMoveX, nextMoveY);
+		}
+
+		while (true) {
+			EventObject AnEvent = Events.waitEvent();
+
+			if (Events.isMouseEvent(AnEvent))
+				if (Events.isMousePressed(AnEvent)) {
+					int MouseX = Events.getMouseX(AnEvent);
+					int MouseY = Events.getMouseY(AnEvent);
+					if ((MouseX > marginTable) && (MouseX < marginTable + sizeTable))
+						if ((MouseY > marginTable) && (MouseY < marginTable + sizeTable)) {
+							int lengthCell = sizeTable / N;
+							int TableX = (MouseX - marginTable) / lengthCell;
+							int TableY = (MouseY - marginTable) / lengthCell;
+
+							if (!used[TableX][TableY]) {
+								used[TableX][TableY] = true;
+								x[nSteps] = TableX;
+								y[nSteps] = TableY;
+								nSteps++;
+								if (UserX)
+									drawX(TableX, TableY);
+								else
+									drawO(TableX, TableY);
+
+								if (CheckFinalState()) {
+									GamePlaying();
+									return;
+								}
+
+								ArtificialIntelligence.findNextMove(N, nSteps, x, y, whoFirst, hasAI);
+								nextMoveX = ArtificialIntelligence.getNextMoveX();
+								nextMoveY = ArtificialIntelligence.getNextMoveY();
+								UpdateMove(nextMoveX, nextMoveY);
+
+								if (CheckFinalState()) {
+									GamePlaying();
+									return;
+								}
+							}
+						}
+				}
+
+			String name = Events.getName(AnEvent);
+
+			if (name.equals("NewGame")) {
+				GamePlaying();
+				return;
+			}
+
+			if (name.equals("Undo")) {
+				UndoMove();
+				continue;
+			}
+
+			if (name.equals("About")) {
+				JOptionPane.showMessageDialog(frame,
+						"Phần mềm: Caro A.I\n"
+								+ "Tác giả: \n    Hoàng Đức Thắng --- 14130323\n    Đồng Danh Học   --- 14130220\n"
+								+ "Lớp: DH14DTB\n" + "Copyright ©2017");
+				continue;
+			}
+
+			if (name.equals("Level")) { // chọn_cách_chơi ++ thêm_phần_2_user_đánh_với_nhau
+				if (LevelBox.getSelectedIndex() == 0) {
+					if (!hasAI) {
+						hasAI = true;
+						GamePlaying();
+						return;
+					}
+				} else {
+					if (hasAI) {
+						hasAI = false;
+						GamePlaying();
+						return;
+					}
+				}
+				continue;
+			}
+
+			if (name.equals("whoFirst")) { // chọn ai đánh trước
+				if (whoFirstBox.getSelectedIndex() == 0) {
+					if (whoFirst == 1) {
+						whoFirst = -1;
+						GamePlaying();
+						return;
+					}
+				} else if (whoFirst == -1) {
+					whoFirst = 1;
+					GamePlaying();
+					return;
+				}
+				continue;
+			}
+
+			if (name.equals("Represent")) { // chọn x hay o
+				int index = RepresentBox.getSelectedIndex();
+				if (index == 0) {
+					if (!UserX) {
+						UserX = true;
+						reDrawXO();
+					}
+				} else if (UserX) {
+					UserX = false;
+					reDrawXO();
+				}
+				continue;
+			}
+		}
+	}
+
+	// +-------------+
+	// | Main method |
+	// +-------------+
+
+	public static void main(String args[]) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		InitGUI();
+		InitEventListener();
+		GamePlaying();
+	}
+
+}

@@ -1,0 +1,40 @@
+package khac;
+
+import java.util.Scanner;
+
+public class PasswordChecker {
+	private static Scanner nhapVaoPass;
+
+	public static void main(String[] args) {
+		nhapVaoPass = new Scanner(System.in);
+		String password = nhapVaoPass.nextLine();
+		// Kiểm tra độ mạnh của mật khẩu
+		System.out.println(
+				"Độ mạnh của mật khẩu password1:" + password + " là =" + validatePasswordStrength(password) + "%");
+
+	}
+
+	public static int validatePasswordStrength(String password) {
+		int strengthPercentage = 0;
+		String[] regexChecks = { ".*[a-z]+.*", // kiểm tra chữ thường
+				".*[A-Z]+.*", // kiểm tra chữ hoa
+				".*[\\d]+.*", // kiểm tra chữ số
+				".*[@#$%]+.*" // kiểm tra ký tự đặc biệt
+		};
+
+		if (password.matches(regexChecks[0])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[1])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[2])) {
+			strengthPercentage += 25;
+		}
+		if (password.matches(regexChecks[3])) {
+			strengthPercentage += 25;
+		}
+
+		return strengthPercentage;
+	}
+}

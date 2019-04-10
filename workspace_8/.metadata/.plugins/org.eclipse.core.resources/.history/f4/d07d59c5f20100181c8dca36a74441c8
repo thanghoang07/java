@@ -1,0 +1,9 @@
+package onTap2;
+
+import java.io.IOException;
+
+public class CopyFile {
+	public void copyDataFile(String source, String dest) throws IOException {
+
+	}
+}

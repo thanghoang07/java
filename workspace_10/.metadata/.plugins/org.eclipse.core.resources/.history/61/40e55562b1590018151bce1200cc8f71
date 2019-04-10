@@ -1,0 +1,39 @@
+package apriori;
+
+import java.util.ArrayList;
+import java.util.List; 
+
+public class Data {
+	List<List<Integer>> transection = new ArrayList<>();
+	
+	List<List<Itemset>> transection1 = new ArrayList<>();
+	
+	public Data() {
+		List<Integer> item1 = new ArrayList<>();
+		item1.add(1);
+		item1.add(3);
+		item1.add(4);
+		List<Integer> item2 = new ArrayList<>();
+		item2.add(2);
+		item2.add(3);
+		item2.add(5);
+		List<Integer> item3 = new ArrayList<>();
+		item3.add(1);
+		item3.add(2);
+		item3.add(3);
+		item3.add(5);
+		List<Integer> item4 = new ArrayList<>();
+		item4.add(2);
+		item4.add(5);
+		List<Integer> item5 = new ArrayList<>();
+		item5.add(1);
+		item5.add(3)
+		item5.add(5);
+		//
+		transection.add(item1);
+		transection.add(item2);
+		transection.add(item3);
+		transection.add(item4);
+		transection.add(item5);
+	}
+}

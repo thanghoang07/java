@@ -1,0 +1,138 @@
+package socketSinhVien;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class Server extends Thread {
+	Socket socket;
+	static int port = 12345;
+	BufferedReader in;
+	PrintWriter out;
+
+	HashMap<String, SinhVien> map = new HashMap<>();
+
+	List<String> comment = new LinkedList<>();
+	{
+		comment.add("-----------");
+		comment.add("Su dung nhung lenh sau: ");
+		comment.add("THEM_msv_hoten_sdt_diem");
+		comment.add("SUA_msv_hoten_sdt_diem");
+		comment.add("XOA_msv");
+		comment.add("XEM");
+		comment.add("XEM1");
+	}
+
+	public Server(Socket socket) {
+		super();
+		this.socket = socket;
+	}
+
+	@Override
+	public void run() {
+		super.run();
+		try {
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new PrintWriter(socket.getOutputStream(), true);
+			out.println("Chao mung");
+			String line;
+			while (true) {
+				WML(comment);
+				line = in.readLine();
+				StringTokenizer tk = new StringTokenizer(line, "_");
+				if (tk.countTokens() > 0) {
+					String cm = tk.nextToken();
+					switch (cm.toUpperCase()) {
+					case "THEM":
+						them(line);
+						break;
+					case "SUA":
+						sua(line);
+						break;
+					case "XOA":
+						xoa(line);
+						break;
+					case "XEM":
+						xem();
+						break;
+					case "XEM1":
+						xem1(line);
+						break;
+					case "EXIT":
+						in.close();
+						out.close();
+						socket.close();
+						break;
+					default:
+						System.out.println("sai cu phap");
+						break;
+					}
+				}
+			}
+		} catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void xem1(String line) {
+		List<String> st = new LinkedList<>();
+		StringTokenizer tk = new StringTokenizer(line, "_");
+		if (tk.countTokens() == 2) {
+			try {
+				tk.nextToken();
+				line = tk.nextToken();
+				st.add(map.get(line).toString());
+				if (st.isEmpty()) {
+					System.out.println("chua co thong tin");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				out.println("masv phai la so va ton tai");
+			}
+			WML(st);
+		} else {
+			out.println("sai cu phap");
+		}
+
+	}
+
+	private void xem() {
+		List<String> st = new LinkedList<>();
+		for (SinhVien s : map.values()) {
+			st.add(s.toString());
+		}
+		if (st.isEmpty()) {
+			out.println("Chua co thong tin");
+		}
+		WML(st);
+	}
+
+	private void xoa(String line) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void sua(String line) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void them(String line) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void WML(List<String> list) {
+		for (String s : list) {
+			out.println(s);
+		}
+		out.println(".");
+	}
+}

@@ -1,0 +1,23 @@
+package socket;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Server implements Runnable{
+Socket socket;
+int port = 12345;
+PrintWriter out;
+BufferedReader in;
+
+public Server(Socket socket) throws IOException{
+	this.socket=socket;
+}
+
+@Override
+public void run() {
+	// TODO Auto-generated method stub
+	
+}
+}

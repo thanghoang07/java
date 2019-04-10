@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;oldFF&apos; in &apos;hdhnc.ScheduledJobs.moveFF(...)&apos; to &apos;oldpathFF&apos;&#x0D;&#x0A;- Original project: &apos;Z_ATM&apos;&#x0D;&#x0A;- Original element: &apos;hdhnc.ScheduledJobs.moveFF(File).oldFF&apos;&#x0D;&#x0A;- Renamed element: &apos;oldFF&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;oldFF&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;hdhnc{ScheduledJobs.java[ScheduledJobs~moveFF~QFile;@oldFF!23690!23699!23695!23699!QFile;!0!true" name="oldpathFF" references="true" stamp="1459263834387" version="1.0"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;map&apos; in &apos;vacworld.VacuumState&apos; to &apos;matrix&apos;&#x0D;&#x0A;- Original project: &apos;VacuumWorld2&apos;&#x0D;&#x0A;- Original element: &apos;vacworld.VacuumState.map&apos;&#x0D;&#x0A;- Renamed element: &apos;vacworld.VacuumState.matrix&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;map&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;vacworld{VacuumState.java[VacuumState^map" name="matrix" references="true" setter="false" stamp="1488419930349" textual="false" version="1.0"/>
+</session>

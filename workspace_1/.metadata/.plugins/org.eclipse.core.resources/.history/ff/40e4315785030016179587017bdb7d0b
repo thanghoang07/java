@@ -1,0 +1,16 @@
+package video_Rental;
+
+public class Test {
+	public static void main(String[] args) {
+		Movie[] phim = { new Movie(" Batman v Superman: Dawn of Justice", LoaiPhimThue.NEW_RELEASE),
+				new Movie("Captain America: Civil War", LoaiPhimThue.NEW_RELEASE),
+				new Movie("X-men: Apocalypse", LoaiPhimThue.NEW_RELEASE),
+				new Movie("Angry Birds 3D", LoaiPhimThue.CHILDRENS),
+				new Movie("Finding Dory", LoaiPhimThue.CHILDRENS),
+				new Movie("Kungfu Panda 3", LoaiPhimThue.CHILDRENS),
+				new Movie("", LoaiPhimThue.REGULAR),
+				new Movie("", LoaiPhimThue.REGULAR),
+				new Movie("", LoaiPhimThue.REGULAR)};
+		}
+	
+}

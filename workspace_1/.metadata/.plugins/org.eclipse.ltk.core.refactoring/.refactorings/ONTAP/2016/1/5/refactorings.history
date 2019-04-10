@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy source folder &apos;Ontap1&apos; to &apos;Pass&apos;&#x0D;&#x0A;- Original project: &apos;ONTAP&apos;&#x0D;&#x0A;- Destination element: &apos;Pass&apos;&#x0D;&#x0A;- Original element: &apos;ONTAP/Ontap1&apos;" description="Copy source folder" destination="=Pass" element1="/Ontap1" flags="6" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyRoots" roots="1" stamp="1453797948027" version="1.0"/>
+</session>

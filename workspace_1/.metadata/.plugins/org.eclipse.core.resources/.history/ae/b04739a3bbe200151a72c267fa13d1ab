@@ -1,0 +1,107 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class DirectedGraph extends GraphTheory {
+	int[][] matrix = null;
+	int numVex;
+
+	@Override
+	public int[][] readMatrix(File fileName) {
+		String line;
+		int row = 0;
+		int vex = 0;// so_dinh_cua_do_thi
+		int count = 0;// đếm_số_dòng_đã_đọc_dòng_đầu_tiên_là_số_đỉnh
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			try {
+				while ((line = br.readLine()) != null) {
+					count++;
+					if (count == 1) {// số_đỉnh_của_đồ_thị
+						vex = Integer.parseInt(line);
+						matrix = new int[vex][vex];
+					} else {// matrix
+						String[] elements = line.split(" ");
+						for (int col = 0; col < vex; col++) {// lấy_từng_phần_tử_gán_vào_matrix
+							matrix[row][col] = Integer.parseInt(elements[col]);
+						}
+						row++;
+					}
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return matrix;
+	}
+
+	@Override
+	public void printGraph(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	@Override
+	public void addEgdes(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 1;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi....");
+		}
+	}
+
+	@Override
+	public void removeEdges(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi....");
+		}
+	}
+
+	// bậc_vào_cảu_đỉnh_duyệt_theo_chiều_dọc_của_matrix
+	public int din(int vex) {
+		int degreeVex = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			degreeVex += matrix[vex][i];
+		}
+		return degreeVex;
+	}
+
+	// bậc_ra_của_đỉnh_duyệt_theo_chiều_ngang_của_matrix
+	public int dout(int vex) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int degreeGraph(int[][] matrix) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int numEdges(int[][] matrix) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isConnected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="weka.core.Instances"/>
+<fullyQualifiedTypeName name="weka.core.converters.ConverterUtils.DataSource"/>
+<fullyQualifiedTypeName name="weka.associations.Apriori"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="weka.associations.AssociationRule"/>
+<fullyQualifiedTypeName name="weka.associations.FPGrowth"/>
+<fullyQualifiedTypeName name="Demo.Info"/>
+<fullyQualifiedTypeName name="Demo.GetInfor"/>
+<fullyQualifiedTypeName name="Demo.Test"/>
+<fullyQualifiedTypeName name="demo1.RegisterAccount"/>
+<fullyQualifiedTypeName name="demo1.Account"/>
+<fullyQualifiedTypeName name="demo1.Login"/>
+<fullyQualifiedTypeName name="demo1.AccountDetail"/>
+<fullyQualifiedTypeName name="weka.gui.treevisualizer.TreeVisualizer"/>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="apriori.Apriori"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="apriori.Itemset"/>
+</qualifiedTypeNameHistroy>

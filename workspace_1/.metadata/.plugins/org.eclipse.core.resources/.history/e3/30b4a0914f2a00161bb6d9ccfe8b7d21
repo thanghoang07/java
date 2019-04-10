@@ -1,0 +1,212 @@
+package demo;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+
+public class Dijkstra {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	// khởi tạo một mảng boolean vị trí các đỉnh viếng thăm
+	public boolean[] visited;
+	// khoi tao mang chua duogn di
+	public int[] path;
+	//
+	private Queue<Integer> queue;
+	private Set<Integer> settled;
+
+	public Dijkstra(int[][] matrix) {
+		super();
+		this.matrix = matrix;
+		this.numVex = matrix.length;
+		this.visited = new boolean[matrix.length];
+		this.path = new int[matrix.length];
+		settled = new HashSet<Integer>();
+		queue = new LinkedList<Integer>();
+	}
+
+	public Dijkstra(int numVex) {
+		super();
+		this.matrix = new int[numVex][numVex];
+		this.numVex = numVex;
+		this.visited = new boolean[numVex];
+		this.path = new int[numVex];
+		settled = new HashSet<Integer>();
+		queue = new LinkedList<Integer>();
+	}
+
+	// in matrix
+	public void printGraph(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix.length; j++)
+				System.out.printf("%3d", matrix[i][j]);
+			System.out.println();
+		}
+	}
+
+	// xoa bo mot canh
+	public void removeEdges(int src, int dest) {
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (src >= 0 && dest >= 0 && src <= numVex && dest <= numVex) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh bac cua mot dinh bat ky
+	public int degreeVex(int vex) {
+		int degreeVex = 0;
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (vex > numVex + 1) {
+			System.out.println("loi.. .  .   .   .");
+		} else {
+			for (int i = 0; i < matrix[vex].length; i++) {
+				degreeVex += matrix[vex][i];
+			}
+		}
+		return degreeVex;
+	}
+
+	// them vao matrix mot canh co trong so
+	public void addEdgesNumber(int src, int dest, int trongSo) {
+		if (src >= 0 && dest >= 0 && trongSo > 0) {
+			matrix[src][dest] = trongSo;
+			matrix[dest][src] = trongSo;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh tong trong so cua ma tran.
+	public int degreeGraphNum() {
+		int degreeG = 0;
+		if (matrix.length == 0) {
+			System.out.println("Matrix chưa được tạo");
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += degreeVex(i);
+		}
+		return degreeG / 2;
+	}
+
+	public void algoDijkstra(int src) {
+		int min = 0, d = 0, numEdges = 0;
+		int[] dist = new int[numVex];
+		int[] pred = new int[numVex];
+		for (int i = 0; i < numVex; i++) {
+			dist[i] = Integer.MAX_VALUE;
+			visited[i] = false;
+		}
+		dist[src] = 0;
+		while (numEdges < (numVex - 1)) {
+			min = minDisTance(dist, visited);
+			visited[min] = true;
+			for (int j = 0; j < numVex; j++) {
+				d = dist[min] + matrix[min][j];
+				if (!visited[j] && matrix[min][j] != 0 && dist[min] != Integer.MAX_VALUE && dist[j] > d) {
+					dist[j] = d;
+					pred[j] = min;
+					numEdges++;
+				}
+			}
+		}
+		System.out.printf("Dinh bat dau: %3d\n", src);
+		System.out.printf("%3s : %3s : %3s\n", "Den dinh", "Do dai", "Duong di");
+		for (int j = 0; j < pred.length; j++) {
+			System.out.printf("%3d : %3d : ", j, dist[j]);
+			inDuongDiD(pred, src, j);
+			System.out.println();
+		}
+	}
+
+	public void inDuongDiD(int[] path, int src, int des) {
+		List<Integer> list = new ArrayList<>();
+		int x = des;
+		while (x != src) {
+			list.add(0, x);
+			x = path[x];
+		}
+		list.add(0, src);
+		System.out.print(list);
+
+	}
+
+	private int minDisTance(int[] dist, boolean[] visited) {
+		int x = Integer.MAX_VALUE;
+		int y = -1;
+		for (int i = 0; i < numVex; i++) {
+			if (!visited[i] && dist[i] < x) {
+				y = i;
+				x = dist[i];
+			}
+		}
+		return y;
+	}
+	
+	public void dijkstra_algorithm(int source) {
+		int evaluationNode;
+		for (int i = 1; i <= numVex; i++)
+			for (int j = 1; j <= numVex; j++)
+				matrix[i][j] = matrix[i][j];
+
+		for (int i = 1; i <= numVex; i++) {
+			path[i] = Integer.MAX_VALUE;
+		}
+
+		queue.add(source);
+		path[source] = 0;
+
+		while (!queue.isEmpty()) {
+			evaluationNode = getNodeWithMinimumDistanceFromQueue();
+			settled.add(evaluationNode);
+			evaluateNeighbours(evaluationNode);
+		}
+	}
+
+	private int getNodeWithMinimumDistanceFromQueue() {
+		int min;
+		int node = 0;
+		Iterator<Integer> iterator = queue.iterator();
+		node = iterator.next();
+		min = path[node];
+
+		for (int i = 1; i <= path.length; i++) {
+			if (queue.contains(i)) {
+				if (path[i] <= min) {
+					min = path[i];
+					node = i;
+				}
+			}
+		}
+		queue.remove(node);
+		return node;
+	}
+
+	private void evaluateNeighbours(int evaluationNode) {
+		int edgeDistance = -1;
+		int newDistance = -1;
+
+		for (int i = 1; i <= numVex; i++) {
+			if (!settled.contains(i)) {
+				if (matrix[evaluationNode][i] != Integer.MAX_VALUE) {
+					edgeDistance = matrix[evaluationNode][i];
+					newDistance = path[evaluationNode] + edgeDistance;
+					if (newDistance < path[i]) {
+						path[i] = newDistance;
+					}
+					queue.add(i);
+				}
+			}
+		}
+	}
+}

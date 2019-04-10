@@ -1,0 +1,51 @@
+1464058302961	Delete element
+1464244454550	Delete element
+1464246685579	Rename field 'StdCode'
+1464246688906	Rename field 'StdName'
+1464246692977	Rename field 'StdDob'
+1464246697255	Rename field 'StdPob'
+1464246700776	Rename field 'StdCode2'
+1464246703814	Rename field 'StdName2'
+1464246706520	Rename field 'StdDob2'
+1464246709979	Rename field 'StdPob2'
+1464246713599	Rename field 'StdCode3'
+1464246738895	Rename field 'StdName3'
+1464246742039	Rename field 'StdDob3'
+1464246749640	Rename field 'StdPob3'
+1464246764710	Rename field 'textField'
+1464246776558	Rename field 'textField_1'
+1464246790496	Rename field 'textField_2'
+1464246801212	Rename field 'textField_3'
+1464315446389	Rename type 'StudenMa'
+1464334607127	Delete element
+1464334659430	Rename resource '201401132221412750_iphone5c-gallery2-2013.jpg'
+1464419515695	Rename method 'createPanleInput'
+1464420199384	Delete element
+1464422007454	Delete element
+1464422676984	Rename method 'addStuden'
+1464422758709	Rename method 'appData'
+1464429535332	Rename package 'imgage'
+1464429542304	Delete element
+1464429648367	Delete element
+1464430463222	Rename local variable 'stCode'
+1464430490830	Rename local variable 'stName'
+1464430494990	Rename local variable 'stDob'
+1464430498549	Rename local variable 'stPob'
+1464430664870	Rename type 'Student'
+1464430891308	Delete element
+1464430911366	Delete element
+1464430926449	Delete element
+1464430936090	Copy compilation unit
+1464430942768	Copy compilation units
+1464430996027	Rename type 'ModelInterface'
+1464431309433	Delete element
+1464431381273	Delete element
+1464431385856	Copy package
+1464431389126	Delete element
+1464431409683	Copy compilation unit
+1464432127744	Move source folder
+1464432378656	Rename field 'model'
+1464442230567	Delete element
+1464442508363	Delete element
+1464443905673	Delete element
+1464443914615	Move compilation unit

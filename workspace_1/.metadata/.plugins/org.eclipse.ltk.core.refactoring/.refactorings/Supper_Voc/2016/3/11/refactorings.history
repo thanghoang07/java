@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;khac.Labeltest&apos; to &apos;TextFieldtest&apos;&#x0D;&#x0A;- Original project: &apos;Thu&apos;&#x0D;&#x0A;- Original element: &apos;khac.Labeltest&apos;&#x0D;&#x0A;- Renamed element: &apos;khac.TextFieldtest&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Labeltest&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/swing&lt;khac{Labeltest.java[Labeltest" matchStrategy="1" name="TextFieldtest" qualified="false" references="true" similarDeclarations="false" stamp="1457611986395" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,312 @@
+package hdhnc;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.Calendar;
+
+import javax.print.DocFlavor.READER;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RootPaneContainer;
+
+public class GUIA extends JFrame implements ActionListener {
+	JPanel p1, p2, p3, p4, p5, pThe, pNhanThe, pLoaiThe, pGT_a, pGT_b, pGT_c, pGT_d;
+	JButton[] n;
+	JLabel tba, tbb, tbc, xn;
+	JButton enter, cancel, clear, admin;
+	JButton la, lb, lc, ld, ra, rb, rc, rd, layThe, napThe;
+	JPasswordField pin, pin1, pin2, pin3;
+	JTextField loaiThe, guiTien, taiKhoan, guiTien2;
+	JTextField ma, ten, mapin, mathe;
+	JComboBox gt;
+	Font font;
+	String temp = "";
+	boolean kt = true, ad = false;
+	int chon = -1, khoa = 1, phim = 0, chon2 = 0;
+	JLabel tc, td, te, tf, tg, th, ti, tm, mthe;
+	JPanel menu;
+
+	public GUIA() {
+		setLayout(null);
+		setSize(700, 700);
+		setTitle("Chương trình mô phỏng máy ATM");
+		font = new Font("Time New Romances", Font.BOLD, 29);
+		tba = new JLabel("<html><center><p>Ngân Hàng XYZ xin chào quý khách, vui lòng để thẻ vào khe bên dưới</p></center></html>");
+		tba.setFont(font);
+		tba.setForeground(Color.BLUE);
+		tbb = new JLabel(">>>Chưa có thẻ<<<");
+		tbc = new JLabel("");
+		tbc.setFont(font);
+		tbc.setForeground(Color.yellow);
+		la = new JButton();
+		lb = new JButton();
+		lc = new JButton();
+		ld = new JButton();
+		ra = new JButton();
+		rb = new JButton();
+		rc = new JButton();
+		rd = new JButton();
+
+		n = new JButton[12];
+		for (int i = 0; i < 10; i++)
+			n[i] = new JButton("" + i);
+
+		p1 = new JPanel(new GridLayout(4, 3));
+		for (int i = 0; i < 10; i++)
+			p1.add(n[i]);
+		p1.add(new JLabel());
+		p1.setSize(250, 200);
+		p1.setLocation(190, 460);
+
+		p2 = new JPanel(new GridLayout(4, 1));
+		p2.add(la);
+		p2.add(lb);
+		p2.add(lc);
+		p2.add(ld);
+		p2.setSize(100, 400);
+		p2.setLocation(0, 30);
+
+		p3 = new JPanel(new GridLayout(4, 1));
+		p3.add(ra);
+		p3.add(rb);
+		p3.add(rc);
+		p3.add(rd);
+		p3.setSize(100, 400);
+		p3.setLocation(600, 30);
+		// man hinh chinh
+		p4 = new JPanel(new GridLayout(4, 1));
+		p4.setSize(500, 440);
+		p4.setLocation(100, 5);
+		p4.add(tba);
+		p4.add(tbc);
+		p4.setBackground(Color.WHITE);
+
+		p5 = new JPanel(new GridLayout(4, 1));
+		enter = new JButton("ENTER");
+		enter.setEnabled(false);
+		cancel = new JButton("CANCEL");
+		cancel.setEnabled(false);
+		clear = new JButton("CLEAR");
+		clear.setEnabled(false);
+		admin = new JButton("admin");
+		admin.setEnabled(false);
+		p5.add(enter);
+		p5.add(cancel);
+		p5.add(admin);
+		p5.add(clear);
+		p5.setSize(80, 200);
+		p5.setLocation(440, 460);
+		p5.setBackground(Color.red);
+
+		pNhanThe = new JPanel(new GridLayout(1, 2));
+		pNhanThe.setSize(180, 30);
+		pNhanThe.setLocation(520, 490);
+		layThe = new JButton("Lấy thẻ");
+		layThe.setVisible(false);
+		napThe = new JButton("Nạp thẻ");
+		pNhanThe.add(layThe);
+		pNhanThe.add(napThe);
+
+		loaiThe = new JTextField(10);
+		loaiThe.setText("Nhập mã thẻ");
+		loaiThe.setBackground(Color.pink);
+		pLoaiThe = new JPanel();
+		pLoaiThe.setSize(180, 30);
+		pLoaiThe.setLocation(520, 520);
+		pLoaiThe.add(loaiThe);
+		layThe.addActionListener(this);
+		napThe.addActionListener(this);
+
+		for (int i = 0; i < 10; i++)
+			n[i].addActionListener(this);
+		enter.addActionListener(this);
+		clear.addActionListener(this);
+		cancel.addActionListener(this);
+		admin.addActionListener(this);
+
+		pThe = new JPanel();
+		pThe.add(tbb);
+		pThe.setSize(200, 20);
+		pThe.setLocation(500, 470);
+		pThe.setBackground(Color.cyan);
+
+		la.addActionListener(this);
+		lb.addActionListener(this);
+		lc.addActionListener(this);
+		ld.addActionListener(this);
+		ra.addActionListener(this);
+		rb.addActionListener(this);
+		rc.addActionListener(this);
+		rd.addActionListener(this);
+
+		tc = new JLabel("<html><p>Đổi mã</p> PIN</html>");
+		tc.setForeground(Color.yellow);
+		tc.setFont(font);
+		td = new JLabel("<html><p>Số dư </p>tài khoản</html>");
+		td.setHorizontalAlignment(JLabel.RIGHT);
+		td.setForeground(Color.yellow);
+		td.setFont(font);
+		te = new JLabel("<html><p>In thông tin</p>cá nhân</html>");
+		te.setForeground(Color.yellow);
+		te.setFont(font);
+		tf = new JLabel("<html><p>Gửi tiền vào</p>tài khoản</html>");
+		tf.setHorizontalAlignment(JLabel.RIGHT);
+		tf.setForeground(Color.yellow);
+		tf.setFont(font);
+		tg = new JLabel("<html><p>In lịch sử</p>giao dịch</html>");
+		tg.setForeground(Color.yellow);
+		tg.setFont(font);
+		th = new JLabel("Chuyển khoản");
+		th.setHorizontalAlignment(JLabel.RIGHT);
+		th.setForeground(Color.yellow);
+		th.setFont(font);
+		ti = new JLabel("<html><p>Hủy bỏ </p>giao dịch</html>");
+		ti.setForeground(Color.yellow);
+		ti.setFont(font);
+		tm = new JLabel("Rút tiền");
+		tm.setHorizontalAlignment(JLabel.RIGHT);
+		tm.setForeground(Color.yellow);
+		tm.setFont(font);
+		xn = new JLabel("Xác nhận");
+		xn.setFont(font);
+		xn.setForeground(Color.yellow);
+		mthe = new JLabel("Mã thẻ: ");
+		mthe.setHorizontalAlignment(JLabel.RIGHT);
+		mthe.setForeground(Color.yellow);
+		mthe.setFont(font);
+		ma = new JTextField();
+		ma.setFont(font);
+		ma.setBackground(Color.pink);
+		ten = new JTextField();
+		ten.setFont(font);
+		ten.setBackground(Color.pink);
+		gt = new JComboBox();
+		gt.setFont(font);
+		gt.setBackground(Color.pink);
+		gt.addItem("Nam");
+		gt.addItem("Nu");
+		mapin = new JTextField();
+		mapin.setFont(font);
+		mapin.setBackground(Color.pink);
+		mathe = new JTextField();
+		mathe.setFont(font);
+		mathe.setBackground(Color.pink);
+		pin = new JPasswordField(4);
+
+		pin1 = new JPasswordField();
+		pin1.setFont(new Font("Time New Romances", Font.BOLD, 40));
+		pin1.setEditable(false);
+		pin2 = new JPasswordField();
+		pin2.setFont(new Font("Time New Romances", Font.BOLD, 40));
+		pin2.setEditable(false);
+		pin3 = new JPasswordField();
+		pin3.setFont(new Font("Time New Romances", Font.BOLD, 40));
+		pin3.setEditable(false);
+		guiTien = new JTextField();
+		guiTien.setFont(font);
+		taiKhoan = new JTextField();
+		taiKhoan.setFont(font);
+		guiTien2 = new JTextField();
+		guiTien2.setFont(font);
+		guiTien2.setEditable(false);
+
+		menu = new JPanel(new GridLayout(4, 2));
+		menu.add(tc);
+		menu.add(td);
+		menu.add(te);
+		menu.add(tf);
+		menu.add(tg);
+		menu.add(th);
+		menu.add(ti);
+		menu.add(tm);
+		menu.setSize(500, 440);
+		menu.setLocation(100, 5);
+		menu.setBackground(Color.CYAN);
+
+		add(p1);
+		add(p2);
+		add(p3);
+		add(p4);
+		add(p5);
+		add(pThe);
+		add(pNhanThe);
+		add(pLoaiThe);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	
+	public void thongBao(int c) {
+		temp = "";
+		tc.setText("Trở về");
+		//te.setText(Exe.getLoi());
+		tg.setText("");
+		menu.setVisible(false);
+		remove(menu);
+		menu = new JPanel(new GridLayout(3, 1));
+		menu.setSize(500, 440);
+		menu.setLocation(100, 5);
+		menu.add(tc);
+		menu.add(te);
+		menu.add(tg);
+		menu.setBackground(Color.blue);
+		add(menu);
+		chon = c;
+	}
+
+	public void thongBao(String tb, int c) {
+		temp = "";
+		tc.setText("Trở về");
+		te.setText(tb);
+		tg.setText("");
+		menu.setVisible(false);
+		remove(menu);
+		menu = new JPanel(new GridLayout(3, 1));
+		menu.setSize(500, 440);
+		menu.setLocation(100, 5);
+		menu.add(tc);
+		menu.add(te);
+		menu.add(tg);
+		menu.setBackground(Color.blue);
+		add(menu);
+		chon = c;
+	}
+
+	public void admin(String tb) {
+		temp = "";
+		te.setText(tb);
+		tg.setText("");
+		menu.setVisible(false);
+		remove(menu);
+		menu = new JPanel(new GridLayout(2, 1));
+		menu.setSize(500, 440);
+		menu.setLocation(100, 5);
+		menu.add(te);
+		menu.add(tg);
+		menu.setBackground(Color.blue);
+		add(menu);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}

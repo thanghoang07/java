@@ -1,0 +1,76 @@
+package lab4;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Bai5 {
+	public final static int MAX = 10;
+
+	public static int[] taoMang(int n) {
+		int[] arr = new int[n];
+		Random ra = new Random();
+		for (int i = 0; i < n; i++) {
+			arr[i] = ra.nextInt(MAX) - 4;
+		}
+		return arr;
+	}
+
+	public static void in(int[] arr) {
+		for (int i : arr) {
+			System.out.printf("|%d|", i);
+		}
+	}
+
+	public static boolean xacDinhX(int[] arr, int soX) {
+		for (int i = 0; i < arr.length; i++) {
+			if (!(arr[i] == soX)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static void timX(int[] arr, int soX) {
+		int count = 0;
+		int[] index = new int[arr.length];
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == soX) {
+				count++;
+				index[i] = i;
+			}
+		}
+		System.out.println("\nso lan xuat hien: " + count);
+	}
+
+	public static void xoaX(int[] myList, int n, int soX) {
+		int i;
+		int count = 0;
+
+		for (i = 0; i < n; i++) {
+			if (myList[i] == soX)
+				count++;
+			else
+				myList[i - count] = myList[i];
+		}
+		n -= count;
+		System.out.printf("\nmang sau khi xoa %d la: ", soX);
+		for (i = 0; i < n; i++) {
+			System.out.printf("|%d|", i);
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner nhapVao = new Scanner(System.in);
+		System.out.print("Nhap vao mot so: ");
+		int n = nhapVao.nextInt();
+		int[] arr;
+		arr = taoMang(n);
+		in(arr);
+		System.out.print("\nNhap vao mot so: ");
+		int soX = nhapVao.nextInt();
+		System.out.println(xacDinhX(arr, soX) ? ("khong co trong mang") : ("co trong mang"));
+		System.out.println();
+		timX(arr, soX);
+		xoaX(arr, n, soX);
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;javax.mail-1.5.2.jar&apos; to &apos;Z_ATM/src/hdhnc&apos;&#x0D;&#x0A;- Original project: &apos;tesst&apos;&#x0D;&#x0A;- Destination element: &apos;Z_ATM/src/hdhnc&apos;&#x0D;&#x0A;- Original element: &apos;javax.mail-1.5.2.jar&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move file" destination="=Z_ATM/src&lt;hdhnc" element1="javax.mail-1.5.2.jar" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1461396144259" units="0" version="1.0"/>
+</session>

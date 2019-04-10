@@ -1,0 +1,29 @@
+1456833843258	Move compilation units
+1456833922898	Delete element
+1456834314578	Rename type 'CopyFile3'
+1456845835346	Rename local variable 'source'
+1456845847854	Rename local variable 'thuMucD'
+1456846002820	Rename method 'copy'
+1456846157899	Rename local variable 'sourceLocation'
+1456846189480	Rename local variable 'targetLocation'
+1456847157426	Rename type 'File2'
+1456876582802	Rename local variable 'o'
+1456882916011	Move package
+1456886802755	Rename field 'path'
+1456886930546	Rename field 'dir'
+1456886939454	Rename field 'selFile'
+1456887064161	Rename field 'selFileCopy'
+1456887068595	Rename field 'dirFileCopy'
+1456887078762	Rename field 'selFileOpen'
+1456887423162	Rename field 'testFile'
+1456887619264	Rename field 'testFileOpen'
+1456887625501	Rename field 'testFileCopy'
+1456961624858	Rename field 'jButton2'
+1456989353729	Move compilation unit
+1456990310051	Rename local variable 'win'
+1456991975974	Rename type 'mofolder'
+1456992525357	Rename field 'btnopen'
+1456996058233	Move compilation unit
+1457014520497	Rename type 'DemoJFileChooser'
+1457014538589	Move compilation units
+1457014562528	Rename package 'thu_test'

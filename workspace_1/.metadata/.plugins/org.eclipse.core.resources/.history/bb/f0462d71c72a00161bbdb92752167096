@@ -1,0 +1,205 @@
+package ly_thuyet_do_thi_2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Kruskal {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	//
+	List<Edges> listEdges = new ArrayList<>();
+	//
+	public boolean[] visited;
+
+	// khoi tao matrix
+	public Kruskal() {
+		super();
+	}
+
+	/**
+	 * ?????????????????????????????????????????????????????????????????????????
+	 */
+	public Kruskal(int[][] matrix) {
+		super();
+		this.matrix = matrix;
+		this.numVex = matrix.length;
+		this.visited = new boolean[matrix.length];
+	}
+
+	// khoi tao matrix dang nhap vao dinh
+	public Kruskal(int numVex) {
+		this.numVex = numVex;
+		this.matrix = new int[numVex][numVex];
+		this.visited = new boolean[numVex];
+	}
+
+	// in matrix
+	public void printGraph(int[][] matrix) {
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix.length; j++)
+				System.out.printf("%3d", matrix[i][j]);
+			System.out.println();
+		}
+	}
+
+	// xoa bo mot canh
+	public void removeEdges(int src, int dest) {
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (src >= 0 && dest >= 0 && src <= numVex && dest <= numVex) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh bac cua mot dinh bat ky
+	public int degreeVex(int vex) {
+		int degreeVex = 0;
+		if (matrix.length == 0) {
+			System.out.println("Đồ thị chưa được tạo");
+		} else if (vex > numVex + 1) {
+			System.out.println("loi.. .  .   .   .");
+		} else {
+			for (int i = 0; i < matrix[vex].length; i++) {
+				degreeVex += matrix[vex][i];
+			}
+		}
+		return degreeVex;
+	}
+
+	// them vao matrix mot canh co trong so
+	public void addEdgesNumber(int src, int dest, int trongSo) {
+		if (src >= 0 && dest >= 0 && trongSo > 0) {
+			matrix[src][dest] = trongSo;
+			matrix[dest][src] = trongSo;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh tong trong so cua ma tran.
+	public int degreeGraphNum() {
+		int degreeG = 0;
+		if (matrix.length == 0) {
+			System.out.println("Matrix chưa được tạo");
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += degreeVex(i);
+		}
+		return degreeG / 2;
+	}
+
+	public void addNewEdge(Edges e) {
+		if (e.getSrc() >= 0 && e.getDes() >= 0 && e.getTrongSo() > 0) {
+			matrix[e.getSrc()][e.getDes()] = e.getTrongSo();
+			matrix[e.getDes()][e.getSrc()] = e.getTrongSo();
+			listEdges.add(e);
+		} else
+			System.out.println("loi.. .  .   .   .");
+	}
+
+	// cách của cô
+	public Kruskal algoKruskal(int[][] g) {
+		int min;// bien tam trong so nho nhat
+		int src = 0; // dinh bat dau
+		int des = 0; // dinh ket thuc
+		int numVex2 = 0;// so canh do thi
+		int total = 0; // trong so cua do thi
+		// danh dau so cay
+		int[] mark = new int[numVex];
+		int t = 0;
+		int temp;
+		Kruskal kru = new Kruskal(numVex);
+		while (numVex2 < (numVex - 1)) {
+			min = Integer.MAX_VALUE;
+			for (int i = 0; i < numVex; i++) {
+				for (int j = 0; j < numVex; j++) {
+					if (matrix[i][j] < min && matrix[i][j] > 0 && !(mark[i] != 0 && mark[i] == mark[j])) {
+						min = matrix[i][j];
+						src = i;
+						des = j;
+					}
+				}
+			}
+			if (des != src) { // kiem tra co tao chu trihh
+				// kiem tra lien thong 2
+				numVex2++;
+				System.out.printf("Edges found: %d -> %d Min: %d\n", src, des, min);
+				total += min;
+
+				kru.addEdgesNumber(src, des, min);
+
+			}
+			matrix[src][des] = 0;
+			matrix[des][src] = 0;
+		}
+		System.out.printf("Tong trong nho so cua tree: %d\n", total);
+		if (numVex2 < numVex - 1) {
+			System.out.println("loi . . . .");
+		} else {
+			System.out.println("In ma tran co trong so nho nhat");
+			kru.printGraph(kru.matrix);
+		}
+		return kru;
+	}
+
+	// tạo lop moi
+	public Kruskal algoKruskal2() {
+		// còn một số lỗi nữa như : chưa in được tổng trọng số, lỗi tạo chu
+		// trình
+		Collections.sort(listEdges);
+		int min;// bien tam trong so nho nhat
+		int src = 0; // dinh bat dau
+		int des = 0; // dinh ket thuc
+		int numVex2 = 0;// so canh do thi
+		int total = 0; // trong so cua do thi
+		// danh dau so cay
+		int[] mark = new int[numVex];
+		int t = 0;
+		int temp;
+		Kruskal kru = new Kruskal(numVex);
+		for (int i = 0; i < listEdges.size(); i++) {
+			min = listEdges.get(i).getTrongSo();
+			src = listEdges.get(i).getSrc();
+			des = listEdges.get(i).getDes();
+			numVex2++;
+			if (mark[src] == 0 && mark[des] == 0) {
+				t++;
+				mark[src] = mark[des] = t;
+				kru.addEdgesNumber(src, des, min);
+			} else if (mark[src] == 0 && mark[des] != 0) {
+				mark[src] = mark[des];
+				kru.addEdgesNumber(src, des, min);
+			} else if (mark[src] != 0 && mark[des] == 0) {
+				mark[des] = mark[src];
+				kru.addEdgesNumber(src, des, min);
+			} else if (mark[src] != mark[des] && mark[des] != 0) {
+				temp = mark[src];
+				for (int j = 0; j < mark.length; j++) {
+					if (temp == mark[j]) {
+						mark[j] = mark[des];
+						kru.addEdgesNumber(src, des, min);
+					}
+				}
+			}
+			System.out.printf("Edges found: %d -> %d Min: %d\n", src, des, min);
+			total += min;
+			matrix[src][des] = 0;
+			matrix[des][src] = 0;
+		}
+
+		System.out.printf("Tong trong nho so cua tree: %d\n", total);
+		if (numVex2 < numVex - 1) {
+			System.out.println("loi . . . .");
+		} else {
+			System.out.println("In ma tran co trong so nho nhat");
+			kru.printGraph(kru.matrix);
+		}
+		return kru;
+	}
+}

@@ -1,0 +1,108 @@
+package quanLyDiem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+	// khoi tao danh sach cac sinh vien
+	public static List<Student> stu = new ArrayList<Student>();
+	// khoi tao danh sach cac giang vien
+	public static List<Lecturer> lec1 = new ArrayList<Lecturer>();
+	// khoi tao danh sach cac mon hoc
+	public static List<Course> cor1 = new ArrayList<Course>();
+
+	// phuong thuc in danh sach cac sinh vien
+	public void printStuden(List<Student> students) {
+		for (Student student : students) {
+			student.print();
+		}
+	}
+	
+	public void printCourse(List<Course> courses){
+		for (Course course : courses) {
+			course.
+		}
+	}
+
+	public static void main(String[] args) {
+		// khoi tao mot mang chua dang ky
+		ArrayList<Register> list1 = new ArrayList<Register>();
+		ArrayList<Register> list2 = new ArrayList<Register>();
+		ArrayList<Register> list3 = new ArrayList<Register>();
+		ArrayList<Register> list4 = new ArrayList<Register>();
+		ArrayList<Register> list5 = new ArrayList<Register>();
+		// tao du lieu giang vien
+		Lecturer lt1 = new Lecturer("Thien", new Date(10, 12, 2012), "GV");
+		Lecturer lt2 = new Lecturer("Hung", new Date(10, 12, 2012), "GV");
+		Lecturer lt3 = new Lecturer("Thuan", new Date(10, 12, 2012), "GV");
+		Lecturer lt4 = new Lecturer("Tram", new Date(10, 12, 2012), "GV");
+		Lecturer lt5 = new Lecturer("Nga", new Date(10, 12, 2012), "GV");
+		// them giang vien vao danh sach cac giang vien
+		lec1.add(lt1);
+		lec1.add(lt2);
+		lec1.add(lt3);
+		lec1.add(lt4);
+		lec1.add(lt5);
+		// tao du lieu mon hoc
+		Course co1 = new Course("LTNC", lt1, 3);
+		Course co2 = new Course("LTCB", lt3, 4);
+		Course co3 = new Course("LTDT", lt4, 3);
+		Course co4 = new Course("CTDL", lt5, 4);
+		Course co5 = new Course("HDHNC", lt2, 5);
+		// them mon hoc vao danh sach cac mon hoc
+		cor1.add(co1);
+		cor1.add(co2);
+		cor1.add(co3);
+		cor1.add(co4);
+		cor1.add(co5);
+		// tao dang ky
+		Register re1 = new Register(co1, 10);
+		Register re2 = new Register(co2, 7);
+		Register re3 = new Register(co3, 6);
+		Register re4 = new Register(co4, 8);
+		Register re5 = new Register(co5, 5);
+		// them vao danh sach mang
+		// list 1
+		list1.add(re1);
+		list1.add(re2);
+		list1.add(re3);
+		list1.add(re4);
+		list1.add(re5);
+		// list 1
+		list2.add(re1);
+		list2.add(re2);
+		list2.add(re4);
+		list2.add(re5);
+		// list 1
+		list3.add(re1);
+		list3.add(re2);
+		// list 1
+		list4.add(re1);
+		list4.add(re2);
+		list4.add(re3);
+		list4.add(re4);
+		list4.add(re5);
+		// list 1
+		list5.add(re1);
+		list5.add(re2);
+		list5.add(re3);
+		// tao du lieu hoc vien
+		Student st1 = new Student("Trinh Van Toan", new Date(3, 10, 1996), lt1, list1);
+		Student st2 = new Student("Hoang Duc Thang", new Date(3, 1, 1995), lt2, list2);
+		Student st3 = new Student("Tran Van Thang", new Date(23, 2, 1995), lt3, list3);
+		Student st4 = new Student("Le Ba Loc", new Date(6, 3, 1995), lt4, list4);
+		Student st5 = new Student("Vo Quoc Huy", new Date(29, 11, 1995), lt5, list5);
+		// them vao danh sach cac sinh vien
+		stu.add(st1);
+		stu.add(st2);
+		stu.add(st3);
+		stu.add(st4);
+		stu.add(st5);
+		// in ra danh sach cac sinh vien
+		Test te1 = new Test();
+		te1.printStuden(stu);
+		//
+
+	}
+
+}

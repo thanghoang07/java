@@ -1,0 +1,41 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
+public abstract class GraphTheory {
+	protected static File file;
+
+	// - Phương thức truyen ma trận
+	public abstract int[][] readMatrix(File fileName);
+
+	// - Phương thức in ma trận
+	public abstract void printGraph(int[][] adj);
+
+	public abstract void addEgdes(int src, int dest);
+
+	public abstract void removeEdges(int src, int dest);
+
+	// - Phương thức tính bậc của đỉnh
+	public abstract int degreeVex(int vex);
+
+	// - Phuong thuc tinh tong bac cua do thi
+	public abstract int degreeGraph(int[][] matrix);
+
+	// - Phương thức doc file
+	public static File docFile() {
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new File("C:\\Users\\thang\\Desktop\\files"));// dat_vi_tri_mac_dinh_de_mo
+		fc.setDialogTitle("chon file chua do thi.");
+		fc.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
+		fc.setAcceptAllFileFilterUsed(false);
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			String selOpen = fc.getSelectedFile().getAbsolutePath();// lay_duong_dan_file
+			file = new File(selOpen);
+		} else {
+			System.out.println("No selection");
+		}
+		return file;
+	}
+}

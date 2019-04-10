@@ -1,0 +1,29 @@
+package tuan4;
+
+public class Register {
+	// khoi tao mon hoc
+	public Course course;
+	// khoi tao so diem
+	public float grade;
+
+	public Register(Course course, float grade) {
+		this.course = course;
+		this.grade = grade;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	public float getGrade() {
+		return grade;
+	}
+
+	public void setGrade(float grade) {
+		this.grade = grade;
+	}
+}

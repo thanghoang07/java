@@ -1,0 +1,645 @@
+package ly_thuyet_do_thi_2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class UndirectedGraph extends GraphTheory {
+	// khởi tạo một matrix rỗng
+	int[][] matrix = null;
+	// khỏi tạo số cạnh matrix
+	int numVex;
+	//
+	private BufferedReader br;
+	// khởi tạo một mảng boolean vị trí các đỉnh viếng thăm
+	public boolean[] visited;
+	// khởi tạo một giá trị cho thành phần liên thông
+	int countConnected = 1;
+	// Array of lists for Adjacency List Representation
+	private LinkedList<Integer>[] dinhKe;
+	// khoi tao mang chua duogn di
+	public int[] path;
+	// dem so phan tu hien co trong mang
+	public int indext;
+	//
+	int index;
+
+	// khoi tao matrix
+	public UndirectedGraph() {
+
+	}
+
+	/**
+	 * ?????????????????????????????????????????????????????????????????????????
+	 * ?????????????????????????????????????????????????????????????????????????
+	 */
+	public UndirectedGraph(int[][] matrix) {
+		this.matrix = matrix;
+		this.numVex = matrix.length;
+		this.visited = new boolean[matrix.length];
+		this.dinhKe = new LinkedList[numVex];
+		for (int i = 0; i < numVex; ++i)
+			dinhKe[i] = new LinkedList();
+		this.path = new int[matrix.length];
+	}
+
+	// khoi tao matrix dang nhap vao dinh
+	public UndirectedGraph(int numVex) {
+		this.numVex = numVex;
+		this.visited = new boolean[numVex];
+		this.matrix = new int[numVex][numVex];
+		this.dinhKe = new LinkedList[numVex];
+		for (int i = 0; i < numVex; ++i)
+			dinhKe[i] = new LinkedList();
+		this.path = new int[numVex];
+	}
+
+	/**
+	 * doc va in do thi
+	 */
+	// doc matran tu file
+	@Override
+	public int[][] readMatrix(File fileName) {
+		String line;
+		matrix = null; // gan cho matrix ban dau bang rong
+		int row = 0; // so_dong
+		int vex = 0; // so_dinh_cua_do_thi
+		int count = 0; // đếm_số_dòng_đã_đọc_dòng_đầu_tiên_là_số_đỉnh
+		try {
+			br = new BufferedReader(new FileReader(fileName));
+			try {
+
+				while ((line = br.readLine()) != null) {
+					count++;
+					if (count == 1) {// số_đỉnh_của_đồ_thị
+						vex = Integer.parseInt(line);
+						// adj[vex] = new LinkedList();
+						matrix = new int[vex][vex];
+					} else {// matrix
+						String[] elements = line.split(" ");
+						for (int col = 0; col < vex; col++) {// lấy_từng_phần_tử_gán_vào_matrix
+							matrix[row][col] = Integer.parseInt(elements[col]);
+						}
+						row++;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return matrix;
+	}
+
+	// đọc file matrix Incidence
+	@Override
+	public int[][] readIncidenceMatrix(File fileName) {
+
+		return null;
+	}
+
+	// in matrix
+	@Override
+	public void printGraph(int[][] matrix) {
+		// so hang,
+		for (int i = 0; i < matrix.length; i++)
+			System.out.printf("%3d", i);
+		System.out.println();
+		// in ra so cot
+		for (int i = 0; i < matrix.length; i++) {
+			System.out.print(i + " ");
+			// in matrix
+			for (int j = 0; j < matrix.length; j++)
+				System.out.print(matrix[i][j] + "  ");
+			System.out.println();
+		}
+	}
+
+	// them vao matrix mot canh
+	@Override
+	public void addEdges(int src, int dest) throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được khởi tạo");
+		}
+		if (src >= matrix.length && dest >= matrix.length) {
+			throw new IndexOutOfBoundsException("Vị trí vượt quá giới hạn");
+		}
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 1;
+			matrix[dest][src] = 1;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// xoa bo mot canh
+	@Override
+	public void removeEdges(int src, int dest) {
+		if (src >= 0 && dest >= 0) {
+			matrix[src][dest] = 0;
+			matrix[dest][src] = 0;
+		} else {
+			System.out.println("loi.. .  .   .   .");
+		}
+	}
+
+	// tinh bac cua mot dinh bat ky
+	public int degreeVex(int vex) throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được tạo");
+		}
+		int degreeVex = 0;
+		for (int i = 0; i < matrix[vex].length; i++) {
+			degreeVex += matrix[vex][i];
+		}
+		return degreeVex;
+	}
+
+	// tinh tong bac cua do thi
+	@Override
+	public int degreeGraph() throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được tạo");
+		}
+		int degreeG = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			degreeG += degreeVex(i);
+		}
+		return degreeG;
+	}
+
+	// tinh so canh cua do thi
+	@Override
+	public int numEdges() throws Exception {
+		if (matrix.length == 0) {
+			throw new Exception("Matrix chưa được tạo");
+		}
+		int temp = 0;
+		temp = degreeGraph() / 2;
+		return temp;
+	}
+
+	/**
+	 * Lien thong
+	 */
+	// kiem tra lien thong
+	@Override
+	public boolean isConnected() {// duyet_theo_chieu_sau
+		int i = 0;
+		visited = new boolean[matrix.length];
+		Stack<Integer> stack = new Stack<>();
+		stack.push(i);
+		while (!stack.empty()) {
+			i = stack.pop();
+			visited[i] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if (!visited[j] && matrix[i][j] > 0) {
+					stack.push(j);
+				}
+			}
+		}
+		for (int j = 0; j < matrix.length; j++) {
+			if (!visited[j]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// duyệt theo chiều sâu dùng Stack
+	@Override
+	public void DFSUseStack(int vex) {// duyet_theo_chieu_sau
+		Stack<Integer> stack = new Stack<>();// khởi tạo một stack
+		stack.push(vex);// thêm đỉnh bắt đầu vào stack
+		visited[vex] = true;// đánh dầu điểm đó đã đc duyệt
+		while (!stack.empty()) {// kiểm tra coi track có rõng hay ko
+			vex = stack.pop();// lấy đỉnh bắt đầu ra khỏi stack
+			/*
+			 * visited[vex] = true; for (int j = 0; j < matrix.length; j++) { if
+			 * (!visited[j] && matrix[vex][j] > 0) { stack.push(j); } }
+			 */
+			// System.out.print(vex + " ");
+			for (int i : dinhKe(vex)) {
+				/*
+				 * kiêm tra các đỉnh kề coi đã đc duyệt chưa? chưa thì thêm vào
+				 * stack
+				 */
+				if (!visited[i]) {
+					stack.push(i);
+					visited[i] = true;
+
+				}
+			}
+		}
+	}
+
+	// duyệt theo chiều sâu
+	@Override
+	public void DFS(int vex) {
+		// đánh dấu điểm đó là đã đc duyệt
+		visited[vex] = true;
+		/*
+		 * for (int i = 0; i < matrix.length; i++) { if (!visited[i] &&
+		 * matrix[vex][i] > 0) { DFS(i); } }
+		 */
+		for (int i : dinhKe(vex)) {
+			/*
+			 * kiêm tra các đỉnh kề coi đã đc duyệt chưa? chưa thì gọi đệ quy
+			 * lại
+			 */
+			if (!visited[i] && matrix[vex][i] > 0)
+				DFS(i);
+		}
+	}
+
+	// duyệt theo chiều rộng dùng Queue
+	@Override
+	// duyet_theo_chieu_rong
+	public void BFSUseQueue(int vex) {
+		// khỏi tạo một queue
+		Queue<Integer> queue = new LinkedList<Integer>();
+		// them vao hang doi
+		queue.add(vex);
+		// đánh dấu đỉnh nhập vào là đã duyệt
+		visited[vex] = true;
+		// kiểm tra coi queue có rỗng hay không
+		while (!queue.isEmpty()) {
+			// lay gia trị phan tu ra khoi hang doi
+			vex = queue.remove();
+			/*
+			 * int acx = vex; System.out.print(acx + "---"); // The BFS
+			 * traversal of the graph
+			 *
+			 * for (int i = 0; i < matrix.length; i++) { if (!visited[i] &&
+			 * matrix[vex][i] > 0) { queue.add(i); // tiep tuc them dinh vao
+			 * hang doi visited[i] = true; } }
+			 */
+			for (int i : dinhKe(vex)) {
+				/*
+				 * kiêm tra các đỉnh kề coi đã đc duyệt chưa? chưa thì thêm vào
+				 * queue
+				 */
+				if (!visited[i] && matrix[vex][i] > 0) {
+					// tiep tuc them dinh vao hang doi
+					queue.add(i);
+					visited[i] = true;
+					/*
+					 * đánh dấu đỉnh kề với đỉnh nhập vào là đã duyệt
+					 */
+				}
+			}
+		}
+	}
+
+	// in duong di
+	// lưu các đỉnh kề của một đỉnh
+	public LinkedList<Integer> dinhKe(int vex) {
+		for (int i = 0; i < matrix.length; i++) {
+			if (matrix[vex][i] > 0) {
+				/*
+				 * kiểm tra coi phần tử của hàng đó có lớn hơn 0 hay không
+				 */
+				// thêm đỉnh vào LinkedList
+				dinhKe[vex].add(i);
+			}
+		}
+		return dinhKe[vex];
+	}
+
+	// dem thanh phan lien thong
+	@Override
+	public int countConnectedDFSUseStack() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				DFSUseStack(i);
+			}
+		}
+		return countConnected;
+	}
+
+	@Override
+	public int countConnectedDFS() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				DFS(i);
+			}
+		}
+		return countConnected;
+	}
+
+	@Override
+	public int countConnectedBFSUseQueue() {
+		for (int i = 0; i < matrix.length; i++) {
+			if (visited[i] == false) {
+				countConnected++;
+				BFSUseQueue(i);
+			}
+		}
+		return countConnected;
+	}
+
+	public void pathDFS(int v, int v1) {
+		path[index] = v;
+		index++;
+		visited[v] = true;
+		if (v == v1) {
+			for (int i = 0; i < index; i++) {
+				System.out.print(path[i] + " ");
+			}
+			System.out.println();
+			return;
+		}
+		for (int i = 0; i < numVex; i++) {
+			if (!visited[i] && matrix[v][i] > 0) {
+				pathDFS(i, v1);
+				visited[i] = true;
+				index--;
+			}
+		}
+	}
+
+	public String pathBFS(int v, int v1) {
+		String path = "";
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.add(v);
+		visited[v] = true;
+		while (!queue.isEmpty()) {
+			int temp = queue.remove();
+			path += temp + " ";
+			for (int i : dinhKe(temp)) {
+				if (!visited[i]) {
+					if (i == v1) {
+						visited[i] = true;
+						queue.clear();
+						break;
+					} else {
+						queue.add(i);
+						visited[i] = true;
+					}
+				}
+			}
+		}
+		if (!visited[v1])
+			return "khong co duong di";
+		else
+			return path + v1;
+	}
+
+	/**
+	 * tinh bac xem bac do co chan ko trong do thi vo huong lien thong
+	 * 
+	 */
+	public boolean tinhBacChan(int vex) {
+		// tao bien tam
+		int bac = 0;
+		// tinh bac cua dinh trong 1 hang ( 1 hang là 1 dinh chưa cac bac)
+		for (int i = 0; i < matrix.length; i++) {
+			bac += matrix[vex][i];
+		}
+		// tra ve true neu bac chan
+		if (bac % 2 == 0) {
+			return true;
+		} // tra ve false neu bac le
+		return false;
+	}
+
+	// kiem tra euler dung dinh ly euler 1
+	public boolean checkEuler() {
+		int demLe = 0;
+		int demChan = 0;
+		// kiem tra coi do thi co lien thong hay ko??
+		if (isConnected()) {
+			// lien thong thi tinh cac bac cua tung dinh xem co bac chan hay ko
+			for (int i = 0; i < matrix.length; i++) {
+				// neu khong ton tai cac dinh deu bac chan thi tra ve false
+				// tinh bac le
+				if (!tinhBacChan(i)) {
+					// dem bac le tang
+					demLe++;
+					// neu bac le la 2 thi co duong di
+					if (demLe == 2) {
+						// tra ve false
+						System.out.println("do thi euler co hai dinh bac le nen co duong di");
+						return true;
+					}
+					// nguoc lai tra ve false return false;
+				}
+				// tinh bac le
+				if (tinhBacChan(i)) {
+					// dem bac chan tang
+					demChan++;
+					// neu bac chan bang so dinh thi co do thi euler
+					if (demChan == numVex) {
+						// tra ve true
+						System.out.println("do thi euler co chu trinh va duong di");
+						return true;
+					}
+					// nguoc lai tra ve false return false;
+				}
+			}
+		}
+		// nguoc lai neu do thi ko lien thong thi tra ve false
+		System.out.println("Do thi khong la do thi euler");
+		return false;
+	}
+
+	// lam moi mang boolean
+	public void reset() {
+		// duyet mang
+		for (int i = 0; i < numVex; i++) {
+			// gan can phan tu trong mang bang false
+			visited[i] = false;
+		}
+	}
+
+	// in duong di euler
+	public void pathEuler(int src, int dest) {
+		path[indext] = src;
+		indext++;
+		visited[src] = true;
+		if (src == dest) {
+			for (int i = 0; i < indext; i++) {
+				System.out.print(path[i] + "|");
+			}
+			System.out.println();
+			return;
+		}
+		for (int i = 0; i < numVex; i++) {
+			if (matrix[src][i] == 1 && visited[i] == false) {
+				pathEuler(i, dest);
+				visited[i] = false;
+				indext--;
+			}
+		}
+	}
+
+	// in duong di
+	public void path(int src, int dest) {
+		path[indext] = src;
+		indext++;
+		visited[src] = true;
+		if (src == dest) {
+			for (int i = 0; i < indext; i++) {
+				System.out.print(path[i] + "|");
+			}
+			System.out.println();
+			return;
+		}
+		for (int i = 0; i < numVex; i++) {
+			if (matrix[src][i] == 1 && visited[i] == false) {
+				path(i, dest);
+				visited[i] = true;
+				indext--;
+			}
+		}
+	}
+
+	// kiem tra do thi luong phan
+	public void checkBi(int vex) {
+		// khoi tao mang chua dinh
+		int[] color = new int[numVex];
+		// duyet mang
+		for (int i = 0; i < numVex; i++) {
+			// dannh dau cac dinh la -1 (-1 la chua co mau)
+			color[i] = -1;
+		}
+		// danh dau dinh truyen vao la 1(1 la mau thu hai)
+		color[vex] = 1;
+		// khoi tao mang stack
+		Stack<Integer> stack = new Stack<Integer>();
+		// them dinh do vao stack
+		stack.push(vex);
+		// danh dau dinh do la true
+		visited[vex] = true;
+		// vong lap while kiem tra coi stack co rong ko??
+		while (!stack.isEmpty()) {
+			// tao bien u chua dinh lay ra
+			int u = stack.pop();
+			// duyet mang
+			for (int i = 0; i < matrix.length; i++) {
+				/*
+				 * neu phan tu tai vi tri do lon hon khong va mau tai dinh do la
+				 * -1 thi
+				 */
+				if (matrix[u][i] > 0 && color[i] == -1) {
+					// danh dau dinh do la 0(0 la mau thu nhat)
+					color[i] = 1 - color[u];
+				}
+			}
+		}
+	}
+
+	/**
+	 * Do thi luong phan
+	 * 
+	 */
+	public boolean equalty(int[] a, int sizeA, int[] b, int sizeB) {
+		if (sizeA == sizeB) {
+			for (int i = 0; i < sizeA; i++) {
+				if (a[i] != b[i]) {
+					return false;
+				}
+			}
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean isEmpty(int[] a, int sizeA, int[] b, int sizeB) {
+		for (int i = 0; i < sizeA; i++) {
+			for (int j = 0; j < sizeB; j++) {
+				if (a[i] == b[j])
+					return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean isTowSideGraph() {
+		int[] x = new int[1000];
+		x[0] = 0;
+		int[] y = new int[1000];
+		y[0] = 0;
+		int[] t = new int[1000];
+		t[0] = 0;
+		int sizeX = 1;
+		int sizeY = 0;
+		int sizeT = 0;
+		while (true) {
+			sizeT = 0;
+			sizeY = 0;
+			for (int i = 0; i < numVex; i++) {
+				/*
+				 * Mac dinh cac gia tri la chua duoc su dung
+				 */
+				visited[i] = true;
+			}
+
+			// Tim tap Y: tap cac dinh ke voi X
+
+			for (int i = 0; i < sizeX; i++) {
+				for (int j = 0; j < numVex; j++) {
+					if (matrix[x[i]][j] == 1 && visited[j] == true) {
+						y[sizeY] = j;
+						visited[j] = false;
+						sizeY++;
+					}
+				}
+			}
+			// xem xet dieu kien mang x va y giao nhau bang rong, neu khong rong
+			// thi khoi xet nua
+			if (isEmpty(x, sizeX, y, sizeY) == false) {
+				return false;
+			}
+
+			for (int i = 0; i < numVex; i++) { // gan lai mang dieu kien bang 0
+				visited[i] = true;
+			}
+
+			// Tim tap T: tap cac dinh ke voi cac dinh trong Y
+			for (int i = 0; i < sizeY; i++) {
+				for (int j = 0; j < numVex; j++) {
+					if (matrix[y[i]][j] == 1 && visited[j] == true) {
+						visited[j] = false;
+						t[sizeT] = j;
+
+						sizeT++;
+					}
+				}
+			}
+			/*
+			 * xem xet dieu kien mang y va t giao nhau bang rong, neu khong rong
+			 * thi khoi xet nua
+			 */ if (isEmpty(y, sizeY, t, sizeT) == false) {
+				return false;
+			}
+			// xem mang x va t co giong nhau khong, neu bang nhau thi ket thuc
+			if (equalty(x, sizeX, t, sizeT) == true) {
+				System.out.print("Do thi la do thi luong phan:  ");
+				System.out.print("\nX = ");
+				for (int i = 0; i < sizeX; i++) {
+					System.out.print(x[i] + " ");
+				}
+				System.out.print("\nY = ");
+				for (int i = 0; i < sizeY; i++) {
+					System.out.print(y[i] + " ");
+				}
+				return true; // ket thuc vong lap
+			} else {
+				sizeX = 0;
+				for (int i = 0; i < sizeT; i++) {
+					x[i] = t[i];
+					sizeX++;
+				}
+			}
+		}
+	}
+}

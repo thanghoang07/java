@@ -1,0 +1,169 @@
+package demo;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JToolBar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.BoxLayout;
+import java.awt.Dimension;
+import javax.swing.border.TitledBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class StudentView extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField pob;
+	private JTextField code;
+	private JTextField dob;
+	private JTextField name;
+
+	private Dimension dim = new Dimension(50, 14);
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StudentView frame = new StudentView();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public StudentView() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setSize(531, 447);
+		setBounds(100, 100, 446, 332);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+
+		JToolBar toolBar = new JToolBar();
+		contentPane.add(toolBar);
+
+		JButton jbtAdd = new JButton("Add");
+		jbtAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addAction();
+			}
+		});
+		toolBar.add(jbtAdd);
+
+		JButton btnEdit = new JButton("Edit");
+		toolBar.add(btnEdit);
+
+		JButton btnDelete = new JButton("Delete");
+		toolBar.add(btnDelete);
+
+		JPanel panel = new JPanel();
+		contentPane.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		JPanel p1 = new JPanel();
+		panel.add(p1);
+
+		JLabel label = new JLabel("StCode");
+		label.setPreferredSize(new Dimension(50, 14));
+		p1.add(label);
+
+		code = new JTextField();
+		code.setColumns(25);
+		p1.add(code);
+
+		JPanel p2 = new JPanel();
+		panel.add(p2);
+
+		JLabel lblStname = new JLabel("StName");
+		lblStname.setPreferredSize(new Dimension(50, 14));
+		p2.add(lblStname);
+
+		name = new JTextField();
+		name.setColumns(25);
+		p2.add(name);
+
+		JPanel p3 = new JPanel();
+		panel.add(p3);
+
+		JLabel lblStdob_1 = new JLabel("StDob");
+		lblStdob_1.setPreferredSize(new Dimension(50, 14));
+		p3.add(lblStdob_1);
+
+		dob = new JTextField();
+		dob.setColumns(25);
+		p3.add(dob);
+
+		JPanel p4 = new JPanel();
+		panel.add(p4);
+
+		JLabel lblStcode = new JLabel("StPob");
+		lblStcode.setPreferredSize(new Dimension(50, 14));
+		p4.add(lblStcode);
+
+		pob = new JTextField();
+		p4.add(pob);
+		pob.setColumns(25);
+
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setAutoscrolls(true);
+		panel_1.add(scrollPane);
+
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, },
+				new String[] { "Hay", "VanToan", "StCode" }));
+		table.getColumnModel().getColumn(0).setResizable(false);
+		scrollPane.setViewportView(table);
+	}
+
+	public void addAction() {
+
+		JPanel panel_3 = new JPanel();
+
+		JLabel label_2 = new JLabel(code.getText());
+		label_2.setPreferredSize(new Dimension(70, 14));
+		panel_3.add(label_2);
+
+		JLabel label_3 = new JLabel(name.getText());
+		label_3.setPreferredSize(new Dimension(110, 14));
+		panel_3.add(label_3);
+
+		JLabel label_4 = new JLabel(dob.getText());
+		label_4.setPreferredSize(new Dimension(100, 14));
+		panel_3.add(label_4);
+
+		JLabel label_5 = new JLabel(pob.getText());
+		label_5.setPreferredSize(new Dimension(100, 14));
+		panel_3.add(label_5);
+		setSize(new Dimension(getWidth(), getHeight() + 16));
+		// panel_1.add(panel_3);
+	}
+
+	@Override
+	public Dimension getSize() {
+		Dimension dim = new Dimension(100, 100);
+		return dim;
+	}
+}

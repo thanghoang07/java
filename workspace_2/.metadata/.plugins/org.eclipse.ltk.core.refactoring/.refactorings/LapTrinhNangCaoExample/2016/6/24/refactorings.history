@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;inHinhSao.Mau1.inSao(...)&apos; to &apos;inSaoXuoi&apos;&#x0D;&#x0A;- Original project: &apos;LapTrinhNangCaoExample&apos;&#x0D;&#x0A;- Original element: &apos;inHinhSao.Mau1.inSao(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;inHinhSao.Mau1.inSaoXuoi(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;inSao&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;inHinhSao{Mau1.java[Mau1~inSao~I~I" name="inSaoXuoi" references="true" stamp="1465613968250" version="1.0"/>
+</session>

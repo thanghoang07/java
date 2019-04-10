@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;st.txt&apos; to &apos;socketIO/src/copyFileClientServer&apos;&#x0D;&#x0A;- Original project: &apos;lmt_io&apos;&#x0D;&#x0A;- Destination element: &apos;socketIO/src/copyFileClientServer&apos;&#x0D;&#x0A;- Original element: &apos;st.txt&apos;" description="Copy file" destination="=socketIO/src&lt;copyFileClientServer" element1="src/IEStudent/st.txt" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1541473648395" units="0" version="1.0"/>
+</session>

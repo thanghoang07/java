@@ -1,0 +1,99 @@
+package view;
+
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+
+class ComputerKI
+{
+	/** Diese Klasse Implementiert die Bewegungen des Computers und zeichnet auch die
+	Computerpaddel */
+
+	// Deklaration der Variablen
+	private int y_pos;					// y - Position des Paddels
+	private int y_speed;				// Geschwindigkeit in y - Richtung
+	private int real_y_pos;				// Speichert die wirkliche Paddelposition (Mitte)
+
+	// Konstanten
+	private static final int x_pos = 15;	// x - Position des Paddels
+	private static final int size_x = 10;	// Größe des Paddels in x - Richtung
+	private static final int size_y = 50;	// Größe des Paddels in y - Richtung
+
+	// Ball
+	private static PongBall ball;
+
+	// Construktor
+	public ComputerKI (int y_pos, PongBall ball)
+	{
+		this.y_pos = y_pos;
+		y_speed = 4;
+		this.ball = ball;
+	}
+
+	/** Diese Methode bewegt das Paddel */
+	public void move ()
+	{
+		// Mitte des Paddels
+		real_y_pos = y_pos + (size_y / 2);
+
+		// Wenn sich Ball von Paddel wegbewegt, werden die Paddel in die Mitte zurückbewegt
+		if (ball.getXSpeed() > 0)
+		{
+			// Paddel oberhalb der Mitte
+			if (real_y_pos < 148)
+			{
+				y_pos += y_speed;
+			}
+			// Paddel unterhalb der Mitte
+			else if (real_y_pos > 152)
+			{
+				y_pos -= y_speed;
+			}
+		}
+		else if (ball.getXSpeed() < 0)
+		{
+			// Solange Paddel nicht auf Höhe des Balles ist wird es bewegt
+			if ( real_y_pos != ball.getYPos())
+			{
+				// Ball oberhalb von Paddel
+				if (ball.getYPos() < real_y_pos)
+				{
+					y_pos -= y_speed;
+				}
+				// Ball unterhalb von Paddel
+				else if (ball.getYPos() > real_y_pos)
+				{
+					y_pos += y_speed;
+				}
+			}
+		}
+	}
+
+	public int getXPos()
+	{
+		return x_pos;
+	}
+
+	public int getYPos()
+	{
+		return y_pos;
+	}
+
+	public int getXSize()
+	{
+		return size_x;
+	}
+
+	public int getYSize()
+	{
+		return size_y;
+	}
+
+
+	/** Diese Methode zeichnet das Paddel */
+	public void paint (Graphics g)
+	{
+		g.setColor (Color.blue);
+		g.fillRect (x_pos, y_pos, size_x, size_y);
+	}
+}

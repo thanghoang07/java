@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;file&apos; in &apos;bt1.BaiTap1.delete(...)&apos; to &apos;filePath&apos;&#x0D;&#x0A;- Original project: &apos;ltm_file&apos;&#x0D;&#x0A;- Original element: &apos;bt1.BaiTap1.delete(String).file&apos;&#x0D;&#x0A;- Renamed element: &apos;file&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;file&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;bt1{BaiTap1.java[BaiTap1~delete~QString;@file!105!131!110!113!QFile;!0!false" name="filePath" references="true" stamp="1537854606929" version="1.0"/>
+</session>
