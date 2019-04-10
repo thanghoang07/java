@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.io.MainActivity" >
+
+    <TextView
+        android:id="@+id/io"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Input - Output"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/io"
+        android:layout_below="@+id/io"
+        android:layout_marginTop="112dp"
+        android:text="Clear All"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/clear"
+        android:layout_alignBottom="@+id/clear"
+        android:layout_toRightOf="@+id/write"
+        android:text="Load"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/load"
+        android:layout_alignBottom="@+id/load"
+        android:layout_toRightOf="@+id/clear"
+        android:text="Write"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/clear"
+        android:layout_below="@+id/clear"
+        android:layout_marginTop="31dp"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/load"
+        android:layout_alignLeft="@+id/clear"
+        android:layout_alignRight="@+id/load"
+        android:layout_below="@+id/io"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>   
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.hinhchunhat.HinhChuNhatActivity" >
+
+    <TextView
+        android:id="@+id/textViewDai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập chiều dài: " />
+
+    <TextView
+        android:id="@+id/textViewRong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextDai"
+        android:layout_below="@+id/editTextDai"
+        android:layout_marginTop="15dp"
+        android:text="Nhập chiều rộng: " />
+
+    <EditText
+        android:id="@+id/editTextDai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDai"
+        android:layout_below="@+id/textViewDai"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnTinh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextRong"
+        android:layout_below="@+id/editTextRong"
+        android:layout_marginTop="17dp"
+        android:text="Tính" />
+
+    <EditText
+        android:id="@+id/editTextRong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewRong"
+        android:layout_below="@+id/textViewRong"
+        android:layout_marginTop="16dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTinh"
+        android:layout_below="@+id/btnTinh"
+        android:layout_marginTop="26dp"
+        android:text="Kết quả: " />
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/hinh2"
+    tools:context="com.example.phuongtrinhbacmot.PhuongTrinhActivity" >
+
+    <TextView
+        android:id="@+id/textHeSoA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập hệ số a: " />
+
+    <TextView
+        android:id="@+id/textHeSoB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eTHeSoA"
+        android:layout_below="@+id/eTHeSoA"
+        android:layout_marginTop="15dp"
+        android:text="Nhập hệ số b: " />
+
+    <EditText
+        android:id="@+id/eTHeSoA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textHeSoA"
+        android:layout_below="@+id/textHeSoA"
+        android:ems="10" android:inputType="">
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnTinh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eTHeSoB"
+        android:layout_below="@+id/eTHeSoB"
+        android:layout_marginTop="17dp"
+        android:text="Giải" />
+
+    <EditText
+        android:id="@+id/eTHeSoB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textHeSoB"
+        android:layout_below="@+id/textHeSoB"
+        android:layout_marginTop="16dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTinh"
+        android:layout_below="@+id/btnTinh"
+        android:layout_marginTop="26dp"
+        android:text="Kết quả: " />
+
+</RelativeLayout>
