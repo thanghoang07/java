@@ -1,0 +1,22 @@
+package dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.KhachHang;
+
+public interface KhachHangDAO {
+	
+	// Them khach hang vao database.
+	public void themKhachHang(KhachHang kh) throws ClassNotFoundException, SQLException;
+	
+	// Lay danh sach khach hang.
+	public ArrayList<KhachHang> layDanhSachKhachHang() throws ClassNotFoundException, SQLException;
+	
+	// Xoa khach hang dua vao ma_kh.
+	public void xoaKhachHang(String ma_kh);
+	
+	// Update khach hang.
+	public void updateKhachHang(KhachHang kh);
+
+}

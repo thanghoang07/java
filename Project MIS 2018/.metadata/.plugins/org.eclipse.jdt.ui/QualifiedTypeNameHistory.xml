@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.AbstractMethodError"/>
+<fullyQualifiedTypeName name="NhanSu.INhanSu"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="NhanSu.LoaiNhanSu"/>
+<fullyQualifiedTypeName name="DonHang.IDonHang"/>
+<fullyQualifiedTypeName name="DonHang.ISanPham"/>
+<fullyQualifiedTypeName name="ChamCong.IChamCong"/>
+<fullyQualifiedTypeName name="ChamCong.ChamCong"/>
+<fullyQualifiedTypeName name="ChamCong.TrangThaiLamViec"/>
+<fullyQualifiedTypeName name="NhanSu.IQuanLy"/>
+<fullyQualifiedTypeName name="NhanSu.QuanLy"/>
+<fullyQualifiedTypeName name="NhanSu.NhanVienKho"/>
+<fullyQualifiedTypeName name="NhanSu.NhanVien"/>
+<fullyQualifiedTypeName name="KhachHang.KhachHang"/>
+<fullyQualifiedTypeName name="Controls.DateTime"/>
+<fullyQualifiedTypeName name="DonHang.TrangThaiDonHang"/>
+<fullyQualifiedTypeName name="DonHang.DonHang"/>
+<fullyQualifiedTypeName name="DonHang.NhaCungCap"/>
+<fullyQualifiedTypeName name="DonHang.LoaiNguyenLieu"/>
+<fullyQualifiedTypeName name="DonHang.NguyenLieu"/>
+<fullyQualifiedTypeName name="DonHang.SanPham"/>
+<fullyQualifiedTypeName name="DonHang.ChiTietDonHang"/>
+<fullyQualifiedTypeName name="java.util.TreeMap"/>
+<fullyQualifiedTypeName name="DAO.ConnectionPool"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.awt.image.RescaleOp"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="DAO.DBUtil"/>
+<fullyQualifiedTypeName name="NhanSu.NhanSu"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="ThoiGian.DateTime"/>
+<fullyQualifiedTypeName name="dao.KhachHangImpl"/>
+<fullyQualifiedTypeName name="model.KhachHang"/>
+<fullyQualifiedTypeName name="dao.ConnectionPool"/>
+<fullyQualifiedTypeName name="dao.SanPhamImpl"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="model.SanPham"/>
+<fullyQualifiedTypeName name="model.LoaiNguyenLieu"/>
+<fullyQualifiedTypeName name="model.NhaCungCap"/>
+<fullyQualifiedTypeName name="dao.QuanLyNguyenLieu"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="model.NguyenLieu"/>
+</qualifiedTypeNameHistroy>

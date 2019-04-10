@@ -1,0 +1,80 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.NhanSu;
+import model.SanPham;
+
+public class SanPhamImpl implements SanPhamDAO {
+
+	@Override
+	public void themSanPham(SanPham sp) throws ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnect.getConnection();
+		
+		String sql = "INSERT INTO SANPHAM VALUES(?,?,?,?,?,?,?);";
+		
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+		
+		ps.setString(1, sp.getMa_sp());
+		ps.setString(2, sp.getTen_sp());
+		ps.setInt(3, sp.getSoluong());
+		ps.setDouble(4, sp.getGia());
+		ps.setString(5, sp.getKichthuoc());
+		ps.setString(6, sp.getMa_loaihang());
+		ps.setString(7, sp.getUrl_hinh());
+		
+		ps.executeUpdate();
+		
+		con.close();
+		
+	}
+
+	@Override
+	public ArrayList<SanPham> layDanhSachSanPhamTheoMaLoaiHang(String ma_loaihang) throws ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnect.getConnection();
+		
+		String sql = "SELECT * FROM SANPHAM where MA_LH='" + ma_loaihang + "'";
+		
+		ArrayList<SanPham> listSanPham = new ArrayList<SanPham>();
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			
+			String ma_sp = rs.getString("MA_SP");
+			
+			String ten_sp = rs.getString("TEN_SP");
+			
+			int soluong = rs.getInt("SO_LUONG");
+			
+			double gia = rs.getDouble("GIA");
+			
+			String kichthuoc = rs.getString("KICH_THUOC");
+			
+			String maloaihang = rs.getString("MA_LH");
+			
+			String url_hinh = rs.getString("URL_HINH");
+			
+			listSanPham.add(new SanPham(ma_sp, ten_sp, soluong, gia, kichthuoc, maloaihang, url_hinh));
+			
+		}
+		
+		con.close();
+		
+		
+		return listSanPham;
+	}
+	
+	
+	
+	
+
+}

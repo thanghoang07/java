@@ -1,0 +1,16 @@
+package dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.SanPham;
+
+public interface SanPhamDAO {
+	
+	// Them san pham vao db.
+	public void themSanPham(SanPham sp) throws ClassNotFoundException, SQLException;
+	
+	// Lay danh sach san phan do theo ma loai hang.
+	public ArrayList<SanPham> layDanhSachSanPhamTheoMaLoaiHang(String ma_loaihang) throws ClassNotFoundException, SQLException;
+
+}

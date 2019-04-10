@@ -1,0 +1,103 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.KhachHang;
+
+public class KhachHangImpl implements KhachHangDAO {
+
+	@Override
+	public void themKhachHang(KhachHang kh) throws ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnect.getConnection();
+		
+		String sql = "insert into KHACHHANG values(?,?,?,?,?);";
+		
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+		
+		ps.setString(1, kh.getMa_kh());
+		ps.setString(2, kh.getTen_kh());
+		ps.setBoolean(3, kh.isGioitinh());
+		ps.setString(4, kh.getDiachi());
+		ps.setInt(5, kh.getSdt());
+		
+		ps.executeUpdate();
+		
+		con.close();
+		
+	}
+
+	@Override
+	public ArrayList<KhachHang> layDanhSachKhachHang() throws ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnect.getConnection();
+		
+		ArrayList<KhachHang> listKhachHang = new ArrayList<KhachHang>();
+		
+		String sql = "SELECT * FROM KHACHHANG;";
+		
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			
+			String ma_kh = rs.getString("MA_KH");
+			String ten_kh = rs.getString("TEN_KH");
+			boolean gioitinh = rs.getBoolean("GIOI_TINH");
+			String diachi = rs.getString("DIA_CHI");
+			int sdt = rs.getInt("SDT");
+			
+			listKhachHang.add(new KhachHang(ma_kh, ten_kh, gioitinh, diachi, sdt));
+		}
+		
+		con.close();
+		
+		return listKhachHang;
+	}
+
+	@Override
+	public void xoaKhachHang(String ma_kh) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateKhachHang(KhachHang kh) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		ArrayList<KhachHang> listKH = new ArrayList<KhachHang>();
+		
+		KhachHang kh = new KhachHang("05", "Nguyễn Văn Lan", true, "số 16, đường Hà Thị Lan, quận 12", 12348978);
+		KhachHang kh1 = new KhachHang("06", "Hà Thị Linh", false, "số 19, đường Nguyễn Thị Minh Khai, quận 4", 22445566);
+		KhachHang kh2 = new KhachHang("07", "Cao Bá Quát", true, "số 22, đường Hà Thị Lan, quận 12", 16245231);
+		KhachHang kh3 = new KhachHang("08", "Lê Văn Lợi", true, "số 21, đường Hà Thị Lan, quận 12", 12348978);
+		KhachHang kh4 = new KhachHang("09", "Tạ Văn Bản", true, "số 26, đường Nguyễn Văn A, quận 1", 3243746);
+		KhachHang kh5 = new KhachHang("10", "Võ Hồng Diệu", true, "số 15, đường Nguyễn Văn B, quận 2", 12323545);
+		
+		listKH.add(kh);
+		listKH.add(kh1);
+		listKH.add(kh2);
+		listKH.add(kh3);
+		listKH.add(kh4);
+		listKH.add(kh5);
+		
+		KhachHangImpl khimpl = new KhachHangImpl();
+		
+		for (KhachHang khang : listKH) {
+			khimpl.themKhachHang(khang);
+		}
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,30 @@
+package faceData;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.KhachHangImpl;
+import dao.SanPhamImpl;
+import model.KhachHang;
+import model.SanPham;
+
+public class Test {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		KhachHangImpl kh = new KhachHangImpl();
+		//
+		List<KhachHang> list =  new ArrayList<KhachHang>();
+		list = kh.layDanhSachKhachHang();
+		for (KhachHang k : list) {
+			System.out.println(k.getTen_kh());
+		}
+		//
+		SanPhamImpl sp = new SanPhamImpl();
+		//
+		List<SanPham> listSp= new ArrayList<SanPham>();
+		listSp = sp.layDanhSachSanPhamTheoMaLoaiHang("");
+		
+	}
+
+}

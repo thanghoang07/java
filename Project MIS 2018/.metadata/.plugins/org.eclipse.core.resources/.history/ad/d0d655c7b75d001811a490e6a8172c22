@@ -1,0 +1,69 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.NguyenLieu;
+
+public class QuanLyNguyenLieu implements INguyenLieu {
+
+	private static ConnectionPool pool;
+
+	private final static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver", password = "Aimondo08",
+			user = "sa",
+			url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYMOC;useUnicode=true;characterEncoding=UTF-8;";
+
+	@Override
+	public List<NguyenLieu> getList() throws ClassNotFoundException, SQLException {
+		pool = new ConnectionPool(url, user, password, driver, 10, 5);
+		Connection con = pool.getConnection();
+
+		String sql = "select * from NGUYENLIEU nl inner join NHACUNGCAP ncc on nl.MA_NCC = ncc.MA_NCC inner join LOAINGUYENLIEU lnl on nl.MA_LNL = lnl.MA_LNL";
+
+		List<NguyenLieu> listNguyenLieu = new ArrayList<NguyenLieu>();
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			String ma_ns = rs.getString("MA_NS");
+			String ten_ns = rs.getString("TEN_NS");
+			String ma_loains = rs.getString("MA_LOAINS");
+			Date ngaysinh = rs.getDate("NGAY_SINH");
+			boolean gioitinh = rs.getBoolean("GIOI_TINH");
+			String diachi = rs.getString("DIA_CHI");
+			Date ngayvaolam = rs.getDate("NGAY_VAO_LAM");
+			//
+			
+		}
+
+		con.close();
+
+		return listNguyenLieu;
+	}
+
+	@Override
+	public NguyenLieu getLoaiHang(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void xoaNguyenLieu(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateNguyenLieu(NguyenLieu nguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

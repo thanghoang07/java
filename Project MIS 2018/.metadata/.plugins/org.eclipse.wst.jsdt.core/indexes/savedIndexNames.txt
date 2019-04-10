@@ -1,0 +1,12 @@
+INDEX VERSION 1.4+D:\OneDrive\Documents\Project MIS 2018\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1817797683.index
+3100279980.index
+610862637.index
+2444561417.index
+2726961915.index
+3939799653.index
+3430600223.index
+551277640.index
+1664714454.index
+4115674505.index
+1659875072.index

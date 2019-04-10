@@ -1,0 +1,16 @@
+package faceData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.KhachHangImpl;
+import model.KhachHang;
+
+public class Test {
+
+	public static void main(String[] args) {
+		KhachHangImpl kh = new KhachHangImpl();
+		List<KhachHang> list new ArrayList<KhachHang>();
+	}
+
+}

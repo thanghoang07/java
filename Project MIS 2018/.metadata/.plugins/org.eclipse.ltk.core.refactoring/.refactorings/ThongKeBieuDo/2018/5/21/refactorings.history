@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 2 elements to &apos;ProjectMIS2018_2/src/dao&apos;&#x0D;&#x0A;- Original project: &apos;ThongKeBieuDo&apos;&#x0D;&#x0A;- Destination element: &apos;ProjectMIS2018_2/src/dao&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     dao.ThongKeSoLuongDonHang.java&#x0D;&#x0A;     dao.ThongKeSoLuongDonHangTheoTTDH.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="=ProjectMIS2018_2/src&lt;dao" element1="/src&lt;dao{ThongKeSoLuongDonHang.java" element2="/src&lt;dao{ThongKeSoLuongDonHangTheoTTDH.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1526991338677" units="2" version="1.0"/>
+</session>

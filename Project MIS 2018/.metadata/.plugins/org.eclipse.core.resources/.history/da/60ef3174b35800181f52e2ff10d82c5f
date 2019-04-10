@@ -1,0 +1,24 @@
+package DAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DatabaseConnection {
+	public static Connection getConnection() {
+		Connection connection = null;
+		String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+		String url = "jdbc:sqlserver://localhost:1433;databaseName=quanlymoc";
+		String user ="sa";
+		String pass="Sugia!1996";
+		try {
+		Class.forName(driver);
+		connection = DriverManager.getConnection(url,user,pass);
+		} catch (Exception e) {
+		// Orther err
+		e.printStackTrace();
+		}
+		return connection;
+		}
+	
+	
+}

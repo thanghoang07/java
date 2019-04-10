@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;ProjectMIS2018_2/src/dao&apos;&#x0D;&#x0A;- Original project: &apos;ProjectMIS2018_1&apos;&#x0D;&#x0A;- Destination element: &apos;ProjectMIS2018_2/src/dao&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     DAO.DBUtil.java&#x0D;&#x0A;     DAO.ConnectionPool.java&#x0D;&#x0A;     DAO.DatabaseConnection.java" description="Copy compilation units" destination="=ProjectMIS2018_2/src&lt;dao" element1="/src&lt;DAO{DBUtil.java" element2="/src&lt;DAO{ConnectionPool.java" element3="/src&lt;DAO{DatabaseConnection.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1526536628704" units="3" version="1.0"/>
+</session>

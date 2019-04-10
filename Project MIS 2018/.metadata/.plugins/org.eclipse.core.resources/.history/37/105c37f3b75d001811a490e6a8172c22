@@ -1,0 +1,74 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.LoaiNguyenLieu;
+import model.NguyenLieu;
+import model.NhaCungCap;
+
+public class QuanLyNguyenLieu implements INguyenLieu {
+
+	private static ConnectionPool pool;
+
+	private final static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver", password = "Aimondo08",
+			user = "sa",
+			url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYMOC;useUnicode=true;characterEncoding=UTF-8;";
+
+	@Override
+	public List<NguyenLieu> getList() throws ClassNotFoundException, SQLException {
+		pool = new ConnectionPool(url, user, password, driver, 10, 5);
+		Connection con = pool.getConnection();
+
+		String sql = "select * from NGUYENLIEU nl inner join NHACUNGCAP ncc on nl.MA_NCC = ncc.MA_NCC inner join LOAINGUYENLIEU lnl on nl.MA_LNL = lnl.MA_LNL";
+
+		List<NguyenLieu> listNguyenLieu = new ArrayList<NguyenLieu>();
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			String ma_nL = rs.getString("MA_NL");
+			String ten_nL = rs.getString("TEN_NL");
+			int so_luong = rs.getInt("MA_LOAINS");
+			String ma_lnl = rs.getString("NGAY_SINH");
+			String ma_ncc = rs.getString("GIOI_TINH");
+			String ten_lnl = rs.getString("TEN_LNL");
+			String ten_ncc = rs.getString("TEN_NCC");
+			String dia_chi = rs.getString("DIA_CHI");
+			String email = rs.getString("EMAIL");
+			int sdt = rs.getInt("SDT");
+			//
+			listNguyenLieu.add(new NguyenLieu(ma_nL, ten_nL, so_luong, new LoaiNguyenLieu(ma_lnl, ten_lnl), new NhaCungCap(ma_ncc, ten_ncc, sdt, dia_chi, email)));
+		}
+
+		con.close();
+
+		return listNguyenLieu;
+	}
+
+	@Override
+	public NguyenLieu getLoaiHang(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void xoaNguyenLieu(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateNguyenLieu(NguyenLieu nguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

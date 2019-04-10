@@ -1,0 +1,9 @@
+
+May 22, 2018 19:10:20.96 NEW SESSION
+May 22, 2018 19:10:20.96 [880:11616:0522/191020.944:ERROR:install_util.cc(589)] Unable to create registry key HKLM\SOFTWARE\Policies\Google\Chrome for reading result=2
+May 22, 2018 19:11:19.11 [880:14236:0522/191119.118:ERROR:service_manager_context.cc(258)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\67.0.3396.48\chrome_renderer.service.exe
+May 22, 2018 19:11:19.18 [880:14236:0522/191119.118:ERROR:service_manager_context.cc(258)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\67.0.3396.48\chrome_renderer.service.exe
+May 22, 2018 19:11:19.18 [880:14236:0522/191119.118:ERROR:service_manager_context.cc(258)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\67.0.3396.48\chrome_renderer.service.exe
+May 22, 2018 19:11:19.27 [880:14236:0522/191119.118:ERROR:service_manager_context.cc(258)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\67.0.3396.48\chrome_renderer.service.exe
+May 22, 2018 19:41:44.16 Unable to read VR Path Registry from C:\Users\thang\AppData\Local\openvr\openvrpaths.vrpath
+May 22, 2018 19:41:44.22 [880:11616:0522/194144.156:ERROR:CONSOLE(226)] "Uncaught TypeError: Cannot read property '0' of null", source: chrome://settings/crisper.js (226)

@@ -1,0 +1,46 @@
+package NhanSu;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import DAO.ConnectionPool;
+
+public class DAONhanSu {
+	private static ConnectionPool pool;
+	private static List<NhanSu> accList;
+
+	private final static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver", password = "Aimondo08",
+			user = "sa",
+			url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYMOC;useUnicode=true;characterEncoding=UTF-8;";
+
+	public static List<NhanSu> getListNhanSu() throws SQLException, ClassNotFoundException {
+		pool = new ConnectionPool(url, user, password, driver, 10, 5);
+		if(accList == null)
+			accList = new ArrayList<NhanSu>();
+		
+		if(accList.size() == 0) {
+			Connection conn = pool.getConnection();
+			PreparedStatement ps = null;
+			String sql = "select * from NhanSu";
+			try {
+				conn.setAutoCommit(false);
+				ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					NhanSu ns = new NhanVienKho();
+					accList.add()
+				}
+			}
+		}
+		return accList;
+		
+	}
+	
+	public static void main(String[] args) {
+
+	}
+
+}

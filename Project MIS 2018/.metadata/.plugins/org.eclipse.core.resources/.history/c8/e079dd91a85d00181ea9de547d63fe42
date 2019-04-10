@@ -1,0 +1,36 @@
+package dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import model.NguyenLieu;
+
+public class QuanLyNguyenLieu implements INguyenLieu {
+
+	@Override
+	public List<NguyenLieu> getList() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NguyenLieu getLoaiHang(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void xoaNguyenLieu(String maNguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNguyenLieu(NguyenLieu nguyenLieu) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+}

@@ -1,0 +1,52 @@
+package NhanSu;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import DAO.ConnectionPool;
+import ThoiGian.DateTime;
+
+public class DAONhanSu {
+	private static ConnectionPool pool;
+	private static List<NhanSu> accList;
+
+	private final static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver", password = "Aimondo08",
+			user = "sa",
+			url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYMOC;useUnicode=true;characterEncoding=UTF-8;";
+
+	public static List<NhanSu> getListNhanSu() throws SQLException, ClassNotFoundException {
+		pool = new ConnectionPool(url, user, password, driver, 10, 5);
+		if(accList == null)
+			accList = new ArrayList<NhanSu>();
+		
+		if(accList.size() == 0) {
+			Connection conn = pool.getConnection();
+			PreparedStatement ps = null;
+			String sql = "select * from NHANSU inner join LOAINHANSU on LOAINHANSU.MA_LOAINS = NHANSU.MA_LOAINS;";
+			try {
+				conn.setAutoCommit(false);
+				ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					NhanSu ns = new NhanVienKho(rs.getString(1), rs.getString(2), new DateTime(rs.getDate(4).getDay(), 
+							rs.getDate(4).getMonth(), rs.getDate(4).getYear()) ,rs.getString(6), (rs.getInt(5) == 1? true: false), new DateTime(rs.getDate(7).getDay(), 
+									rs.getDate(7).getMonth(), rs.getDate(7).getYear()), new LoaiNhanSu(rs.getString(8), rs.getString(9), rs.getFloat(10)));
+					accList.add(ns);
+				}
+				ps.executeBatch();
+				conn.commit();
+				return accList;
+			}
+		}
+		return accList;
+		
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}
